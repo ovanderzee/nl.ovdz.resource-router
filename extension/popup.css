@@ -12,6 +12,7 @@ fieldset {
 	padding: 0 0.5em;
 }
 legend {margin: 0.5em 0;}
+.required legend {display: none;}
 button {
 	display: block;
 	margin: 0.25em 0 0.25em auto;
@@ -20,10 +21,12 @@ button {
     background: red;
 	border: 0 none;
 }
-button#activate {
+.active,
+#activate {
     background: limegreen;
 }
-button#deactivate {
+.passive,
+#deactivate {
     background: orange;
 }
 label {

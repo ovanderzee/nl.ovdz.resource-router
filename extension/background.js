@@ -6,7 +6,7 @@ var assets = {
 
 var routingResponse = function (details) {
 	var localRsrc = assets[details.url];
-	if (localStorage['running'] && localRsrc) {
+	if (localStorage.running && localRsrc) {
 		linkElement.createURL(details.url);
 		localRsrc = linkElement.protocol + '//' + localStorage[linkElement.protocol] + '/' + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localRsrc);
