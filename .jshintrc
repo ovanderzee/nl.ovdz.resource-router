@@ -19,6 +19,7 @@
   "smarttabs": true,
   "globals": {
     "chrome": false,
-    "linkElement": false
+    "linkElement": false,
+    "dataStorage": false
   }
 }

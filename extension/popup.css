@@ -1,0 +1,55 @@
+body {
+	font: 12px/1.2 Verdana;
+	width: 33em;
+	margin: 0.5em;
+}
+h1 {font-size: 2em;}
+h2 {font-size: 1.4em;}
+h3, legend {font-size: 1.2em;}
+h1, h2, h3, p, fieldset {margin: 0 0 1em 0;}
+fieldset {
+	border: 0 none;
+	padding: 0 0.5em;
+}
+legend {margin: 0.5em 0;}
+button {
+	display: block;
+	margin: 0.25em 0 0.25em auto;
+    font-size: inherit;
+    color: white;
+    background: red;
+	border: 0 none;
+}
+button#activate {
+    background: limegreen;
+}
+button#deactivate {
+    background: orange;
+}
+label {
+	display: flex;
+    padding: 0.25em;
+}
+label span {
+	align-self: baseline;
+    padding: 0.25em;
+}
+label .tag {
+	flex: 0 0 10em;
+}
+label .tag input {
+	margin: 0 auto;
+    font-size: 1.5em;
+}
+label .value {
+	margin-left: 1em;
+	flex: 0 0 20em;
+}
+label .value input {
+	width: 100%;
+    font-size: inherit;
+}
+.route label .tag,
+.route label .action {
+	flex: 0 0 5em;
+}

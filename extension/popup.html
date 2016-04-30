@@ -1,0 +1,67 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="popup.css" />
+	<script type="text/javascript" src="popup.js"></script>
+</head>
+<body>
+	<h2>Frontend Resource Router</h2>
+	<form name="routing">
+		<fieldset class="required setting">
+
+			<legend>Settings</legend>
+			<button type="button" id="activate" value="running">activate</button>
+			<button type="button" id="deactivate" value="">deactivate</button>
+			<label>
+				<span class="tag">localhost http://</span>
+				<span class="value">
+					<input type="url" id="http:" required placeholder="hostname:portnumber" />
+				</span>
+			</label>
+			<label>
+				<span class="tag">localhost https://</span>
+				<span class="value">
+					<input type="url" id="https:" placeholder="hostname:portnumber" />
+				</span>
+			</label>
+			<button type="button" id="required_ok">ok</button>
+		</fieldset>
+<!--
+		<fieldset class="new setting">
+			<legend>New Routing</legend>
+			<label>
+				<span class="tag">route original file</span>
+				<span class="value">
+					<input type="url" id="origin" />
+				</span>
+			</label>
+			<label>
+				<span class="tag">to local served resource</span>
+				<span class="value">
+					<input type="url" id="resource" />
+				</span>
+			</label>
+			<button type="button" id="new_ok">ok</button>
+		</fieldset>
+
+		<fieldset class="route">
+			<legend>Routings</legend>
+			<label class="origin">
+				<span class="tag">origin</span>
+				<span class="value">
+					<input type="url" />
+				</span>
+				<span class="action">
+					<button type="button">&times;</button>
+				</span>
+			</label>
+			<label class="resource">
+				<span class="tag">resource</span>
+				<span class="value">
+					<input type="url" />
+				</span>
+			</label>
+		</fieldset>
+-->
+	</form>
+</body>
+</html>
