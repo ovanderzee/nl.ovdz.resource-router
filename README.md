@@ -9,5 +9,5 @@ cd ~/nl.ovdz.resource-router && npm install
 // run local server for editing resources
 cd ~/nl.ovdz.resource-router && grunt serve
 
-
+To setup a local https site, read: https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
 
