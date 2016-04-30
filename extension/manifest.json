@@ -10,7 +10,10 @@
 		"128": "rsrc-route-128.png"
 	},
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": [
+			"link-element.js",
+			"background.js"
+		]
 	},
 	"permissions": [
 		"webRequest",

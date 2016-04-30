@@ -18,6 +18,7 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "chrome": false
+    "chrome": false,
+    "linkElement": false
   }
 }
