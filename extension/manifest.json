@@ -1,0 +1,20 @@
+{
+	"short_name": "Resource Router",
+	"name": "Frontend Resource Router",
+	"version": "0.1",
+	"description": "Route frontend sources in production to local files",
+	"manifest_version": 2,
+	"icons": {
+		"16": "rsrc-route-16.png",
+		"48": "rsrc-route-48.png",
+		"128": "rsrc-route-128.png"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"*://*/*"
+	]
+}

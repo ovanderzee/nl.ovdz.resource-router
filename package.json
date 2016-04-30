@@ -1,0 +1,24 @@
+{
+	"name": "nl.ovdz.resource-router",
+	"version": "0.1",
+	"description": "serve resources local",
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "*",
+		"grunt-contrib-connect": "*",
+		"grunt-contrib-csslint": "*",
+		"grunt-contrib-jshint": "*",
+		"grunt-contrib-watch": "*",
+		"grunt-jsonlint": "*",
+		"grunt-newer": "*",
+		"load-grunt-tasks": "*"
+	},
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ovdzee/nl.ovdz.resource-router.git"
+	}
+}

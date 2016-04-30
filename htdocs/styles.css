@@ -1,0 +1,7 @@
+body {
+	background: #123;
+	color: #fed;
+}
+body:after {
+	content: ' with styles';
+}
