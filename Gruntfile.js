@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 			},
 			scripts: {
 				files: ['Gruntfile.js', servedDir + '/**/*.js', extensionDir + '/**/*.js'],
-				tasks: ['newer:jshint:all'],
+				tasks: ['newer:jshint:all', 'newer:jscs:src'],
 			},
 			styles: {
 				files: [servedDir + '/**/*.css', extensionDir + '/**/*.css'],
@@ -88,6 +88,14 @@ module.exports = function (grunt) {
 			]
 		},
 
+		// Make sure code styles are up to par
+		jscs: {
+			src: [
+				servedDir + '/**/*.js',
+				extensionDir + '/**/*.js'
+			]
+		},
+
 		// Check integrity of JSON files
 		jsonlint: {
 			src: [
@@ -102,9 +110,13 @@ module.exports = function (grunt) {
 	grunt.registerTask('serve', 'Compile then start a connect web server', function () {
 
 		grunt.task.run([
+		    // do all checks when the watching is started,
+		    // on error the task is exited, so problems need to solved.
 			'csslint:strict',
 			'jshint:all',
+			'jscs',
 			'jsonlint',
+			// start the servers and the watch
 			'connect',
 			'watch'
 		]);

@@ -1,7 +1,7 @@
 {
 	"short_name": "Resource Router",
 	"name": "Frontend Resource Router",
-	"version": "0.1",
+	"version": "0.1.1",
 	"description": "Route frontend sources in production to local files",
 	"manifest_version": 2,
 	"browser_action": {

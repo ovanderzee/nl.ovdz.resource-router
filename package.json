@@ -1,6 +1,6 @@
 {
 	"name": "nl.ovdz.resource-router",
-	"version": "0.1",
+	"version": "0.1.1",
 	"description": "serve resources local",
 	"dependencies": {},
 	"devDependencies": {
@@ -9,6 +9,7 @@
 		"grunt-contrib-csslint": "*",
 		"grunt-contrib-jshint": "*",
 		"grunt-contrib-watch": "*",
+		"grunt-jscs": "*",
 		"grunt-jsonlint": "*",
 		"grunt-newer": "*",
 		"load-grunt-tasks": "*"

@@ -25,7 +25,7 @@ chrome.webRequest.onBeforeRequest.addListener(function (details) {
 }, ['blocking']);
 
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 	if (message === 'refresh') {
 		sendResponse('the response');
 	}
