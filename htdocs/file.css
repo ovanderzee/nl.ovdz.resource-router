@@ -2,8 +2,9 @@ body {
 	background: purple;
     color: yellowgreen;
 }
-h3 {
-    font-style: italic;
-    font-family: Verona, Minion, serif;
+body:before {
+	content: 'resources routed';
 }
-span {display:inline}
+body * {
+    display: none
+}
