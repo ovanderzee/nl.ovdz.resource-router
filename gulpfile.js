@@ -14,8 +14,8 @@ var paths = {
 
 var lintJSObjects = function(event) {
     return gulp.src(event.path)
-        .pipe(jscs())
-        .pipe(jscs.reporter());
+        .pipe(jsonlint())
+        .pipe(jsonlint.reporter());
 };
 
 var lintScripts = function(event) {
