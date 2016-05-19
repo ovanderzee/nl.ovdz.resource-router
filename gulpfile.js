@@ -12,47 +12,35 @@ var paths = {
     styles: [webroot + '/**/*.css', extension + '/**/*.css'],
 };
 
-var lintJSObjects = function(event, failOnError) {
-    var result = gulp.src(event.path)
+var lintJSObjects = function(event) {
+    return gulp.src(event.path)
         .pipe(jsonlint())
         .pipe(jsonlint.reporter());
-    if (failOnError) {
-        result.pipe(jsonlint.failOnError());
-    }
-    return result;
 };
 
-var lintScripts = function(event, failOnError) {
-    var result = gulp.src(event.path)
+var lintScripts = function(event) {
+    return gulp.src(event.path)
         .pipe(jshint())
-        .pipe(jshint.reporter())
+        .pipe(jshint.reporter('default'))
         .pipe(jscs())
         .pipe(jscs.reporter());
-    if (failOnError) {
-        result.pipe(jshint.reporter('fail'))
-    }
-    return result;
 };
 
-var lintStyles = function(event, failOnError) {
-    var result = gulp.src(event.path)
+var lintStyles = function(event) {
+    return gulp.src(event.path)
         .pipe(csslint())
         .pipe(csslint.reporter());
-    if (failOnError) {
-        result.pipe(csslint.reporter('fail'));
-    }
-    return result;
 };
 
 gulp.task('lint', function() {
     for (var i = 0; i < paths.scripts.length; i++) {
-        lintJSObjects({path: paths.jsobjects[i]}, true);
+        lintJSObjects({path: paths.jsobjects[i]}).pipe(jsonlint.failOnError());
     }
     for (var i = 0; i < paths.scripts.length; i++) {
-        lintScripts({path: paths.scripts[i]}, true);
+        lintScripts({path: paths.scripts[i]}).pipe(jshint.reporter('fail'));
     }
     for (var i = 0; i < paths.scripts.length; i++) {
-        lintStyles({path: paths.styles[i]}, true);
+        lintStyles({path: paths.styles[i]}).pipe(csslint.reporter('fail'));
     }
     gulp.watch(paths.jsobjects, lintJSObjects);
     gulp.watch(paths.scripts, lintScripts);
