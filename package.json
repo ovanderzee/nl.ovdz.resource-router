@@ -1,18 +1,14 @@
 {
 	"name": "nl.ovdz.resource-router",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "serve resources local",
 	"dependencies": {},
 	"devDependencies": {
-		"grunt": "*",
-		"grunt-contrib-connect": "*",
-		"grunt-contrib-csslint": "*",
-		"grunt-contrib-jshint": "*",
-		"grunt-contrib-watch": "*",
-		"grunt-jscs": "*",
-		"grunt-jsonlint": "*",
-		"grunt-newer": "*",
-		"load-grunt-tasks": "*"
+		"gulp": "*",
+		"gulp-csslint": "*",
+		"gulp-jscs": "*",
+		"gulp-jshint": "*",
+		"gulp-jsonlint": "*"
 	},
 	"engines": {
 		"node": ">=0.10.0"
