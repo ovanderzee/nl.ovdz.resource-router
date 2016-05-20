@@ -1,0 +1,21 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "chrome": false
+    },
+    "rules": {
+        "camelcase": "off",
+        "curly": "error",
+        "eqeqeq": "error",
+        "indent": "off",
+        "strict": "off"
+    }
+}
+
+/*
+    extensive list of rules / best-practices at:
+    http://eslint.org/docs/rules/#best-practices
+*/

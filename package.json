@@ -6,8 +6,8 @@
 	"devDependencies": {
 		"gulp": "*",
 		"gulp-csslint": "*",
+		"gulp-eslint": "*",
 		"gulp-jscs": "*",
-		"gulp-jshint": "*",
 		"gulp-jsonlint": "*"
 	},
 	"engines": {

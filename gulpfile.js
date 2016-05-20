@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var csslint = require('gulp-csslint');
 var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var jsonlint = require("gulp-jsonlint");
 
 var webroot = 'htdocs'
@@ -20,8 +20,8 @@ var lintJSObjects = function(event) {
 
 var lintScripts = function(event) {
     return gulp.src(event.path)
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        .pipe(eslint())
+        .pipe(eslint.format('compact'))
         .pipe(jscs())
         .pipe(jscs.reporter());
 };
@@ -37,7 +37,7 @@ gulp.task('lint', function() {
         lintJSObjects({path: paths.jsobjects[i]}).pipe(jsonlint.failOnError());
     }
     for (var i = 0; i < paths.scripts.length; i++) {
-        lintScripts({path: paths.scripts[i]}).pipe(jshint.reporter('fail'));
+        lintScripts({path: paths.scripts[i]}).pipe(eslint.failOnError());
     }
     for (var i = 0; i < paths.scripts.length; i++) {
         lintStyles({path: paths.styles[i]}).pipe(csslint.reporter('fail'));
