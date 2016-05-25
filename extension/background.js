@@ -1,10 +1,12 @@
 var assets = {
+	'http://t-cromhouthuis-d7.finalist.nl/sites/cromhouthuis/themes/cromhouthuis/static/css/main.css': 'cromhouthuis/css/main.css',
 	'https://angularjs.org/css/docs.css': 'file.css',
 	'http://www.hastalavista.dds.nl/spel/mijnenveger.js': 'file.js',
 	'http://www.hastalavista.dds.nl/spel/mijnenveger.css': 'file.css'
 };
 
 var routingResponse = function (details) {
+	details.url = details.url.split('?')[0].split('#')[0];
 	var localRsrc = assets[details.url];
 	if (localStorage.running && localRsrc) {
 		linkElement.createURL(details.url);
