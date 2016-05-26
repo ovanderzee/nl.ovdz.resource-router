@@ -3,6 +3,7 @@ var csslint = require('gulp-csslint');
 var jscs = require('gulp-jscs');
 var eslint = require('gulp-eslint');
 var jsonlint = require("gulp-jsonlint");
+var connect = require('gulp-connect');
 
 var webroot = 'htdocs'
 var extension = 'extension';
@@ -47,3 +48,14 @@ gulp.task('lint', function() {
     gulp.watch(paths.styles, lintStyles);
 });
 
+gulp.task('connect', function() {
+	connect.server({
+		port: 9080,
+		root: webroot
+	});
+});
+
+gulp.task('default', [
+	'connect',
+	'lint'
+]);

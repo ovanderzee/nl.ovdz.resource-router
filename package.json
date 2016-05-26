@@ -1,21 +1,22 @@
 {
-	"name": "nl.ovdz.resource-router",
-	"version": "0.1.2",
-	"description": "serve resources local",
-	"dependencies": {},
-	"devDependencies": {
-		"gulp": "*",
-		"gulp-csslint": "*",
-		"gulp-eslint": "*",
-		"gulp-jscs": "*",
-		"gulp-jsonlint": "*"
-	},
-	"engines": {
-		"node": ">=0.10.0"
-	},
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ovdzee/nl.ovdz.resource-router.git"
-	}
+  "name": "nl.ovdz.resource-router",
+  "version": "0.1.2",
+  "description": "serve resources local",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-connect": "*",
+    "gulp-csslint": "*",
+    "gulp-eslint": "*",
+    "gulp-jscs": "*",
+    "gulp-jsonlint": "*"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ovdzee/nl.ovdz.resource-router.git"
+  }
 }
