@@ -44,9 +44,9 @@ gulp.task('lint', function() {
     for (var i = 0; i < paths.scripts.length; i++) {
         lintScripts({path: paths.scripts[i]}).pipe(eslint.failOnError());
     }
-    for (var i = 0; i < paths.scripts.length; i++) {
-        lintStyles({path: paths.styles[i]}).pipe(csslint.reporter('fail'));
-    }
+//     for (var i = 0; i < paths.scripts.length; i++) {
+//         lintStyles({path: paths.styles[i]}).pipe(csslint.reporter('fail'));
+//     }
     gulp.watch(paths.jsobjects, lintJSObjects);
     gulp.watch(paths.scripts, lintScripts);
     gulp.watch(paths.styles, lintStyles);
@@ -59,19 +59,20 @@ gulp.task('connect', function() {
 	});
 });
 
-gulp.task('connectSecure', function() {
+gulp.task('secure', function() {
 	connect.server({
-		// https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
+		// https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
+		// http://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
 		port: 9443,
 		root: webroot,
 		https: true,
-		key: fs.readFileSync('server.key').toString(),
-		cert: fs.readFileSync('server.crt').toString(),
-		ca: fs.readFileSync('ca.crt').toString()
+		key: fs.readFileSync('key.pem'),
+		cert: fs.readFileSync('cert.pem')
 	});
 });
 
 gulp.task('default', [
 	'connect',
+	'secure',
 	'lint'
 ]);
