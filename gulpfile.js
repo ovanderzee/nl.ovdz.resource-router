@@ -4,6 +4,7 @@ var jscs = require('gulp-jscs');
 var eslint = require('gulp-eslint');
 var jsonlint = require("gulp-jsonlint");
 var connect = require('gulp-connect');
+var fs = require('fs');
 
 var webroot = 'htdocs'
 var extension = 'extension';
@@ -52,6 +53,18 @@ gulp.task('connect', function() {
 	connect.server({
 		port: 9080,
 		root: webroot
+	});
+});
+
+gulp.task('connectSecure', function() {
+	connect.server({
+		// https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
+		port: 9443,
+		root: webroot,
+		https: true,
+		key: fs.readFileSync('server.key').toString(),
+		cert: fs.readFileSync('server.crt').toString(),
+		ca: fs.readFileSync('ca.crt').toString()
 	});
 });
 

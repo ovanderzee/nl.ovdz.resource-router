@@ -4,6 +4,7 @@
   "description": "serve resources local",
   "dependencies": {},
   "devDependencies": {
+    "fs": "*",
     "gulp": "*",
     "gulp-connect": "*",
     "gulp-csslint": "*",
