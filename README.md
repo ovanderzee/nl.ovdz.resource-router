@@ -1,22 +1,42 @@
 # nl.ovdz.resource-router
 
-This repository provides a browser extension to route files in production.
-These files are routed to a local hosted server.
+Resource-Router is a chrome-browser extension to route files to website in production.
+Resource-Router also provides tools to serve and lint the routed files in a local editing environment.
 
-// build local editing environment
-cd ~/nl.ovdz.resource-router && npm install
+## Install
 
-// run local server for editing resources
-cd ~/nl.ovdz.resource-router && grunt serve
+### Use the local extension in Google Chrome
+    
+Surf to chrome://extensions/
+Checkbox "Developer mode" has to checked
+Click button "Load unpacked extension..." 
+In the filesystem dialog, browse to the extension root directory (the directory "source")
+In the address bar, right of the input field, the plugin icon will appear 
 
-To setup a local https site, read: https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
+### Build local editing environment
 
-TODO
+Download the repository to for instance your homedirectory:
 
-events.js:141
-      throw er; // Unhandled 'error' event
-      ^
-Error: CSSLint failed for cromhouthuis/css/main.css
+    cd ~/nl.ovdz.resource-router 
 
-TODO
-PEM FILES ipv CERT
+Install the dependencies:  
+
+    npm install
+
+To setup the local https site:  
+
+    openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+
+### Run local server for editing resources
+
+Run the default gulp task
+
+    cd ~/nl.ovdz.resource-router && gulp
+
+## ToDo: csslint chockes or is chocked
+
+    events.js:141
+          throw er; // Unhandled 'error' event
+          ^
+    Error: CSSLint failed for cromhouthuis/css/main.css
+
