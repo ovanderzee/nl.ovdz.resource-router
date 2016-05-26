@@ -15,12 +15,14 @@ var paths = {
 };
 
 var lintJSObjects = function(event) {
+	console.log('---- lint jsons of ' + event.path + ' ----');
     return gulp.src(event.path)
         .pipe(jsonlint())
         .pipe(jsonlint.reporter());
 };
 
 var lintScripts = function(event) {
+	console.log('---- lint scripts of ' + event.path + ' ----');
     return gulp.src(event.path)
         .pipe(eslint())
         .pipe(eslint.format('compact'))
@@ -29,6 +31,7 @@ var lintScripts = function(event) {
 };
 
 var lintStyles = function(event) {
+	console.log('---- lint styles of ' + event.path + ' ----');
     return gulp.src(event.path)
         .pipe(csslint())
         .pipe(csslint.reporter());
