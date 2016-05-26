@@ -11,3 +11,12 @@ cd ~/nl.ovdz.resource-router && grunt serve
 
 To setup a local https site, read: https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
 
+TODO
+
+events.js:141
+      throw er; // Unhandled 'error' event
+      ^
+Error: CSSLint failed for cromhouthuis/css/main.css
+
+TODO
+PEM FILES ipv CERT
