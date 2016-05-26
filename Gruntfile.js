@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 		connect: {
 			server: {
 				options: {
-					port: 9000,
+					port: 9080,
 					base: servedDir
 				}
 			},
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 				// https://github.com/gruntjs/grunt-contrib-connect#user-content-support-for-https--http2
 				options: {
 					protocol: 'https', // or 'http2'
-					port: 8443,
+					port: 9443,
 // 					key: grunt.file.read('server.key').toString(),
 // 					cert: grunt.file.read('server.crt').toString(),
 // 					ca: grunt.file.read('ca.crt').toString(),
