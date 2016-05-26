@@ -36,7 +36,7 @@ Add to trusted sites (Mac OSX)
 
 Run the default gulp task
 
-    cd ~/nl.ovdz.resource-router && gulp
+    cd ~/nl.ovdz.resource-router && gulp develop
 
 
 ## toDo, toWant

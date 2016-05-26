@@ -71,7 +71,7 @@ gulp.task('secure', function() {
 	});
 });
 
-gulp.task('default', [
+gulp.task('develop', [
 	'connect',
 	'secure',
 	'lint'
