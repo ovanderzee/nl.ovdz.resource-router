@@ -14,42 +14,62 @@ var paths = {
     styles: [webroot + '/**/*.css', extension + '/**/*.css'],
 };
 
-var lintJSObjects = function(event) {
-	console.log('---- lint jsons of ' + event.path + ' ----');
-    return gulp.src(event.path)
-        .pipe(jsonlint())
-        .pipe(jsonlint.reporter());
+var lintLog = function(event) {
+    console.log('\n---- linted ' + event.path + ' ----');
 };
 
-var lintScripts = function(event) {
-	console.log('---- lint scripts of ' + event.path + ' ----');
-    return gulp.src(event.path)
+var lintJSObjects = function(event, fail) {
+    lintLog(event);
+    var result = gulp.src(event.path)
+        .pipe(jsonlint())
+        .pipe(jsonlint.reporter());
+	if (fail) {
+	    result.pipe(jsonlint.failOnError());
+	}
+    return result;
+};
+
+var lintScripts = function(event, fail) {
+    lintLog(event);
+    var result = gulp.src(event.path)
         .pipe(eslint())
         .pipe(eslint.format('compact'))
         .pipe(jscs())
         .pipe(jscs.reporter());
+	if (fail) {
+	    result.pipe(eslint.failOnError());
+	}
+    return result;
 };
 
-var lintStyles = function(event) {
-	console.log('---- lint styles of ' + event.path + ' ----');
-    return gulp.src(event.path)
+var lintStyles = function(event, fail) {
+    lintLog(event);
+    var result = gulp.src(event.path)
         .pipe(csslint())
         .pipe(csslint.reporter());
-};
-
-gulp.task('lint', function() {
-    for (var i = 0; i < paths.scripts.length; i++) {
-        lintJSObjects({path: paths.jsobjects[i]}).pipe(jsonlint.failOnError());
-    }
-    for (var i = 0; i < paths.scripts.length; i++) {
-        lintScripts({path: paths.scripts[i]}).pipe(eslint.failOnError());
-    }
-    for (var i = 0; i < paths.scripts.length; i++) {
-        lintStyles({path: paths.styles[i]}).pipe(csslint.failReporter());
+	if (fail) {
+	    result.pipe(csslint.failReporter());
         // when csslint encounters a problem,
         // you'll get an "Unhandled 'error' event" in events.js
         // https://github.com/lazd/gulp-csslint/issues/50
+	}
+    return result;
+};
+
+var lintAll = function(fail) {
+    for (var i = 0; i < paths.scripts.length; i++) {
+        lintJSObjects({path: paths.jsobjects[i]}, fail)
     }
+    for (var i = 0; i < paths.scripts.length; i++) {
+        lintScripts({path: paths.scripts[i]}, fail)
+    }
+    for (var i = 0; i < paths.scripts.length; i++) {
+        lintStyles({path: paths.styles[i]}, fail)
+    }
+};
+
+gulp.task('lint', function() {
+    lintAll(false);
     gulp.watch(paths.jsobjects, lintJSObjects);
     gulp.watch(paths.scripts, lintScripts);
     gulp.watch(paths.styles, lintStyles);
