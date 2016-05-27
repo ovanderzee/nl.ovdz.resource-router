@@ -44,9 +44,12 @@ gulp.task('lint', function() {
     for (var i = 0; i < paths.scripts.length; i++) {
         lintScripts({path: paths.scripts[i]}).pipe(eslint.failOnError());
     }
-//     for (var i = 0; i < paths.scripts.length; i++) {
-//         lintStyles({path: paths.styles[i]}).pipe(csslint.reporter('fail'));
-//     }
+    for (var i = 0; i < paths.scripts.length; i++) {
+        lintStyles({path: paths.styles[i]}).pipe(csslint.failReporter());
+        // when csslint encounters a problem,
+        // you'll get an "Unhandled 'error' event" in events.js
+        // https://github.com/lazd/gulp-csslint/issues/50
+    }
     gulp.watch(paths.jsobjects, lintJSObjects);
     gulp.watch(paths.scripts, lintScripts);
     gulp.watch(paths.styles, lintStyles);
