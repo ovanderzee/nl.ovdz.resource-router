@@ -1,11 +1,4 @@
 var gulp = require('gulp');
-var csslint = require('gulp-csslint');
-var jscs = require('gulp-jscs');
-var eslint = require('gulp-eslint');
-var jsonlint = require("gulp-jsonlint");
-var connect = require('gulp-connect');
-var fs = require('fs');
-
 var webroot = 'htdocs'
 var extension = 'extension';
 var paths = {
@@ -19,6 +12,7 @@ var lintLog = function(event) {
 };
 
 var lintJSObjects = function(event, fail) {
+    var jsonlint = require("gulp-jsonlint");
     lintLog(event);
     var result = gulp.src(event.path)
         .pipe(jsonlint())
@@ -30,6 +24,8 @@ var lintJSObjects = function(event, fail) {
 };
 
 var lintScripts = function(event, fail) {
+    var eslint = require('gulp-eslint');
+    var jscs = require('gulp-jscs');
     lintLog(event);
     var result = gulp.src(event.path)
         .pipe(eslint())
@@ -43,6 +39,7 @@ var lintScripts = function(event, fail) {
 };
 
 var lintStyles = function(event, fail) {
+    var csslint = require('gulp-csslint');
     lintLog(event);
     var result = gulp.src(event.path)
         .pipe(csslint())
@@ -76,6 +73,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('connect', function() {
+    var connect = require('gulp-connect');
 	connect.server({
 		port: 9080,
 		root: webroot
@@ -83,6 +81,8 @@ gulp.task('connect', function() {
 });
 
 gulp.task('secure', function() {
+    var connect = require('gulp-connect');
+    var fs = require('fs');
 	connect.server({
 		// https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
 		// http://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
