@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var webroot = 'htdocs'
 var extension = 'extension';
 var paths = {
+    webroot: [webroot + '/**/*.*'],
     jsobjects: [webroot + '/**/*.json', extension + '/**/*.json'],
     scripts: [webroot + '/**/*.js', extension + '/**/*.js'],
     styles: [webroot + '/**/*.css', extension + '/**/*.css'],
@@ -72,12 +73,20 @@ gulp.task('lint', function() {
     gulp.watch(paths.styles, lintStyles);
 });
 
+var connectReload = function(connect) {
+    var connect = require('gulp-connect');
+    return gulp.src(paths.webroot)
+        .pipe(connect.reload());
+};
+
 gulp.task('connect', function() {
     var connect = require('gulp-connect');
 	connect.server({
 		port: 9080,
-		root: webroot
+		root: webroot,
+	    livereload: true
 	});
+    gulp.watch(paths.webroot, connectReload);
 });
 
 gulp.task('secure', function() {
@@ -92,6 +101,7 @@ gulp.task('secure', function() {
 		key: fs.readFileSync('key.pem'),
 		cert: fs.readFileSync('cert.pem')
 	});
+    gulp.watch(paths.webroot, connectReload);
 });
 
 gulp.task('develop', [
