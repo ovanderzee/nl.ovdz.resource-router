@@ -41,13 +41,6 @@ Run the default gulp task
 
 ## toDo, toWant
 
-### csslint chockes or is chocked
-
-    events.js:141
-          throw er; // Unhandled 'error' event
-          ^
-    Error: CSSLint failed for cromhouthuis/css/main.css
-
 ### build the sources
 
     in the task runner, with a zip command
