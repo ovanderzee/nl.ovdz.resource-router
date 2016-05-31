@@ -1,0 +1,160 @@
+=homepage-more-link
+  position: relative
+  .more-link
+    font-size: 17px
+    font-weight: bold
+    text-align: left
+    position: absolute
+    bottom: 22px
+    left: 22px
+    a
+      &:after
+        +icomoon('chevron-right')
+        margin-left: 4px
+        position: relative
+        top: 2px
+
+.node-type-homepage
+
+  .homepage-news,
+  .homepage-twitter,
+  .homepage-events,
+  .homepage-news-schools,
+  .homepage-spotlight
+    margin-bottom: 30px
+    background-color: $niceblock-bg-color
+    padding: 22px
+    height: 360px
+
+
+  //TWITTER
+  .homepage-twitter
+    padding-right: 0px
+    iframe
+      max-height: 360px - 52px
+
+  //EVENTS
+  .homepage-events
+    +homepage-more-link
+    padding: 0
+    .view
+      overflow: hidden
+    ul, li
+      +reset-list
+    ul
+      position: relative
+    li
+      +niceblock
+      height: 360px
+      width: 304px
+      position: absolute
+      top: 0
+
+
+  //NEWS
+  .homepage-news
+    +homepage-more-link
+    padding-left: 0
+    padding-top: 0
+    ul li
+      +reset-list
+      &:first-of-type
+        +niceblock
+        height: 330px
+        width: 50%
+        float: left
+        margin: 0 22px 0 0
+        border-width: 0 1px 0 0
+        border-style: solid
+        border-color: $detail-color-mid
+        -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from($detail-color-mid), to(rgba(0, 0, 0, 0))) 1 100%
+        -webkit-border-image: -webkit-linear-gradient($detail-color-mid, rgba(0, 0, 0, 0)) 1 100%
+        -moz-border-image: -moz-linear-gradient($detail-color-mid, rgba(0, 0, 0, 0)) 1 100%
+        -o-border-image: -o-linear-gradient($detail-color-mid, rgba(0, 0, 0, 0)) 1 100%
+        border-image: linear-gradient(to bottom, $detail-color-mid, rgba(0, 0, 0, 0)) 1 100%
+
+        //reset some niceblock hover things
+        a
+          &:after
+            display: none
+        &:hover
+          +bvp(box-shadow, none)
+          background-color: $niceblock-bg-color
+
+      &:nth-child(n+2)
+        padding: 20px 0 0 0
+        .date,
+        .title
+          display: inline
+        .date
+          color: $nicelist-date-color
+          font-size: $nicelist-date-font-size
+          line-height: $nicelist-date-line-height
+          &:after
+            content: " | "
+        .title
+          font-size: 17px
+          font-weight: bold
+
+    .more-link
+      left: 50%
+      margin-left: 12px
+
+  //NEWS SCHOOLS
+  .homepage-news-schools
+    +homepage-more-link
+    padding: 0
+    ul, li
+      +reset-list
+    li
+      +niceblock
+      height: 360px
+      width: 304px
+
+
+  //SPOTLIGHT
+  .homepage-spotlight
+    +homepage-more-link
+    +niceblock
+    padding: 0
+    margin-top: 0
+
+
+@media #{$tablet-p}, #{$mobile}
+  .front
+    .content-section
+      .content-container
+        .news-middle:nth-child(3n)
+          display: none
+
+@media #{$mobile}
+  .node-type-homepage
+    .homepage-news
+      padding: 22px 22px 22px 22px
+      height: auto
+      .more-link
+        position: static
+        margin: 22px 0 0 0
+      ul li
+        +reset-list
+        &:first-of-type
+          float: none
+          width: auto
+          height: auto
+          border: 0px
+          padding: 0
+          .date,
+          .title
+            display: inline
+          .date
+            color: $nicelist-date-color
+            font-size: $nicelist-date-font-size
+            line-height: $nicelist-date-line-height
+            &:after
+              content: " | "
+          .title
+            font-size: 17px
+            font-weight: bold
+
+    .homepage-twitter
+      display: none

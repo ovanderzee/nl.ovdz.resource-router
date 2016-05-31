@@ -1,0 +1,36 @@
+.tabs
+  margin: 20px 0 0
+
+  ul.primary
+    margin: 0
+    padding: 0
+    @extend %clearfix
+    border-bottom: 0
+
+    li
+      display: inline-block
+      float: left
+      margin-bottom: 10px
+      a
+        border: 0
+        background-color: $tabs-bg-color
+        border-color: $tabs-border-color
+        color: $tabs-text-color
+        display: block
+        padding: 4px 10px
+        font:
+          size: $button-font-size
+          family: $font-heading
+
+        &:hover
+          background-color: $tabs-bg-hover-color
+          border-color: $tabs-border-hover-color
+          color: $tabs-text-hover-color
+
+        &.active
+          background-color: $tabs-bg-hover-color
+          border-color: $tabs-border-hover-color
+          color: $tabs-text-hover-color
+
+        .element-invisible
+          position: absolute !important

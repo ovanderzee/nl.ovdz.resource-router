@@ -1,0 +1,163 @@
+// DESKTOP
+$grid-columns: $default-grid-columns
+$grid-column-width: $default-grid-column-width
+$grid-gutter-width: $default-grid-gutter-width
+
+// No need for a media query here,
+// this is always the base layout
+body
+  &.show-responsive-identifier
+    .responsive-identifier
+      background: $desktop-identifier-color
+      &:after
+        content: $desktop-identifier-text
+
+  &.show-grid
+    +visualize-grid
+
+  header,
+  nav .inner, nav #menu-block-2,
+  footer .inner,
+  .content-section .content-container,
+  .quicklinks-section .quicklinks-container,
+  .group-fcwrapper .quote-container,
+  .banner-section .quote-container,
+  #easy-breadcrumb-easy-breadcrumb,
+  #view-wrapper,
+  .title-container .wrapper,
+  .filter-container .wrapper,
+  .tabs.primary,
+  .messages,
+  #workbench-block
+    width: calc-grid() + px
+
+  &.not-logged-in.page-user section.content
+    width: calc-grid() + px
+    margin: 0 auto
+
+.content-container .ds-2col,
+#view-wrapper
+  .group-left
+    +span-columns(8, true)
+
+  .group-right
+    +span-columns(4, false)
+
+// QUICKLINKS
+.fc-quicklinks
+  .item
+    +span-columns(3, false)
+    margin-right: $grid-gutter-width + px
+
+  // TODO: we really need to change this; the <a> should go in the <div .item>
+  a
+    &:nth-child(4n)
+      .item
+        margin-right: 0
+
+
+// SEARCH
+#finalist-search-finalist-search-form
+  +span-columns(6, false)
+
+
+// FOOTER
+footer
+  #finalist-social-finalist-social-media-block
+    width: 66.66%
+    float: left
+
+  #finalist-blocks-finalist-bottom-block
+    width: 33.33%
+    float: left
+
+// NICE BLOCKS - HOMPAGE
+// .content-section
+//   .content-container
+//     .news-left,
+//     .news-middle,
+//     .news-right
+//       +span-columns(4, true)
+//       float: left
+//
+//       &:nth-child(3n)
+//         margin-right: 0
+//
+//     .event-left,
+//     .event-right
+//       +span-columns(6, true)
+//       float: left
+//
+//     .event-right
+//       margin-right: 0
+
+// NICE BLOCKS - CONTENT-BLOCK-TEASER
+.content-blocks-teaser,
+.teasers
+  .content-block-teaser,
+  .content-block-banner
+    +span-columns(4, true)
+    float: left
+
+    &:nth-child(3n)
+      margin-right: 0
+
+  a:nth-child(3n)
+    .content-block-teaser,
+    .content-block-banner
+      margin-right: 0
+
+.group-left
+  .group-teasers
+    .content-block-teaser,
+    .content-block-banner
+      +span-columns(4, true)
+      float: left
+
+      &:nth-child(2n)
+        margin-right: 0
+
+    a:nth-child(2n)
+      .content-block-teaser
+        margin-right: 0
+
+.list-news.view,
+.list-event.view,
+.list-search.view,
+.list-publication.view,
+.list-standpoint.view,
+.list-news_school.view
+  .view-filters
+    #edit-trefwoord-wrapper
+      +span-columns(8, false)
+
+
+.node-type-homepage
+  .homepage-news
+    +span-columns(8, true)
+    float: left
+
+  .homepage-news-schools
+    +span-columns(4, false)
+    float: left
+
+  .homepage-twitter
+    +span-columns(4, true)
+    float: left
+
+  .homepage-events
+    +span-columns(4, true)
+    float: left
+
+  .homepage-spotlight
+    +span-columns(4, false)
+    float: left
+
+@media #{$desktop}
+  .list-themes
+    .item-list .row
+      +span-columns(4, true)
+      float: left
+
+      &:nth-of-type(3n)
+        margin-right: 0

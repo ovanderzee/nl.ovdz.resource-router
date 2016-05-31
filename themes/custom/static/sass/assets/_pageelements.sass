@@ -1,0 +1,86 @@
+// MESSAGES
+div.messages
+  padding: pxtoem(10px)
+  background-image: none
+  color: #FFFFFF
+  border: none
+
+  .krumo-root
+    color: #000000
+
+  > ul
+    display: inline-block
+    margin: 0
+
+  &:before
+    padding-right: pxtoem(10px)
+    float: left
+    margin-top: pxtoem(1px)
+
+  &.warning
+    background-color: $message-warning
+
+    &:before
+      +icomoon("warning")
+
+  &.status
+    background-color: $message-status
+
+    &:before
+      +icomoon("status")
+
+  &.error
+    background-color: $message-error
+
+    &:before
+      +icomoon("error")
+
+
+
+// Breadcrumb
+.breadcrumb
+  padding-bottom: 0
+#easy-breadcrumb-easy-breadcrumb
+  margin: 24px auto
+  font-family: $font-heading
+
+  a
+    font-size: $breadcrumb-active-font-size
+    line-height: $breadcrumb-line-height
+    color: $breadcrumb-color
+
+    &:hover
+      color: $breadcrumb-active-hover-color
+
+  span
+    font-size: $breadcrumb-font-size
+    line-height: $breadcrumb-line-height
+    color: $breadcrumb-color
+
+  .easy-breadcrumb_segment-separator
+    color: transparent
+    font-size: 0
+    &:after
+      +icomoon('chevron-right')
+      font-size: 11px
+      color: $breadcrumb-color
+      padding: 0 8px
+
+  .easy-breadcrumb_segment-title
+    font-weight: bold
+
+
+
+//hide fake input for spambots
+#comments,
+.node-type-webform
+  .link-textfield
+    display: none
+
+
+
+@media #{$mobile}
+  .breadcrumb
+    display: none
+  #easy-breadcrumb-easy-breadcrumb
+    display: none

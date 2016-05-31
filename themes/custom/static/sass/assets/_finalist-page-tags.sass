@@ -1,0 +1,21 @@
+.finalist-page-tags
+  margin: 24px 0
+  border-top: 2px solid $page-tags-border-color
+  border-bottom: 2px solid $page-tags-border-color
+  padding: 15px 24px
+  font-family: $font-heading
+  .label-above
+    font-size: 19px
+    line-heihgt: 21px
+  ul
+    +inline-list
+    +reset-list
+
+    li
+      &:after
+        color: #404040
+        content: ", "
+        font-family: $arial
+      &:last-child
+        &:after
+          content: ""

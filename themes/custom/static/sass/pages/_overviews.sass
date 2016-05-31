@@ -1,0 +1,106 @@
+// Search overview, all items are shown as list items
+.list-event.view,
+.list-news.view,
+.list-search.view,
+.list-publication.view,
+.list-standpoint.view,
+.list-news_school.view
+  .views-row
+    list-style: none
+    +nicelist
+    width: 100%
+    float: none
+    clear: both
+
+//Overwrite variable for this view
+$search-line-height: 30px
+
+// Generic styling
+.list-event.view,
+.list-news.view,
+.list-search.view,
+.list-publication.view,
+.list-standpoint.view,
+.list-news_school.view
+  margin-bottom: 35px
+  .view-filters
+    #edit-trefwoord-wrapper
+      padding: 0
+      input
+        width: 100%
+        margin: 0
+        height: $search-line-height
+        padding-right: $search-line-height
+
+    .views-submit-button
+      padding: 0
+      margin: 0
+      position: relative
+      &:before
+        +icomoon('search')
+        position: absolute
+        top: 0
+        right: 0
+        height: $search-line-height
+        line-height: $search-line-height
+        z-index: 3
+        font-size: 20px
+        width: $search-line-height
+        height: $search-line-height
+        padding-left: 6px
+        background-color: $search-button-bg-color
+        color: $search-button-icon-color
+        +bvp(transition, color 0.4s ease-in-out)
+
+      &:hover
+        &:before
+          background-color: $search-button-bg-hover-color
+          color: $search-button-icon-hover-color
+
+
+      input[type=submit]
+        position: absolute
+        right: 0
+        top: 0
+        margin: 0
+        z-index: 2
+        font-size: 0
+        width: $search-line-height
+        height: $search-line-height
+        background-color: transparent
+
+  .view-content
+    overflow: hidden
+
+  #autocomplete
+    background: $detail-color-light
+    border-color: $detail-color-mid
+    +bvp(box-sizing, content-box)
+    padding: 1px
+    ul
+      +reset-list
+      li
+        padding: 6px
+        background-color: $detail-color-light
+        &:hover
+          background-color: darken($detail-color-light, 10%)
+          color: $spot-color
+
+
+  #views_infinite_scroll-ajax-loader
+    clear: both
+    margin-top: 25px
+    width: 100%
+    img
+      display: inline
+
+  .view-glossary
+    +bvp(box-shadow, 4px 4px 0px 0px rgba(113, 113, 116, 0.15), inset 0 0 0 1px $niceblock-border-color)
+    margin-top: 40px
+    border: 2px solid $spot-color
+    padding: 22px
+
+    .label
+      font-weight: bold
+      font-size: $h2-font-size
+      line-height: $h2-line-height

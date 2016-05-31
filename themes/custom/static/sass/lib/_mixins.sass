@@ -1,0 +1,309 @@
+=clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+%elementfocus
+  outline: 2px solid rgba($focus-ring-color, 0.75)
+  outline-offset: 2px
+
+  html.no-rgba &
+    outline: 2px solid $focus-ring-color
+
+  &.hide-outline
+    outline: none !important
+
+=button
+  +bvp(transition, color 0.1s ease-in-out, background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out)
+  display: inline-block
+
+  line-height: 28px
+  padding: 6px 30px
+  cursor: pointer
+
+  background-color: $form-button-bg-color
+  color: $form-button-text-color
+
+  border: none
+  -webkit-appearance: none
+  text-decoration: none
+
+  font-family: $font-heading
+  font-size: 17px
+  font-style: normal
+  vertical-align: baseline
+
+  &:hover
+    text-decoration: none
+    background-color: $form-button-bg-hover-color
+    color: $form-button-text-hover-color
+
+  &:visited
+    color: white
+
+  &.disabled:hover,
+  &.disabled
+    background-color: lighten($silver, 15%)
+    +bvp(box-shadow, inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3))
+    color: darken($silver, 15%)
+    pointer-events: none
+
+
+// Placeholder
+=placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+=reset-list
+  padding: 0
+  margin: 0
+  list-style-image: none
+  list-style-type: none
+  li
+    padding: 0
+    margin: 0
+    list-style-image: none
+    list-style-type: none
+
+// Nice block
+=niceblock
+  background-color: $niceblock-bg-color
+  position: relative
+  margin-top: 16px
+  margin-bottom: 16px
+  min-height: 355px
+  &:hover
+    background-color: $niceblock-bg-hover-color
+    +bvp(box-shadow, 4px 4px 0px 0px rgba(113, 113, 116, 0.15), inset 0 0 0 1px $niceblock-border-color)
+    h2
+      color: $niceblock-heading-hover-color
+
+  > a:after
+    content: ""
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    //box-shadow: inset 0 0 0 0 rgba(255,255,255,.5)
+    +bvp(box-shadow, inset 0 0 0 0 white)
+    transition: box-shadow .1s ease
+
+  > a:hover
+    &:after
+      //box-shadow: inset 0 0 0 2px rgba(255,255,255,.5)
+      +bvp(box-shadow, inset 0 0 0 2px $niceblock-border-hover-color)
+
+  // image
+  img
+    width: 100%
+
+  // niceblock heading
+  h2
+    +bvp(transition, color 0.4s ease-in-out)
+    font-size: $niceblock-heading-font-size
+    line-height: $niceblock-heading-line-height
+    font-family: $font-heading
+    color: $niceblock-heading-color
+    font-weight: bold
+    height: 2.3em
+    overflow: hidden
+
+  // niceblock inner container without the image
+  .info
+    padding: 22px 22px 48px 22px
+
+  //niceblock text
+  .intro
+    font-size: $niceblock-text-font-size
+    line-height: $niceblock-text-line-height
+    font-family: $font-default
+    color: $niceblock-text-color
+    max-height: $niceblock-text-line-height * 3
+    overflow: hidden
+    //IE11 fix
+    width: 100%
+    &:after
+      content: "..."
+
+  .date
+    color: $niceblock-date-color
+    font-size: $niceblock-date-font-size
+    line-height: $niceblock-date-line-height
+    display: inline-block
+    padding-right: 4px
+    &:after
+      content: " |"
+  // niceblock readmore
+  .read-more
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    a, span
+      display: inline-block
+      width: 100%
+      background-color: $niceblock-readmore-bg-color
+      color: $niceblock-readmore-color
+      padding: 0 16px
+      font-size: $niceblock-readmore-font-size
+      line-height: $niceblock-readmore-line-height
+      font-family: $font-heading
+      font-weight: bold
+      +bvp(transition, color 0.4s ease-in-out)
+      +bvp(transition, background-color 0.4s ease-in-out)
+      &:hover
+        background-color: $niceblock-readmore-bg-hover-color
+        color: $niceblock-readmore-hover-color
+
+  // niceblock events
+  .finalist-ds-event-till-date-time
+    line-height: 1
+  .finalist-ds-event-start-date
+    padding: 10px 0 0 0
+    height: 164px
+    float: left
+    background-color: $niceblock-event-bg-color
+    width: 33.33%
+    overflow: hidden
+    +bvp(transition, color 0.4s ease-in-out)
+    +bvp(transition, background-color 0.4s ease-in-out)
+
+    @media #{$tablet-p}, #{$mobile}
+      width: 100%
+      height: 160px
+
+    & + .info
+      width: 66.66%
+      margin-left: 33.33%
+      height: 164px
+      overflow: hidden
+
+      @media #{$tablet-p}, #{$mobile}
+        width: 100%
+        height: 160px
+        margin-left: 0
+
+      .event-time-teaser
+        .time-label,
+        .event-time
+          display: inline-block
+          color: $niceblock-text-color
+        .time-label
+          font-style: italic
+          font-size: $niceblock-text-font-size - 1px
+          width: 30px
+        .event-time
+          font-weight: bold
+
+    span
+      display: block
+      text-align: center
+      margin-bottom: 8px
+    .event-date-teaser-day
+      color: $niceblock-event-day-color
+      font-size: $niceblock-event-day-font-size
+      line-height: $niceblock-event-day-font-size
+      font-family: $font-heading
+    .event-date-teaser-month
+      color: $niceblock-event-month-color
+      font-size: $niceblock-event-month-font-size
+      line-height: $niceblock-event-month-font-size
+      font-family: $font-heading
+    .event-date-teaser-year
+      color: $niceblock-event-year-color
+      font-size: $niceblock-event-year-font-size
+      line-height: $niceblock-event-year-font-size
+      font-family: $font-default
+
+  a:hover
+    .node-link
+      a, span
+        background-color: $niceblock-readmore-bg-hover-color
+        color: $niceblock-readmore-hover-color
+    .finalist-ds-event-start-date
+      background-color: $niceblock-event-bg-hover-color
+
+// Nice list
+=nicelist
+  margin: 40px 0
+  +clearfix
+  h2
+    +bvp(transition, color 0.4s ease-in-out)
+    font-size: $nicelist-heading-font-size
+    line-height: $nicelist-heading-line-height
+    color: $nicelist-heading-color
+
+  img
+    float: right
+    margin: 4px 0 10px 10px
+
+  .intro
+    font-size: $nicelist-text-font-size
+    line-height: $nicelist-text-line-height
+    color: $nicelist-text-color
+
+  .date,
+  .category
+    font-size: $nicelist-date-font-size
+    line-height: $nicelist-date-line-height
+    color: $nicelist-date-color
+    &:after
+      content : " | "
+
+  .date + p
+    display: inline
+
+  &:hover
+    h2
+      color: $nicelist-heading-hover-color
+
+@mixin sm-icon($icontype)
+  &:after
+    +icomoon($icontype)
+    color: $socialmedia-icon-color
+    background-color: $socialmedia-bg-color
+    width: 32px
+    height: 32px
+    font-size: 16px
+    text-align: center
+    line-height: 32px
+    display: inline-block
+    +bvp(transition, color 0.4s ease-in-out)
+    +bvp(transition, background-color 0.4s ease-in-out)
+
+  &:hover
+    &:after
+      color: $socialmedia-icon-hover-color
+      background-color: $socialmedia-bg-hover-color
+
+=back-link
+  line-height: 40px
+  font-size: 17px
+  background-color: $main-color
+  display: block
+  text-align: center
+  position: relative
+  color: #ffffff
+  font-weight: bold
+  height: 40px
+  +bvp(transition, background-color 0.4s ease-in-out)
+  &:before
+    +icomoon('chevron-left')
+    color: $action-color
+    line-height: 40px
+    position: absolute
+    left: 12px
+    +bvp(transition, color 0.4s ease-in-out)
+
+  &:hover
+    background-color: darken($main-color, 5%)
+    &:before
+      color: #ffffff

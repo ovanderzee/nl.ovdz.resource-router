@@ -1,0 +1,61 @@
+#comments
+  border-top: 2px solid $main-color
+  padding-top: 20px
+  margin-top: 40px
+  clear: both
+
+  textarea
+    resize: none
+
+
+  .comment
+    padding: 20px 0
+    border-bottom: 1px solid $detail-color-light
+
+    .username,
+    time
+      font-size: $h3-font-size
+      line-height: $h3-line-height
+
+    .username
+      font-weight: bold
+
+    time
+      &:before
+        content: " | "
+        font-size: 12px
+
+    .links
+      margin: 20px 0
+      display: block
+      li
+        display: inline-block
+        padding: 0
+        margin-right: 8px
+        margin-bottom: 8px
+        a
+          +button
+          font-size: $default-font-size
+          line-height: $default-line-height
+          padding: 4px 10px
+
+    .comment_show
+      color: $action-color
+      font-weight: bold
+      +bvp(transition, color 0.4s ease-in-out)
+      &:after
+        +icomoon('chevron-down')
+        margin-left: 4px
+      &.showing
+        &:after
+          +icomoon('chevron-up')
+      &:hover
+        color: $spot-color
+
+  .indented
+    .comment
+      &:last-of-type
+        padding-bottom: 0
+
+  h2.comment-form
+    margin-top: 40px

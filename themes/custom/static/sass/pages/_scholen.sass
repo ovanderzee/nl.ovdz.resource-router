@@ -1,0 +1,78 @@
+.schools
+  margin: 24px 0
+
+  .provinces,
+  #gmap-schools
+    height: 600px
+    overflow: auto
+    display: inline-block
+
+  .provinces
+    width: 204px
+    margin-right: 16px
+    padding-right: 24px
+
+  #gmap-schools
+    width: 376px
+
+  .province
+    h2.toggle
+      cursor: pointer
+
+      &:hover
+        color: $spot-color
+
+      &:after
+        +icomoon('chevron-down')
+        font-size: 14px
+        margin: 0 0 0 10px
+
+      &.open
+        color: $spot-color
+
+        &:after
+          +icomoon('chevron-up')
+          font-size: 14px
+          margin: 0 0 0 10px
+
+
+    .item-list
+      +reset-list
+
+      li
+
+        a.school-name
+          font-size: $h3-font-size
+          line-height: $h3-line-height
+          font-weight: bold
+          margin-bottom: 7px
+          display: inline-block
+
+        a
+          font-weight: bold
+
+          &:last-of-type
+            margin-top: 7px
+            display: inline-block
+
+  .school-info
+    display: none
+
+
+@media #{$mobile}
+  .schools
+    #gmap-schools
+      display: none
+
+    .school-info
+      display: block
+
+    .province .item-list
+      li
+        margin: 0 0 24px 0
+
+    .provinces
+      width: auto
+      margin-right: 0
+      padding-right: 0
+      height: auto

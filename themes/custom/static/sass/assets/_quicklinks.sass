@@ -1,0 +1,74 @@
+.quicklinks-section
+  background-color: $detail-color-light
+  margin-bottom: 30px
+.quicklinks-container
+  margin: 0 auto
+  position: relative
+  top: -46px
+.fc-quicklinks
+  //background: $quicklinks-bg-color
+  @extend %clearfix
+  padding: $default-grid-gutter-width + px 0
+
+  .item
+    // width is set in grid file
+    float: left
+    background-color: $quicklinks-item-bg-color
+    color: $quicklinks-item-text-color
+    +bvp(transition, color 0.4s ease-in-out)
+    +bvp(transition, background-color 0.4s ease-in-out)
+
+    padding: 16px
+
+    font-size: $quicklinks-item-font-size
+    line-height: $quicklinks-item-line-height
+    border: 2px solid $spot-color
+
+    &:hover
+      background-color: $quicklinks-item-bg-color-hover
+      color: $quicklinks-item-text-color-hover
+
+
+
+    .title
+      font-family: $font-heading
+      font-size: $quicklinks-item-title-font-size
+      line-height: $quicklinks-item-title-line-height 3px 3px 0px 0px rgba(50, 50, 50, 0.75)
+      margin-bottom: 16px
+      font-weight: bold
+
+    .title,
+    .text
+      &:before
+        +icomoon('chevron-right')
+        font-size: 21px
+        float: right
+
+    //hide for desktop
+    .text:before
+      display: none
+
+@media #{$tablet-p}
+  .fc-quicklinks
+    .item
+      padding: 0
+      margin-bottom: 8px
+      .title
+        margin: 0
+        padding: 16px 0px 16px 16px
+        &:before
+          display: none
+      .text
+        margin: 0
+        padding: 16px 0px 16px 0px
+        &:before
+          display: inline-block
+
+@media #{$mobile}
+  .quicklinks-container
+    position: static
+  .fc-quicklinks
+    .item
+      margin-bottom: 8px
+      margin-right: 0
+      width: 100%

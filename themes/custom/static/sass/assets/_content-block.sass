@@ -1,0 +1,85 @@
+.content-blocks,
+.content-blocks-sidebar
+  margin-top: 15px
+  font-size: $default-font-size
+  line-height: $default-line-height
+  .text
+    p
+      margin: 15px 0
+
+    a
+      font-family: $font-heading
+      font-weight: bold
+      text-decoration: underline
+
+
+    ol
+      margin: 15px 0
+      list-style-type: none
+      counter-reset: my-badass-counter
+
+      li
+        margin-top: 3px
+        position: relative
+        position: relative
+        left: 24px
+        text-indent: -24px
+        padding-left: 0
+        &:before
+          content: counter(my-badass-counter) ". "
+          counter-increment: my-badass-counter
+          line-height: 20px
+          width: 24px
+          display: inline-block
+          vertical-align: middle
+          text-align: left
+          text-indent: 0
+
+        &:first-child
+          margin-top: 0
+
+    ul
+      margin: 15px 0
+      li
+        list-style: none
+        position: relative
+        left: 15px
+        padding-left: 0
+        &:before
+          +icomoon('circle')
+          font-size: 7px
+          line-height: $default-line-height
+          color: $main-color
+          text-indent: -15px
+          display: inline-block
+          vertical-align: middle
+
+    // This is to remove the space between a paragraph and a list.
+    p + ul,
+    p + ol
+      margin-top: -12px
+
+    ol ol
+      margin: 0
+
+    table
+      border: 1px solid #eeeeee
+      table-layout: fixed
+      tbody
+        border-top: 0
+      th, td
+        padding: 10px
+        p
+          margin-top: 0
+          &:last-child
+            margin-bottom: 0
+
+
+
+.content-blocks-sidebar
+  .content-block
+    margin-bottom: $default-grid-gutter-width + px
+
+.content-blocks
+  .content-block
+    margin-bottom: 24px

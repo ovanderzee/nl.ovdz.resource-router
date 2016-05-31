@@ -1,0 +1,38 @@
+#finalist-blocks-finalist-contact-block
+  background-color: $themecolor-bg-alternative
+  padding-top: $default-grid-gutter-width / 2 + px
+  padding-right: $default-grid-gutter-width + px
+  padding-bottom: $default-grid-gutter-width / 2 + px
+  padding-left: $default-grid-gutter-width + px
+  min-height: 60px
+  @media #{$grid-m}, #{$grid-l}, #{$grid-xl}
+    padding: $default-grid-gutter-width + px
+    padding-top: 0
+    margin-bottom: $default-grid-gutter-width + px
+
+  a
+    color: $themecolor-text
+
+  .street,
+  .city
+    +section-heading
+    
+  .street:before
+    +icomoon('location')
+    font-size: 30px
+    float: left
+    margin-top: 7px
+    margin-right: 10px
+    margin-bottom: 10px
+    @media #{$grid-m}, #{$grid-l}, #{$grid-xl}
+      content: ""
+      display: none
+
+  p
+    +page-text
+    margin: 0
+
+  img
+    width: 100%
+    margin: 0 0 10px 0
+    border: 1px solid $themecolor-text

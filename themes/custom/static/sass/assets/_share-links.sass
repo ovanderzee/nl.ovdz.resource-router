@@ -1,0 +1,73 @@
+.social
+  float: left
+  @extend %clearfix
+  margin: 24px 0
+  h3
+    font-family: $font-heading
+    font-size: $socialmedia-heading-font-size
+    line-height: $socialmedia-heading-line-height
+    margin-bottom: 8px
+    font-weight: normal
+    &:after
+      content: ": "
+
+  ul
+    +inline-list
+    +reset-list
+
+    li
+      font-size: 0
+      color: transparent
+      margin-right: 8px
+
+    .service-links-facebook a
+      @include sm-icon(facebook)
+
+    .service-links-twitter a
+      @include sm-icon(twitter)
+
+    .service-links-linkedin a
+      @include sm-icon(linkedin)
+
+    .service-links-google-plus a
+      @include sm-icon(googleplus)
+
+.group-left
+  .social
+    float: none
+
+.finalist-ds-print-button
+  @extend %clearfix
+  float: right
+  margin: 24px 0
+  a
+    color: $socialmedia-bg-color
+    &:after
+      display: block
+      text-align: right
+      +icomoon('print')
+      font-size: 33px
+      line-height: 33px
+      color: $socialmedia-bg-color
+      +bvp(transition, color 0.4s ease-in-out)
+    &:hover
+      &:after
+        color: $socialmedia-bg-hover-color
+
+// clear div after the print button.
+.finalist-ds-print-button + div
+  clear: both
+
+footer
+  #finalist-social-finalist-social-media-block .social
+    h3
+      font-weight: bold
+    li a
+      &:after
+        color: $socialmedia-footer-icon-color
+        background-color: $socialmedia-footer-bg-color
+
+      &:hover
+        &:after
+          color: $socialmedia-footer-icon-hover-color
+          background-color: $socialmedia-footer-bg-hover-color

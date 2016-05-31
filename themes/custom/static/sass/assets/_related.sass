@@ -1,0 +1,97 @@
+=related-block
+  background: $related-info-bg-color
+  padding: 22px 24px
+  margin: 24px 0
+  font-size: 17px
+  line-height: 22px
+
+  .block-title
+    font-size: $related-info-header-font-size
+    line-height: $related-info-header-line-height
+    color: $related-info-header-color
+    font-family: $font-heading
+    font-weight: bold
+    margin: 0 0 20px 0
+
+  ul
+    +reset-list
+
+  .more-link
+    text-align: left
+    font-weight: bold
+    margin: 24px 0 0 0
+
+
+.group-right
+  .related-documents,
+  .related-news,
+  .related-events,
+  .related-publications
+    +related-block
+
+  .related-documents
+    ul
+      li
+        margin-bottom: 24px
+        margin-left: 33px
+      img
+        display: none
+
+      a
+        text-indent: -33px
+        word-break: break-word
+        &:before
+          color: $main-color
+          float: left
+
+      a[href$=".pdf"]
+        &:before
+          +icomoon('pdf')
+          font-size: 28px
+
+      a[href$=".doc"],
+      a[href$=".docx"],
+      a[href$=".txt"],
+      a[href$=".rtf"]
+        &:before
+          +icomoon('word')
+          font-size: 28px
+
+      a[href$=".xls"],
+      a[href$=".xlsx"]
+        &:before
+          +icomoon('excel')
+          font-size: 28px
+
+      a[href$=".ppt"],
+      a[href$=".pptx"]
+        &:before
+          +icomoon('powerpoint')
+          font-size: 28px
+
+  .related-news,
+  .related-events,
+  .related-publications
+    ul li
+      margin-bottom: 12px
+    .date
+      display: inline
+      font-family: $font-heading
+      font-size: $related-info-date-font-size
+      line-height: $related-info-date-line-height
+      color: $related-info-date-color
+      white-space: nowrap
+
+    .title
+      display: inline
+      font-weight: bold
+      font-family: $font-heading
+      font-size: $related-info-item-font-size
+      line-height: $related-info-item-line-height
+      &:before
+        content: "|"
+        font-family: $font-default
+        line-height: $related-info-item-line-height
+        font-size: 12px
+        color: #909090
+        margin: 0 5px

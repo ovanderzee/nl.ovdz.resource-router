@@ -1,0 +1,78 @@
+body.page-nieuws, body.page-event
+  aside.sidebar
+    padding-top: 45px
+    .block
+      padding-bottom: 30px
+      h2
+        font-size: 17px
+        line-height: 23px
+        font-weight: normal
+        margin-bottom: 10px
+
+ul.facetapi-facetapi-checkbox-links
+  li
+    list-style: none
+    position: relative
+    padding-left: 32px
+    margin-left: 0px
+    font-size: 15px
+    line-height: 28px
+    font-weight: bold
+    color: $detail-color-dark
+
+
+    input[type=checkbox] + .facetapi-inactive:before,
+    input[type=checkbox]:checked + .facetapi-active:before
+      background: #eff1f1
+      border: 2px solid #aeaeae
+      content: ""
+      height: 20px
+      top: 3px
+      width: 20px
+    input[type=checkbox]:checked + .facetapi-active:after
+      +icon("check")
+      color: black
+      font-size: 10px
+      left: 4px
+      position: absolute
+      top: 8px
+      z-index: 1
+
+    input[type=checkbox]:checked + .facetapi-active
+      display: block !important
+      font-size: 0px
+
+    input[type=checkbox]:checked + .facetapi-active,
+    input[type=checkbox] + .facetapi-inactive
+      height: 0
+      left: 0
+      text-decoration: none
+      color: $detail-color-dark
+      &:before
+        position: absolute
+        left: 0
+        color: $detail-color-mid
+        text-align: center
+        z-index: 1
+        font-size: 14px
+
+    .facetapi-inactive
+      display: table-cell
+      text-decoration: none
+      font-size: 15px
+      font-weight: bold
+
+.facetapi-limit-link
+  color: black
+  font-family: $font-heading
+  font-size: 16px
+  line-height: 19px
+  position: relative
+  text-decoration: none
+  &:after
+    +icon("chevron-down")
+    color: $spot-color
+    margin-left: 20px
+  &.open
+    &:after
+      +icon("chevron-up")

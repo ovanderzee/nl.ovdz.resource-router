@@ -1,11 +1,14 @@
 var gulp = require('gulp');
-var webroot = 'htdocs'
+var webroot = 'htdocs';
+var webroot = 'themes/custom';
+var compile = webroot + '/static';
 var extension = 'extension';
 var paths = {
     webroot: [webroot + '/**/*.*'],
     jsobjects: [webroot + '/**/*.json', extension + '/**/*.json'],
     scripts: [webroot + '/**/*.js', extension + '/**/*.js'],
     styles: [webroot + '/**/*.css', extension + '/**/*.css'],
+    sass: [compile + '/sass/**/*.s+(a|c)ss'],
 };
 
 var lintLog = function(event) {
@@ -101,8 +104,39 @@ gulp.task('secure', function() {
     gulp.watch(paths.webroot, connectReload);
 });
 
+var compileStyles = function (event, fail) {
+    var compass = require('gulp-compass');
+    // Please make sure to add css and sass options with the same value in config.rb since compass can't output css result directly.
+    return gulp.src(event.path)
+        .pipe(compass({
+            assets: true,
+            comment: true,
+            css: compile + '/css',
+            sass: compile + '/sass',
+            sourcemap: true,
+            style: 'compact'
+        }))
+        .on('error', function(error) {
+            if (fail) {
+                console.log('\n\n' + error);
+                console.log('\n\n     Press Ctrl-C to continue');
+                this.emit('end');
+            }
+        })
+};
+
+var compileAll = function (fail) {
+    compileStyles({path: paths.sass}, fail);
+};
+
+gulp.task('compile', function() {
+    compileAll(false);
+    gulp.watch(paths.sass, compileStyles);
+});
+
 gulp.task('develop', [
+	'lint',
+	'compile',
 	'connect',
-	'secure',
-	'lint'
+	'secure'
 ]);

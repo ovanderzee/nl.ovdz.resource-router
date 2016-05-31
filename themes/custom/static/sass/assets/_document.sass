@@ -1,0 +1,45 @@
+.group-left
+  .document
+    border-top: 2px solid $main-color
+    border-bottom: 2px solid $main-color
+    padding: 20px
+    .file
+      +clearfix
+      padding-left: 33px
+      display: block
+
+      img
+        display: none
+
+      a
+        text-indent: -33px
+        word-wrap: break-word
+        word-break: break-all
+        &:before
+          color: $main-color
+          float: left
+
+      a[href$=".pdf"]
+        &:before
+          +icomoon('pdf')
+          font-size: 28px
+
+      a[href$=".doc"],
+      a[href$=".docx"],
+      a[href$=".txt"],
+      a[href$=".rtf"]
+        &:before
+          +icomoon('word')
+          font-size: 28px
+
+      a[href$=".xls"],
+      a[href$=".xlsx"]
+        &:before
+          +icomoon('excel')
+          font-size: 28px
+
+      a[href$=".ppt"],
+      a[href$=".pptx"]
+        &:before
+          +icomoon('powerpoint')
+          font-size: 28px
