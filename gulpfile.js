@@ -47,9 +47,6 @@ var lintStyles = function(event, fail) {
         .pipe(csslint.reporter());
 	if (fail) {
 	    result.pipe(csslint.failReporter());
-        // when csslint encounters a problem,
-        // you'll get an "Unhandled 'error' event" in events.js
-        // https://github.com/lazd/gulp-csslint/issues/50
 	}
     return result;
 };
