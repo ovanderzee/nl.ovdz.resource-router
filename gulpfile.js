@@ -106,20 +106,16 @@ gulp.task('secure', function() {
 
 var compileStyles = function (event, fail) {
     var compass = require('gulp-compass');
-    // Please make sure to add css and sass options with the same value in config.rb since compass can't output css result directly.
+    // config.rb in compile dir (parent of sass) then comments aboutline-numbers in sass artifacts
     return gulp.src(event.path)
         .pipe(compass({
-            assets: true,
-            comment: true,
+            config_file: compile + '/config.rb',
             css: compile + '/css',
             sass: compile + '/sass',
-            sourcemap: true,
-            style: 'compact'
         }))
         .on('error', function(error) {
             if (fail) {
-                console.log('\n\n' + error);
-                console.log('\n\n     Press Ctrl-C to continue');
+                console.log('\n\n' + error + '\n\n     Press Ctrl-C to continue');
                 this.emit('end');
             }
         })
