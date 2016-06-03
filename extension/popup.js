@@ -111,35 +111,57 @@ window.onload = function () {
 		extensionPassiveState();
 	}, false);
 
+    /* NEW */
+
+    var newEntry = function () {
+        var live = this.form.elements.live;
+        var local = this.form.elements.local;
+        if (live.value && local.value) {
+            routeModel.addRoute.call(this.form);
+            populatePopup(live.value);
+            live.value = '';
+            local.value = '';
+        }
+    };
+
+    var newRoute = document.getElementById('new');
+    newRoute.elements.live.addEventListener('blur', newEntry, false);
+    newRoute.elements.local.addEventListener('blur', newEntry, false);
+    newRoute.elements.add.addEventListener('click', newEntry, false);
+
     /* ROUTES */
 
     var template = document.getElementById('template');
+    var populatePopup = function(key) {
+        var item = JSON.parse(localStorage[key]);
+        var form = template.cloneNode(true);
+        form.id = 'route_' + i;
+        form.addEventListener('mouseout', routeForm.mouseout, false);
+        form.addEventListener('mouseover', routeForm.mouseover, false);
+
+        form.elements.active.checked = Boolean(item.active);
+        routeActive.init.call(form.elements.active);
+        form.elements.active.addEventListener('click', routeActive.click, false);
+
+        form.querySelector('legend').textContent = key;
+        form.elements.initial.value = key;
+        form.elements.live.value = key;
+        form.elements.live.addEventListener('blur', routeLive.blur, false);
+
+        form.elements.local.value = item.local;
+        form.elements.local.addEventListener('blur', routeModel.setLocal, false);
+
+        form.elements.remove.addEventListener('click', routeRemove.click, false);
+
+        document.body.appendChild(form)
+        routeForm.init.call(form);
+    };
+
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var protocol = key.split('//')[0];
         if (protocol == 'http:' || protocol == 'https:') {
-            var item = JSON.parse(localStorage[key]);
-            var form = template.cloneNode(true);
-            form.id = 'route_' + i;
-            form.addEventListener('mouseout', routeForm.mouseout, false);
-            form.addEventListener('mouseover', routeForm.mouseover, false);
-
-            form.elements.active.checked = Boolean(item.active);
-    		routeActive.init.call(form.elements.active);
-            form.elements.active.addEventListener('click', routeActive.click, false);
-
-            form.querySelector('legend').textContent = key;
-            form.elements.initial.value = key;
-            form.elements.live.value = key;
-            form.elements.live.addEventListener('blur', routeLive.blur, false);
-
-            form.elements.local.value = item.local;
-            form.elements.local.addEventListener('blur', routeModel.setLocal, false);
-
-            form.elements.remove.addEventListener('click', routeRemove.click, false);
-
-            document.body.appendChild(form)
-            routeForm.init.call(form);
+            populatePopup(key);
         }
     }
 

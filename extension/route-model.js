@@ -36,6 +36,14 @@ var routeModel = new function () {
         localStorage.removeItem(live);
     };
 
+    var addItem = function (live, local) {
+        var none = localStorage.getItem(live);
+        if (none) return null;
+        var obj = {active: true, local: local}
+        var item = JSON.stringify(obj);
+        localStorage.setItem(live, item);
+    };
+
     /* BACKGROUND */
 
     this.route = function (live) {
@@ -69,4 +77,11 @@ var routeModel = new function () {
         var livefield = this.form.elements.live;
         removeItem(livefield.value);
     };
+
+    this.addRoute = function () {
+        var livefield = this.elements.live;
+        var localfield = this.elements.local;
+        addItem(livefield.value, localfield.value);
+    };
+
 };
