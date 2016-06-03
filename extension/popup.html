@@ -14,14 +14,14 @@
 				<span class="tag">localhost</span>
 				<span class="value">
 					http://
-					<input type="url" id="http:" required placeholder="hostname:portnumber" />
+					<input type="url" id="loose" required placeholder="hostname:portnumber" />
 				</span>
 			</label>
 			<label>
 				<span class="tag">local secure</span>
 				<span class="value">
 					https://
-					<input type="url" id="https:" placeholder="hostname:portnumber" />
+					<input type="url" id="secure" placeholder="hostname:portnumber" />
 				</span>
 			</label>
 			<button type="button" id="required_ok">ok</button>
@@ -46,7 +46,7 @@
 		</fieldset>
 	</form>
 	<h2>Current Routes</h2>
-	<form id="example" class="route">
+	<form id="template" class="route">
 		<fieldset class="required">
 			<input type="hidden" name="initial" />
 			<label class="state">

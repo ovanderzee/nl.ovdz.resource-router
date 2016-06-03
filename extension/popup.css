@@ -70,3 +70,5 @@ label {
 .state .value {
 	text-align: left;
 }
+
+#template {display: none;}

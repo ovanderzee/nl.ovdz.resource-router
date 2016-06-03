@@ -31,23 +31,30 @@ var routeModel = new function () {
         console.error('The initial item does not exist or the proposed already exists')
     };
 
-    var route = function (live) {
+    /* BACKGROUND */
+
+    this.route = function (live) {
         if (getValue(live, 'active')) {
             return getValue(live, 'local');
         }
     };
 
-    this.setActive = function (livefield, checkbox) {
-        setValue(livefield.value, 'active', checkbox.value);
+    /* POPUP */
+
+    this.setActive = function () {
+        var livefield = this.form.elements.live;
+        setValue(livefield.value, 'active', this.checked);
     };
 
-    this.setLocal = function (livefield, textfield) {
-        setValue(livefield.value, 'local', textfield.value);
+    this.setLocal = function () {
+        var livefield = this.form.elements.live;
+        setValue(livefield.value, 'local', this.value);
     };
 
-    this.setLive = function (initialfield, livefield) {
-        if (rename(initialfield.value, livefield.value)) {
-            initialfield.value = livefield.value;
+    this.setLive = function () {
+        var initialfield = this.form.elements.initial;
+        if (renameItem(initialfield.value, this.value)) {
+            initialfield.value = this.value;
         }
     };
 };
