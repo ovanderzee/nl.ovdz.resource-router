@@ -36,7 +36,7 @@ var routeActive = {
         routeModel.setActive.call(this);
         this.form.className = this.form.className.replace(' passive', '');
         this.form.className = this.form.className.replace(' active', '');
-        routeActiveState.call(this);
+        routeActive.init.call(this);
     },
 };
 
