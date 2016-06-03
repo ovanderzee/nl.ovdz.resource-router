@@ -18,13 +18,17 @@ var routeForm = {
     mouseover: function () {
         this.className = this.className.replace(' collapsed', '');
         this.style.height = this.style.maxHeight;
+//        for (var i = this.elements.length - 1; i > -1 ; i--) {
+//            this.elements[i].focus();
+//            this.elements[i].blur();
+//        }
     },
     mouseout: function () {
         setTimeout(function () {
             this.className += ' collapsed';
         }, 500);
         this.style.height = this.style.minHeight;
-    },
+    }
 };
 
 var routeActive = {
@@ -37,19 +41,19 @@ var routeActive = {
         this.form.className = this.form.className.replace(' passive', '');
         this.form.className = this.form.className.replace(' active', '');
         routeActive.init.call(this);
-    },
+    }
 };
 
 var routeLive = {
     blur: function () {
         var renaming = routeModel.setLive.call(this);
-        if (renaming) this.form.querySelector('legend').textContent = this.value;
+        if (renaming) {this.form.querySelector('legend').textContent = this.value;}
         if (renaming === null ) {
             this.value = this.form.initial.value;
             var textNode = document.createTextNode("Reverted. That already exists.");
             this.parentNode.appendChild(textNode);
         }
-    },
+    }
 };
 
 var routeRemove = {
@@ -61,7 +65,7 @@ var routeRemove = {
             routeModel.removeRoute.call(this);
             this.form.parentNode.removeChild(this.form);
         }
-    },
+    }
 };
 
 window.onload = function () {
@@ -91,7 +95,7 @@ window.onload = function () {
 		generalFieldset.className += ' passive';
 		chrome.browserAction.setBadgeBackgroundColor({color: [255, 165, 0, 255]});
 	};
-	if (!localStorage.getItem('loose')) {
+	if (!localStorage.getItem('http:')) {
 		activate.style.display = 'none';
 		deactivate.style.display = 'none';
 	}
@@ -132,7 +136,7 @@ window.onload = function () {
     /* ROUTES */
 
     var template = document.getElementById('template');
-    var populatePopup = function(key) {
+    var populatePopup = function (key) {
         var item = JSON.parse(localStorage[key]);
         var form = template.cloneNode(true);
         form.id = 'route_' + i;
@@ -153,14 +157,14 @@ window.onload = function () {
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);
 
-        document.body.appendChild(form)
+        document.body.appendChild(form);
         routeForm.init.call(form);
     };
 
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        var protocol = key.split('//')[0];
-        if (protocol == 'http:' || protocol == 'https:') {
+        var protocol = key.split('://')[0];
+        if (protocol === 'http' || protocol === 'https') {
             populatePopup(key);
         }
     }
