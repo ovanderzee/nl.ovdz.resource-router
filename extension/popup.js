@@ -8,6 +8,26 @@ var setLocalStorageItem = function () {
 	localStorage.setItem(this.id, this.value);
 };
 
+var routeForm = {
+    init: function () {
+        this.style.maxHeight = this.clientHeight + 'px';
+        this.className += ' collapsed';
+        this.style.minHeight = this.clientHeight + 'px';
+        this.style.height = this.clientHeight + 'px';
+    },
+    mouseover: function () {
+        this.className = this.className.replace(' collapsed', '');
+        this.style.height = this.style.maxHeight;
+    },
+    mouseout: function () {
+        setTimeout(function () {
+            this.className += ' collapsed';
+        }, 500);
+        this.style.height = this.style.minHeight;
+    },
+};
+
+
 window.onload = function () {
 
     /* GENERAL SETTINGS */
@@ -69,6 +89,8 @@ window.onload = function () {
             var item = JSON.parse(localStorage[key]);
             var form = template.cloneNode(true);
             form.id = 'route_' + i;
+            form.addEventListener('mouseout', routeForm.mouseout, false);
+            form.addEventListener('mouseover', routeForm.mouseover, false);
 
             form.elements.active.checked = Boolean(item.active);
     		routeActiveState.call(form.elements.active);
@@ -79,10 +101,12 @@ window.onload = function () {
         		routeActiveState.call(this);
             }, false);
 
+            form.querySelector('legend').textContent = key;
             form.elements.initial.value = key;
             form.elements.live.value = key;
             form.elements.live.addEventListener('blur', function () {
                 routeModel.setLive.call(this);
+                form.querySelector('legend').textContent = this.value;
             }, false);
 
             form.elements.local.value = item.local;
@@ -91,6 +115,7 @@ window.onload = function () {
             }, false);
 
             document.body.appendChild(form)
+            routeForm.init.call(form);
         }
     }
 

@@ -6,12 +6,12 @@ body {
 h1 {font-size: 1.72em;}
 h2 {font-size: 1.44em;}
 h3, legend {font-size: 1.2em;}
-h1, h2, h3, p, fieldset {margin: 0 0 1em 0;}
+h1, h2, h3, p {margin: 0 0 1em 0;}
 fieldset {
 	border: 0 none;
 	padding: 0.25em;
 }
-legend {margin: 0.5em 0;}
+legend {margin: 0.5em 0 0 0;}
 button {
 	display: block;
 	margin: 0.25em 0.25em 0.25em auto;
@@ -66,9 +66,21 @@ label {
 .state .tag {
 	text-align: center;
 }
-
 .state .value {
 	text-align: left;
 }
 
 #template {display: none;}
+
+.route legend {
+    padding: 0.333em 0;
+    word-break: break-word;
+}
+.route.collapsed button,
+.route.collapsed label {
+    display: none;
+}
+.route {
+    transition: height 500ms ease-in-out;
+    overflow: hidden;
+}
