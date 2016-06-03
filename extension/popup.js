@@ -64,7 +64,8 @@ window.onload = function () {
     var template = document.getElementById('template');
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        if (key.indexOf(':') > 0) {
+        var protocol = key.split('//')[0];
+        if (protocol == 'http:' || protocol == 'https:') {
             var item = JSON.parse(localStorage[key]);
             var form = template.cloneNode(true);
             form.id = 'route_' + i;
