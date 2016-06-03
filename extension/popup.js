@@ -42,8 +42,13 @@ var routeActive = {
 
 var routeLive = {
     blur: function () {
-        routeModel.setLive.call(this);
-        this.form.querySelector('legend').textContent = this.value;
+        var renaming = routeModel.setLive.call(this);
+        if (renaming) this.form.querySelector('legend').textContent = this.value;
+        if (renaming === null ) {
+            this.value = this.form.initial.value;
+            var textNode = document.createTextNode("Reverted. That already exists.");
+            this.parentNode.appendChild(textNode);
+        }
     },
 };
 
