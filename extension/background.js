@@ -9,7 +9,7 @@ var assets = {
 
 var routingResponse = function (details) {
 	details.url = details.url.split('?')[0].split('#')[0];
-	var localRsrc = assets[details.url];
+	var localRsrc = routeModel.route(details.url);
 	if (localStorage.running && localRsrc) {
 		linkElement.createURL(details.url);
 		localRsrc = linkElement.protocol + '//' + localStorage[linkElement.protocol] + '/' + localRsrc;

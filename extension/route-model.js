@@ -23,8 +23,8 @@ var routeModel = new function () {
     var renameItem = function (initial, proposed) {
         var item = localStorage.getItem(initial);
         var none = localStorage.getItem(proposed);
-        if (item === none) return false;
-        if (none) return null;
+        if (item === none) {return false;}
+        if (none) {return null;}
         if (item && !none) {
             localStorage.setItem(proposed, item);
             localStorage.removeItem(initial);
@@ -38,8 +38,8 @@ var routeModel = new function () {
 
     var addItem = function (live, local) {
         var none = localStorage.getItem(live);
-        if (none) return null;
-        var obj = {active: true, local: local}
+        if (none) {return null;}
+        var obj = {active: true, local: local};
         var item = JSON.stringify(obj);
         localStorage.setItem(live, item);
     };
@@ -66,11 +66,11 @@ var routeModel = new function () {
 
     this.setLive = function () {
         var initialfield = this.form.elements.initial;
-        var renaming = renameItem(initialfield.value, this.value)
+        var renaming = renameItem(initialfield.value, this.value);
         if (renaming === true) {
             initialfield.value = this.value;
         }
-        return renaming
+        return renaming;
     };
 
     this.removeRoute = function () {
