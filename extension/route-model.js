@@ -31,6 +31,10 @@ var routeModel = new function () {
         console.error('The initial item does not exist or the proposed already exists')
     };
 
+    var removeItem = function (live) {
+        localStorage.removeItem(live);
+    };
+
     /* BACKGROUND */
 
     this.route = function (live) {
@@ -56,5 +60,10 @@ var routeModel = new function () {
         if (renameItem(initialfield.value, this.value)) {
             initialfield.value = this.value;
         }
+    };
+
+    this.removeRoute = function () {
+        var livefield = this.form.elements.live;
+        removeItem(livefield.value);
     };
 };

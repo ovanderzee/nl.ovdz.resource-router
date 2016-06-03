@@ -47,6 +47,17 @@ var routeLive = {
     },
 };
 
+var routeRemove = {
+    click: function () {
+        if (this.value) {
+            this.textContent = this.value + ' ' + this.textContent;
+            this.removeAttribute('value');
+        } else {
+            routeModel.removeRoute.call(this);
+            this.form.parentNode.removeChild(this.form);
+        }
+    },
+};
 
 window.onload = function () {
 
@@ -119,6 +130,8 @@ window.onload = function () {
 
             form.elements.local.value = item.local;
             form.elements.local.addEventListener('blur', routeModel.setLocal, false);
+
+            form.elements.remove.addEventListener('click', routeRemove.click, false);
 
             document.body.appendChild(form)
             routeForm.init.call(form);
