@@ -27,6 +27,26 @@ var routeForm = {
     },
 };
 
+var routeActive = {
+    init: function () {
+        var newState = this.checked ? ' active' : ' passive';
+        this.form.className += newState;
+    },
+    click: function () {
+        routeModel.setActive.call(this);
+        this.form.className = this.form.className.replace(' passive', '');
+        this.form.className = this.form.className.replace(' active', '');
+        routeActiveState.call(this);
+    },
+};
+
+var routeLive = {
+    blur: function () {
+        routeModel.setLive.call(this);
+        this.form.querySelector('legend').textContent = this.value;
+    },
+};
+
 
 window.onload = function () {
 
@@ -77,10 +97,6 @@ window.onload = function () {
 
     /* ROUTES */
 
-    var routeActiveState = function () {
-        var newState = this.checked ? ' active' : ' passive';
-        this.form.className += newState;
-    };
     var template = document.getElementById('template');
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
@@ -93,26 +109,16 @@ window.onload = function () {
             form.addEventListener('mouseover', routeForm.mouseover, false);
 
             form.elements.active.checked = Boolean(item.active);
-    		routeActiveState.call(form.elements.active);
-            form.elements.active.addEventListener('click', function () {
-                routeModel.setActive.call(this);
-        		this.form.className = this.form.className.replace(' passive', '');
-        		this.form.className = this.form.className.replace(' active', '');
-        		routeActiveState.call(this);
-            }, false);
+    		routeActive.init.call(form.elements.active);
+            form.elements.active.addEventListener('click', routeActive.click, false);
 
             form.querySelector('legend').textContent = key;
             form.elements.initial.value = key;
             form.elements.live.value = key;
-            form.elements.live.addEventListener('blur', function () {
-                routeModel.setLive.call(this);
-                form.querySelector('legend').textContent = this.value;
-            }, false);
+            form.elements.live.addEventListener('blur', routeLive.blur, false);
 
             form.elements.local.value = item.local;
-            form.elements.local.addEventListener('blur', function () {
-                routeModel.setLocal.call(this);
-            }, false);
+            form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
             document.body.appendChild(form)
             routeForm.init.call(form);
