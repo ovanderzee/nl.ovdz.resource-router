@@ -38,14 +38,13 @@ label {
     padding: 0.25em;
 }
 .tag {
-	flex: 0 0 5em;
+	flex: 0 0 6em;
 }
 .tag input {
 	margin: 0 auto;
-    font-size: 1.5em;
 }
 .value {
-	margin-left: 1.5em;
+	margin-left: 0.5em;
 	flex: 0 0 25em;
 	text-align: right;
 }
