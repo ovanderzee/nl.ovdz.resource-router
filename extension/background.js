@@ -8,15 +8,22 @@ var assets = {
 };
 
 var routingResponse = function (details) {
-	details.url = details.url.split('?')[0].split('#')[0];
-	var localRsrc = routeModel.route(details.url);
+    if (details.url.indexOf('#') > 0) {
+        details.url = details.url.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
+    }
+    // include searchterm in test
+    var localRsrc = routeModel.route(details.url);
+	if (!localRsrc && details.url.indexOf('?') > 0) {
+        // exclude searchterm from test
+	    var localRsrc = routeModel.route(details.url.split('?')[0]);
+	}
 	if (localStorage.running && localRsrc) {
 		linkElement.createURL(details.url);
+		// compose local url
 		localRsrc = linkElement.protocol + '//' + localStorage[linkElement.protocol] + '/' + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localRsrc);
 		return {redirectUrl: localRsrc};
 	} else {
-//		console.log('KEEP ' + details.url);
 		return {cancel: false};
 	}
 };
