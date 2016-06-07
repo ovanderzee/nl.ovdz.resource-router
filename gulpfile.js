@@ -66,7 +66,7 @@ var lintAll = function(fail) {
     }
 };
 
-gulp.task('lint', function() {
+gulp.task('lint', function() {return;
     lintAll(false);
     gulp.watch(paths.jsobjects, lintJSObjects);
     gulp.watch(paths.scripts, lintScripts);
@@ -107,18 +107,32 @@ gulp.task('secure', function() {
 var compileStyles = function (event, fail) {
     var compass = require('gulp-compass');
     // config.rb in compile dir (parent of sass) then comments aboutline-numbers in sass artifacts
-    return gulp.src(event.path)
+    // Please make sure to add css and sass options with the same value in config.rb since compass can't output css result directly.
+    var postcss      = require('gulp-postcss');
+    var autoprefixer = require('autoprefixer');
+    var cssnano = require('cssnano');
+
+//            config_file: compile + '/config.rb',
+    gulp.src(event.path)
         .pipe(compass({
-            config_file: compile + '/config.rb',
+            assets: true,
             css: compile + '/css',
             sass: compile + '/sass',
+//            style: 'compact',
+            style: 'nested',
+            sourcemap: true,
         }))
-        .on('error', function(error) {
-            if (fail) {
-                console.log('\n\n' + error + '\n\n     Press Ctrl-C to continue');
-                this.emit('end');
-            }
-        })
+//        .on('error', function(error) {
+//            if (fail) {
+//                console.log('\n\n' + error + '\n\n     Press Ctrl-C to continue');
+//                this.emit('end');
+//            }
+//        });
+//    gulp.src(event.path)
+        .pipe(postcss([
+            cssnano(),
+            autoprefixer({ browsers: ['last 2 versions', 'ie 8', 'ie 9'] })
+        ]));
 };
 
 var compileAll = function (fail) {

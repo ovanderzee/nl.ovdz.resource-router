@@ -154,7 +154,7 @@ fieldset
 
         .fieldset-legend
           &:before
-            +bvp(transform, rotate(-90deg))
+            transform: rotate(-90deg)
             vertical-align: 3px
 
       a.fieldset-title
@@ -165,10 +165,10 @@ fieldset
   text-transform: uppercase
 
 .password-indicator
-  +bvp(border-radius, pxtoem(2px))
+  border-radius: pxtoem(2px)
   div
     background-color: $message-status
-    +bvp(border-radius, pxtoem(2px))
+    border-radius: pxtoem(2px)
 
 // INPUT CHECKBOXES
 .form-checkboxes .form-item, .form-radios .form-item
@@ -214,7 +214,7 @@ input
 
   &[type=radio]
     & + label:before
-      +bvp( border-radius, 16px )
+      border-radius: 16px
 
     &.hide-outline:focus + label
       outline: none !important
@@ -258,7 +258,7 @@ input
 
   &[type=radio]
     &:checked + label:after
-      +bvp( border-radius, 10px )
+      border-radius: 10px
       background: $form-field-text-color
       content: ""
       height: 10px
@@ -291,7 +291,7 @@ label.fileinput.prettify
 
     a.button
       background-color: lighten($silver, 15%)
-      +bvp(box-shadow, inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3))
+      box-shadow: inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3)
       color: darken($silver, 15%)
       pointer-events: none
 
@@ -347,7 +347,7 @@ label.select.prettify
     &:after
       content: ""
       border: pxtoem(1px) solid $error-red
-      +bvp(border-radius, pxtoem(2px))
+      border-radius: pxtoem(2px)
       position: absolute
       left: -2px
       right: -2px

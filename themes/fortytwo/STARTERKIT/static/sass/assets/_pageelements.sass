@@ -22,9 +22,9 @@ label[for*=disabled]
 /////////////////////////////////////////
 
 =button
-  +bvp(border-radius, pxtoem(3px))
-  +bvp(transition, color 0.1s ease-in-out, background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out)
-  +bvp(box-shadow, inset 0px pxtoem(-2px) rgba(0, 0, 0, 0.3))
+  border-radius: pxtoem(3px)
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out
+  box-shadow: inset 0px pxtoem(-2px) rgba(0, 0, 0, 0.3)
   display: inline-block
 
   line-height: pxtoem($default-line-height / 1.5)
@@ -52,7 +52,7 @@ label[for*=disabled]
   &.disabled:hover,
   &.disabled
     background-color: lighten($silver, 15%)
-    +bvp(box-shadow, inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3))
+    box-shadow: inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3)
     color: darken($silver, 15%)
     pointer-events: none
 
@@ -80,7 +80,7 @@ label.select.prettify,
 div.password-suggestions,
 div.messages,
 input, textarea, fieldset
-  +bvp(border-radius, pxtoem(2px))
+  border-radius: pxtoem(2px)
 
 span.form-required
   color: $error-red
@@ -141,7 +141,7 @@ fieldset
 
         .fieldset-legend
           &:before
-            +bvp(transform, rotate(-90deg))
+            transform: rotate(-90deg)
             vertical-align: 3px
 
       a.fieldset-title
@@ -152,10 +152,10 @@ fieldset
   text-transform: uppercase
 
 .password-indicator
-  +bvp(border-radius, pxtoem(2px))
+  border-radius: pxtoem(2px)
   div
     background-color: $message-status
-    +bvp(border-radius, pxtoem(2px))
+    border-radius: pxtoem(2px)
 
 // MESSAGES
 div.messages
@@ -216,7 +216,7 @@ input
       +icon("unchecked")
       margin-right: $icon-spacing
       background-color: white
-      +bvp(border-radius, 5px)
+      border-radius: 5px
       color: $silver
 
     &:focus + label
@@ -254,7 +254,7 @@ input
 label.fileinput.prettify
   display: inline-block
   border: pxtoem(1px) solid normal-color($bodycopy-link-colors)
-  +bvp(border-radius, pxtoem(2px))
+  border-radius: pxtoem(2px)
   height: pxtoem(30px)
   position: relative
   font-weight: normal
@@ -277,7 +277,7 @@ label.fileinput.prettify
 
     a.button
       background-color: lighten($silver, 15%)
-      +bvp(box-shadow, inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3))
+      box-shadow: inset 0px pxtoem(-1px) rgba(0, 0, 0, 0.3)
       color: darken($silver, 15%)
       pointer-events: none
 
@@ -322,7 +322,7 @@ label.select.prettify
     &:after
       content: ""
       border: pxtoem(1px) solid $error-red
-      +bvp(border-radius, pxtoem(2px))
+      border-radius: pxtoem(2px)
       position: absolute
       left: -2px
       right: -2px
@@ -334,7 +334,7 @@ label.select.prettify
 
   &:hover
     background-color: lighten($link-button-bg-color, 10%)
-    +bvp(box-shadow, inset 0px pxtoem(-2px) $link-button-bg-color)
+    box-shadow: inset 0px pxtoem(-2px) $link-button-bg-color
 
   select
     -webkit-appearance: none
@@ -372,7 +372,7 @@ label.select.prettify
 a
   text-decoration: none
   color: normal-color($bodycopy-link-colors)
-  +bvp(transition, color 0.1s ease-in-out)
+  transition: color 0.1s ease-in-out
 
   &:hover
     text-decoration: underline

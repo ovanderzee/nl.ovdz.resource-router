@@ -33,7 +33,7 @@
 //      $default-prefixes (defined in _settings.sass)
 //
 //  EXAMPLE
-//      +bvp( box-shadow, 0px 0px 5px 0px rgba( 0, 0, 0, 0.1 ))
+//      box-shadow: 0px 0px 5px 0px rgba( 0, 0, 0, 0.1 )
 //
 //  SETS
 //      webkit-box-shadow: 0px 0px 5px 0px rgba( 0,0,0,0.1 );
@@ -42,11 +42,6 @@
 //      -ms-box-shadow: 0px 0px 5px 0px rgba( 0,0,0,0.1 );
 //      -o-box-shadow: 0px 0px 5px 0px rgba( 0,0,0,0.1 );
 //      box-shadow: 0px 0px 5px 0px rgba( 0,0,0,0.1 );
-
-=bvp($property, $value...)
-  @each $prefix in $default-prefixes
-    #{$prefix}-#{$property}: #{$value}
-  #{$property}: #{$value}
 
 //  BUILD VALUE VENDOR PREFIXES
 //  Builds css PROPERTIES with vendor prefixes

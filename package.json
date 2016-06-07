@@ -4,14 +4,17 @@
   "description": "serve resources local",
   "dependencies": {},
   "devDependencies": {
+    "autoprefixer": "*",
+    "cssnano": "^3.7.0",
     "fs": "*",
     "gulp": "*",
-    "gulp-compass": "^2.1.0",
+    "gulp-compass": "*",
     "gulp-connect": "*",
     "gulp-csslint": "*",
     "gulp-eslint": "*",
     "gulp-jscs": "*",
-    "gulp-jsonlint": "*"
+    "gulp-jsonlint": "*",
+    "gulp-postcss": "*"
   },
   "engines": {
     "node": ">=0.10.0"

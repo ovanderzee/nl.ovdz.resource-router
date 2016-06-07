@@ -16,5 +16,15 @@
     "universal-selector": false, 
     "zero-units": false,
     "box-model": false,
-    "ids": false
+    "ids": false,
+    
+    
+    "font-sizes": false,
+    "overqualified-elements": false,
+    "floats": false,
+    "display-property-grouping": false,
+    "unqualified-selectors": false,
+    "regex-selectors": false,
+    "outline-none": false, 
+    "important": false
 }

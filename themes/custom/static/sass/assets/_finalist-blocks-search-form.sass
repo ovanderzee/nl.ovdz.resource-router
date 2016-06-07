@@ -65,7 +65,7 @@
       padding-left: 8px
       background-color: $search-button-bg-color
       color: $search-button-icon-color
-      +bvp(transition, color 0.4s ease-in-out)
+      transition: color 0.4s ease-in-out
 
     &:hover
       &:before
@@ -85,7 +85,7 @@
     background-color: transparent
 
   #autocomplete
-    +bvp(box-shadow, 4px 4px 0px 0px rgba(113, 113, 116, 0.15))
+    box-shadow: 4px 4px 0px 0px rgba(113, 113, 116, 0.15)
     background-color: $search-autocomplete-bg-color
     border-color: $search-autocomplete-border-color
     border-style: solid
@@ -114,8 +114,8 @@
     display: inline-block
     background-color: $search-button-bg-color
     color: $search-button-icon-color
-    +bvp(transition, color 0.4s ease-in-out)
-    +bvp(transition, background-color 0.4s ease-in-out)
+    transition: color 0.4s ease-in-out
+    transition: background-color 0.4s ease-in-out
     font-style: 16px
     cursor: pointer
     width: 40px
