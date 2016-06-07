@@ -5,6 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "*",
+    "css-mqpacker": "^5.0.1",
     "cssnano": "^3.7.0",
     "fs": "*",
     "gulp": "*",

@@ -108,40 +108,46 @@ var compileStyles = function (event, fail) {
     var compass = require('gulp-compass');
     // config.rb in compile dir (parent of sass) then comments aboutline-numbers in sass artifacts
     // Please make sure to add css and sass options with the same value in config.rb since compass can't output css result directly.
-    var postcss      = require('gulp-postcss');
-    var autoprefixer = require('autoprefixer');
-    var cssnano = require('cssnano');
-
 //            config_file: compile + '/config.rb',
     gulp.src(event.path)
         .pipe(compass({
             assets: true,
             css: compile + '/css',
             sass: compile + '/sass',
-//            style: 'compact',
-            style: 'nested',
+            style: 'compact',
             sourcemap: true,
         }))
-//        .on('error', function(error) {
-//            if (fail) {
-//                console.log('\n\n' + error + '\n\n     Press Ctrl-C to continue');
-//                this.emit('end');
-//            }
-//        });
-//    gulp.src(event.path)
+        .on('error', function(error) {
+            if (fail) {
+                console.log('\n\n' + error + '\n\n     Press Ctrl-C to continue');
+                this.emit('end');
+            }
+        });
+};
+
+var compileCss = function (event, fail) {
+    var postcss = require('gulp-postcss');
+    var autoprefixer = require('autoprefixer');
+    var cssnano = require('cssnano');
+    var mqpacker = require('css-mqpacker');
+    gulp.src(event.path)
         .pipe(postcss([
-            cssnano(),
+//            cssnano(),
+            mqpacker(),
             autoprefixer({ browsers: ['last 2 versions', 'ie 8', 'ie 9'] })
-        ]));
+        ]))
+        .pipe(gulp.dest(compile + '/css'));
 };
 
 var compileAll = function (fail) {
     compileStyles({path: paths.sass}, fail);
+    compileCss({path: compile + '/css/*.css'}, fail);
 };
 
 gulp.task('compile', function() {
     compileAll(false);
     gulp.watch(paths.sass, compileStyles);
+    gulp.watch(paths.styles, compileCss);
 });
 
 gulp.task('develop', [

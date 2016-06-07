@@ -1086,7 +1086,6 @@ input[type=radio]:checked + label {
 
 /* line 64, ../sass/theme/base/_form-elements.sass */
 input.prettify[type=radio], input.prettify[type=checkbox] {
-  filter: alpha(opacity=0);
   opacity: 0;
   position: absolute;
 }
