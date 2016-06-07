@@ -1,67 +1,77 @@
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="popup.css" />
+	<script type="text/javascript" src="route-model.js"></script>
 	<script type="text/javascript" src="popup.js"></script>
 </head>
 <body>
-	<h2>Frontend Resource Router</h2>
-	<form name="routing">
-		<fieldset class="required settings">
-
-			<legend>Settings</legend>
+	<h1>Frontend Resource Router</h1>
+	<form id="general">
+		<fieldset class="required">
 			<button type="button" id="activate" value="running">activate</button>
 			<button type="button" id="deactivate" value="">deactivate</button>
 			<label>
-				<span class="tag">localhost http://</span>
+				<span class="tag">localhost</span>
 				<span class="value">
+					http://
 					<input type="url" id="http:" required placeholder="hostname:portnumber" />
 				</span>
 			</label>
 			<label>
-				<span class="tag">localhost https://</span>
+				<span class="tag">local secure</span>
 				<span class="value">
+					https://
 					<input type="url" id="https:" placeholder="hostname:portnumber" />
 				</span>
 			</label>
 			<button type="button" id="required_ok">ok</button>
 		</fieldset>
-<!--
-		<fieldset class="new settings">
-			<legend>New Routing</legend>
+	</form>
+	<form id="new">
+		<fieldset class="required">
+			<legend>New Route</legend>
 			<label>
 				<span class="tag">route original file</span>
 				<span class="value">
-					<input type="url" id="origin" />
+					<input type="url" name="live" />
 				</span>
 			</label>
 			<label>
 				<span class="tag">to local served resource</span>
 				<span class="value">
-					<input type="url" id="resource" />
+					<input type="url" name="local" />
 				</span>
 			</label>
-			<button type="button" id="new_ok">ok</button>
+			<button type="button" name="add">ok</button>
 		</fieldset>
-
-		<fieldset class="routes">
-			<legend>Routings</legend>
+	</form>
+	<h2>Current Routes</h2>
+	<form id="template" class="route">
+		<fieldset class="required">
+			<legend>route</legend>
+			<input type="hidden" name="initial" />
+			<label class="state">
+				<span class="tag">
+					<input type="checkbox" name="active" />
+				</span>
+				<span class="value">
+					active
+				</span>
+			</label>
 			<label class="origin">
 				<span class="tag">origin</span>
 				<span class="value">
-					<input type="url" />
-				</span>
-				<span class="action">
-					<button type="button">&times;</button>
+					<input type="url" name="live" />
 				</span>
 			</label>
 			<label class="resource">
 				<span class="tag">resource</span>
 				<span class="value">
-					<input type="url" />
+					<input type="url" name="local" />
 				</span>
 			</label>
+			<button type="button" name="remove" value="confirm">remove</button>
 		</fieldset>
--->
 	</form>
 </body>
 </html>
