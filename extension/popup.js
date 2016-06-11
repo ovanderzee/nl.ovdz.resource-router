@@ -13,24 +13,18 @@ window.onload = function () {
 	var generalFieldset = document.querySelector('#general fieldset');
 	var activate = document.querySelector('button#activate');
 	var deactivate = document.querySelector('button#deactivate');
-	if (!localStorage.getItem('http:')) {
-		activate.style.display = 'none';
-		deactivate.style.display = 'none';
-	}
 	if (localStorage.getItem('running')) {
-		extensionActiveState();
+		extensionState.activate.call(generalFieldset);
 	} else {
-		extensionPassiveState();
+		extensionState.deactivate.call(generalFieldset);
 	}
 	activate.addEventListener('click', function () {
 		localStorage.setItem('running', 'running');
-		deactivate.style.display = '';
-		extensionActiveState();
+		extensionState.activate.call(generalFieldset);
 	}, false);
 	deactivate.addEventListener('click', function () {
 		localStorage.setItem('running', '');
-		activate.style.display = '';
-		extensionPassiveState();
+		extensionState.deactivate.call(generalFieldset);
 	}, false);
 
     /* NEW */
@@ -76,5 +70,53 @@ window.onload = function () {
         }
     }
 
+    doReq('http://stackoverflow.com/')
+
 };
 
+
+
+var doReq = function (url) {
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("progress", transferProgress);
+    oReq.addEventListener("load", transferComplete);
+    oReq.addEventListener("error", transferFailed);
+    oReq.addEventListener("abort", transferCanceled);
+
+    oReq.open("GET", url);
+    oReq.send();
+
+    // progress on transfers from the server to the client (downloads)
+    function transferProgress (oEvent) {
+      var percentComplete = '??';
+      if (oEvent.lengthComputable) {
+        var percentComplete = String(Math.floor(oEvent.loaded / oEvent.total)) + '%';
+      }
+      console.log("The transfer is " + percentComplete + " complete.");
+    }
+
+    function transferComplete(evt) {
+      console.log("The transfer is complete.");
+    }
+
+    function transferFailed(evt) {
+      console.log("An error occurred while transferring the file.");
+    }
+
+    function transferCanceled(evt) {
+      console.log("The transfer has been canceled by the user.");
+    }
+
+}
+
+//
+//chrome.webRequest.onHeadersReceived.addListener(function (details) {
+//
+//	console.log('HDRS ' + JSON.stringify(details));
+//
+//    return {cancel: true}
+//
+//}, {
+//	urls: ['*://*/*'],
+//}, ['blocking']);
+//

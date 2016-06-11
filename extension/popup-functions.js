@@ -14,18 +14,18 @@ var setLocalStorageItem = function () {
 
     /* EXTENSION ACTIVE */
 
-var extensionActiveState = function () {
-    activate.style.display = 'none';
-    generalFieldset.className = generalFieldset.className.replace(' passive', '');
-    generalFieldset.className += ' active';
-    chrome.browserAction.setBadgeBackgroundColor({color: [50, 205, 50, 255]});
-};
-var extensionPassiveState = function () {
-    deactivate.style.display = 'none';
-    generalFieldset.className = generalFieldset.className.replace(' active', '');
-    generalFieldset.className += ' passive';
-    chrome.browserAction.setBadgeBackgroundColor({color: [255, 165, 0, 255]});
-};
+var extensionState = {
+    activate: function () {
+        this.className = this.className.replace(' passive', '');
+        this.className += ' active';
+        chrome.browserAction.setBadgeBackgroundColor({color: [50, 205, 50, 255]});
+    },
+    deactivate: function () {
+        this.className = this.className.replace(' active', '');
+        this.className += ' passive';
+        chrome.browserAction.setBadgeBackgroundColor({color: [255, 165, 0, 255]});
+    }
+}
 
     /* NEW */
 

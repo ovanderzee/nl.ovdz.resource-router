@@ -30,6 +30,14 @@ button {
 #deactivate {
     background: orange;
 }
+#activate, #deactivate {
+	display: none;
+}
+.active #deactivate,
+.passive #activate {
+	display: block;
+}
+
 label {
 	display: flex;
 }
