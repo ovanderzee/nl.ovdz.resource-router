@@ -1,12 +1,3 @@
-var assets = {
-	'http://t-cromhouthuis-d7.finalist.nl/sites/cromhouthuis/themes/cromhouthuis/static/css/main.css': 'cromhouthuis/css/main.css',
-	'https://angularjs.org/css/docs.css': 'file.css',
-	'https://ssl.google-analytics.com/ga.js': 'file.js',
-	'https://nodejs.org/api/assets/style.css': 'file.css',
-	'http://www.hastalavista.dds.nl/spel/mijnenveger.js': 'file.js',
-	'http://www.hastalavista.dds.nl/spel/mijnenveger.css': 'file.css'
-};
-
 var routingResponse = function (details) {
     if (details.url.indexOf('#') > 0) {
         details.url = details.url.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
