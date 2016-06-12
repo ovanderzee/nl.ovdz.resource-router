@@ -1,3 +1,16 @@
+//var waitTime = function () {
+//    var timeComponent = function (prop) {
+//        var time = window.getComputedStyle(this, null).getPropertyValue(prop);
+//        var unit = time.replace(/[.\d]+/, '');
+//        var ms = (unit === 'ms') ? parseInt(time) : parseInt(time) * 1000;
+//        return ms;
+//    };
+//
+//    var delay = timeComponent.call(this, 'transition-delay');
+//    var duration = timeComponent.call(this, 'transition-duration');
+//    return delay + duration;
+//};
+//
 var signalRefresh = function () {
 	chrome.runtime.sendMessage('refresh', function () {
 	});
@@ -25,7 +38,7 @@ var extensionState = {
         this.className += ' passive';
         chrome.browserAction.setBadgeBackgroundColor({color: [255, 165, 0, 255]});
     }
-}
+};
 
     /* NEW */
 
@@ -54,12 +67,19 @@ var routeForm = {
         this.style.height = this.style.maxHeight;
         this.elements.remove.focus();
         this.elements.remove.blur();
+//        var self = this;
+//        setTimeout(function () {
+//            // scroll into view
+//            self.elements.remove.focus();
+//            self.elements.remove.blur();
+//        }, waitTime.call(this));
     },
     mouseout: function () {
         setTimeout(function () {
             this.className += ' collapsed';
         }, 500);
         this.style.height = this.style.minHeight;
+        this.scrollTop = 0;
     }
 };
 
