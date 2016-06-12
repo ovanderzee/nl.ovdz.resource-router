@@ -57,6 +57,12 @@ window.onload = function () {
         form.elements.live.addEventListener('blur', routeLive.blur, false);
 
         form.elements.local.value = item.local;
+        linkElement.createURL(key);
+
+        var localHostName = localStorage.getItem(
+            (linkElement.protocol === 'https:') ? 'secure' : 'loose'
+        );
+        urlState.get.call(form.elements.local, protocol + '//' + localHostName + '/');
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);
@@ -67,8 +73,8 @@ window.onload = function () {
 
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        var protocol = key.split('://')[0];
-        if (protocol === 'http' || protocol === 'https') {
+        linkElement.createURL(key);
+        if (linkElement.protocol === 'http:' || linkElement.protocol === 'https:') {
             populatePopup(key);
         }
     }
