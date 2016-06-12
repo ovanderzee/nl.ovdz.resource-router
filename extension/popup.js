@@ -1,3 +1,5 @@
+var template, populatePopup;
+
 window.onload = function () {
 
     /* GENERAL SETTINGS */
@@ -36,8 +38,8 @@ window.onload = function () {
 
     /* ROUTES */
 
-    var template = document.getElementById('template');
-    var populatePopup = function (key) {
+    template = document.getElementById('template');
+    populatePopup = function (key) {
         var item = JSON.parse(localStorage[key]);
         var form = template.cloneNode(true);
         form.id = 'route_' + i;
@@ -51,6 +53,7 @@ window.onload = function () {
         form.querySelector('legend').textContent = key;
         form.elements.initial.value = key;
         form.elements.live.value = key;
+        urlState.get.call(form.elements.live);
         form.elements.live.addEventListener('blur', routeLive.blur, false);
 
         form.elements.local.value = item.local;
