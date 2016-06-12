@@ -30,6 +30,13 @@ button {
 #deactivate {
     background: orange;
 }
+.request-found {
+    color: limegreen;
+}
+.request-failed,
+.request-lost {
+    color: orange;
+}
 #activate, #deactivate {
 	display: none;
 }
