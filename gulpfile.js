@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var webroot = 'htdocs';
-var webroot = 'themes/custom';
+//var webroot = 'themes/custom';
 var compile = webroot + '/static';
 var extension = 'extension';
 var paths = {
