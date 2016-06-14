@@ -9,6 +9,8 @@ window.onload = function () {
 		getLocalStorageItem.call(generalInputs[i]);
 		generalInputs[i].addEventListener('blur', setLocalStorageItem, false);
 	}
+//    urlState.get.call(document.querySelector('input#loose'), 'http://');
+//    urlState.get.call(document.querySelector('input#secure'), 'https://');
 
     /* EXTENSION ACTIVE */
 
@@ -53,7 +55,7 @@ window.onload = function () {
         form.querySelector('legend').textContent = key;
         form.elements.initial.value = key;
         form.elements.live.value = key;
-        urlState.get.call(form.elements.live);
+//        urlState.get.call(form.elements.live, '');
         form.elements.live.addEventListener('blur', routeLive.blur, false);
 
         form.elements.local.value = item.local;
@@ -62,7 +64,7 @@ window.onload = function () {
         var localHostName = localStorage.getItem(
             (linkElement.protocol === 'https:') ? 'secure' : 'loose'
         );
-        urlState.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
+//        urlState.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);
