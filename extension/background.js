@@ -1,4 +1,7 @@
 var routingResponse = function (details) {
+    if (!localStorage.running) {
+		return {cancel: false};
+    }
     if (details.url.indexOf('#') > 0) {
         details.url = details.url.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
     }
@@ -8,7 +11,7 @@ var routingResponse = function (details) {
         // exclude searchterm from test
 	    var localRsrc = routeModel.route(details.url.split('?')[0]);
 	}
-	if (localStorage.running && localRsrc) {
+	if (localRsrc) {
 		linkElement.createURL(details.url);
 		// compose local url
 		localRsrc = linkElement.protocol + '//' + localStorage[linkElement.protocol] + '/' + localRsrc;
