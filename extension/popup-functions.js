@@ -47,15 +47,16 @@ var urlState = new function () {
         }
     };
 
-    chrome.webRequest.onHeadersReceived.addListener(function (details) {
-        var control = urlState.table[details.url];
-        if (control) {
-            self.handle.call(control, details)
-        }
-        return {cancel: true};
-    }, {
-        urls: ['*://*/*']
-    }, ['blocking']);
+//    chrome.webRequest.onHeadersReceived.addListener(function (details) {
+//        var control = self.table[details.url];
+//        if (control) {
+//            self.handle.call(control, details);
+//        }
+//        return {cancel: true};
+////        return {cancel: localStorage.running};
+//    }, {
+//        urls: ['*://*/*']
+//    }, ['blocking']);
 
 /*
     console.log('HDRS ' + JSON.stringify(details));
