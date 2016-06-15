@@ -5,7 +5,7 @@ var extensionModel = new function () {
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
         var keyMatch = key.match(/^[a-z]+$/);
-        if (keyMatch && key === keyMatch) {
+        if (keyMatch && keyMatch.length && key === keyMatch[0]) {
             // a setting is a string
             this.settings[key] = localStorage.getItem(key);
         } else {
