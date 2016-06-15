@@ -131,7 +131,6 @@ var routeForm = new function () {
        eventEnd.call(this);
     };
     this.expand = function () {
-        var selfElement = this;
         eventEnd = function () {
             // geen nabewerking; scrollen kan meteen
         };
@@ -178,17 +177,18 @@ var routeForm = new function () {
     };
 };
 
-var routeActive = {
-    init: function () {
+var routeActive = new function () {
+    var self = this;
+    this.init = function () {
         var newState = this.checked ? ' active' : ' passive';
         this.form.className += newState;
-    },
-    click: function () {
+    };
+    this.click = function () {
         routeModel.setActive.call(this);
         this.form.className = this.form.className.replace(' passive', '');
         this.form.className = this.form.className.replace(' active', '');
-        routeActive.init.call(this);
-    }
+        self.init.call(this);
+    };
 };
 
 var routeLive = {
