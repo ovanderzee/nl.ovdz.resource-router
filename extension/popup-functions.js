@@ -1,16 +1,3 @@
-//var waitTime = function () {
-//    var timeComponent = function (prop) {
-//        var time = window.getComputedStyle(this, null).getPropertyValue(prop);
-//        var unit = time.replace(/[.\d]+/, '');
-//        var ms = (unit === 'ms') ? parseInt(time) : parseInt(time) * 1000;
-//        return ms;
-//    };
-//
-//    var delay = timeComponent.call(this, 'transition-delay');
-//    var duration = timeComponent.call(this, 'transition-duration');
-//    return delay + duration;
-//};
-//
 var signalRefresh = function () {
 	chrome.runtime.sendMessage('refresh', function () {
 	});
@@ -105,32 +92,52 @@ var newEntry = function () {
 
     /* ROUTES */
 
-var routeForm = {
-    init: function () {
+var routeForm = new function () {
+    var eventEnd;
+    var self = this;
+    this.init = function () {
         this.style.maxHeight = this.clientHeight + 'px';
         this.className += ' collapsed';
         this.style.minHeight = this.clientHeight + 'px';
         this.style.height = this.clientHeight + 'px';
-    },
-    mouseover: function () {
+        this.addEventListener('transitionend', self.transitionEnd);
+    };
+    this.toggle = function (event) {
+        if (this.className.indexOf(' collapsed') > -1) {
+            self.expand.call(this, event);
+        } else {
+            self.collapse.call(this);
+        }
+    };
+    this.transitionEnd = function () {
+       eventEnd.call(this);
+    };
+    this.expand = function () {
+        var selfElement = this;
+        eventEnd = function () {
+//            var docTop = document.body.scrollTop; // hoe ver is venster gescrolld
+//            var docHeight = document.body.scrollHeight; // hoe hoog is doc
+//            var thisTop = this.offsetTop; // hoe ver is element van bovenkant doc
+//            var thisHeight = this.offsetHeight; // hoe hoog is element
+//              var winHeight = window.innerHeight;
+//            var scrollToView = docTop + thisHeight - docHeight;
+//            console.log(docTop + ' + ' + thisHeight + ' - ' + docHeight + ' = ' + scrollToView);
+//            if (scrollToView > 0) {
+//                document.documentElement.scrollTop = scrollToView + docTop
+//            }
+            selfElement.elements.remove.focus();
+            selfElement.elements.remove.blur();
+        };
         this.className = this.className.replace(' collapsed', '');
         this.style.height = this.style.maxHeight;
-        this.elements.remove.focus();
-        this.elements.remove.blur();
-//        var self = this;
-//        setTimeout(function () {
-//            // scroll into view
-//            self.elements.remove.focus();
-//            self.elements.remove.blur();
-//        }, waitTime.call(this));
-    },
-    mouseout: function () {
-        setTimeout(function () {
+    };
+    this.collapse = function () {
+        eventEnd = function () {
             this.className += ' collapsed';
-        }, 500);
+        };
         this.style.height = this.style.minHeight;
         this.scrollTop = 0;
-    }
+    };
 };
 
 var routeActive = {

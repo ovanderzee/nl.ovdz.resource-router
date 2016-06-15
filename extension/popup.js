@@ -45,8 +45,7 @@ window.onload = function () {
         var item = JSON.parse(localStorage[key]);
         var form = template.cloneNode(true);
         form.id = 'route_' + i;
-        form.addEventListener('mouseout', routeForm.mouseout, false);
-        form.addEventListener('mouseover', routeForm.mouseover, false);
+        form.addEventListener('click', routeForm.toggle, false);
 
         form.elements.active.checked = Boolean(item.active);
         routeActive.init.call(form.elements.active);
