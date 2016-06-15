@@ -14,6 +14,14 @@ var extensionModel = new function () {
         }
     }
 
+    this.get = function () {
+        this.value = self.settings[this.id];
+    };
+    this.set = function () {
+        self.settings[this.id] = this.value;
+        localStorage.setItem(this.id, this.value);
+    };
+
     this.activate = function () {
 		localStorage.setItem('running', 'running');
 		self.activateView.call(this.form);

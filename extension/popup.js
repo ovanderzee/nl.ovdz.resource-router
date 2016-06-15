@@ -6,8 +6,8 @@ window.onload = function () {
 
 	var generalInputs = document.querySelectorAll('#general input');
 	for (var i = 0; i < generalInputs.length; i++) {
-		getLocalStorageItem.call(generalInputs[i]);
-		generalInputs[i].addEventListener('blur', setLocalStorageItem, false);
+        extensionModel.get.call(generalInputs[i]);
+		generalInputs[i].addEventListener('blur', extensionModel.set, false);
 	}
 //    urlModel.get.call(document.querySelector('input#loose'), 'http://');
 //    urlModel.get.call(document.querySelector('input#secure'), 'https://');

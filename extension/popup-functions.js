@@ -21,15 +21,6 @@ var waitTime = function () {
     return delay + duration;
 };
 
-    /* GENERAL SETTINGS */
-
-var getLocalStorageItem = function () {
-	this.value = localStorage.getItem(this.id);
-};
-var setLocalStorageItem = function () {
-	localStorage.setItem(this.id, this.value);
-};
-
     /* NEW */
 
 var newEntry = function () {
