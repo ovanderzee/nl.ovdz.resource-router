@@ -146,13 +146,13 @@ var routeForm = new function () {
         var thisBottom = parseInt(thisStyle.paddingBottom) + parseInt(thisStyle.borderBottomWidth) + parseInt(thisStyle.marginBottom);
 
         var scrollToViewAll = thisAt + thisMaxHeight + thisBottom - docAt - winHeight;
-        var scrollToViewHead = thisAt + thisMinHeight + thisBottom - docAt - winHeight;
+        var scrollToViewNext = thisAt + thisMinHeight + thisBottom - docAt - winHeight;
         var scrollDuration = waitTime.call(this);
         var scrollLeap = 3;
 
         if (scrollToViewAll > 0) {
             var scrollDistance = thisMaxHeight - thisMinHeight;
-            if (scrollToViewHead > 0) {
+            if (scrollToViewNext > 0) {
                 scrollDistance = thisMaxHeight + thisBottom;
             }
             var scrollInterval = Math.round(scrollDuration * scrollLeap / scrollDistance);
