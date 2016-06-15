@@ -3,6 +3,24 @@ var signalRefresh = function () {
 	});
 };
 
+/*
+* waitTime: Caluclate total transition time
+*  this is an element with the transition defined in a stylesheet
+*  return delay + duration in milliseconds
+*/
+var waitTime = function () {
+    var timeComponent = function (prop) {
+        var time = window.getComputedStyle(this, null).getPropertyValue(prop);
+        var unit = time.replace(/[.\d]+/, '');
+        var ms = (unit === 'ms') ? parseFloat(time) : parseFloat(time) * 1000;
+        return ms;
+    };
+
+    var delay = timeComponent.call(this, 'transition-delay');
+    var duration = timeComponent.call(this, 'transition-duration');
+    return delay + duration;
+};
+
     /* GENERAL SETTINGS */
 
 var getLocalStorageItem = function () {
@@ -118,31 +136,32 @@ var routeForm = new function () {
             // geen nabewerking; scrollen kan meteen
         };
         // scroll
-        var docTop = document.body.scrollTop; // scroll
-        var thisTop = this.offsetTop; // hoe ver is element van bovenkant doc
+        var docAt = document.body.scrollTop; // gescrollde afstand
+        var thisAt = this.offsetTop; // afstand element tot bovenkant doc
         var winHeight = window.innerHeight; // hoogte van het venster
 
-        var thisMinHeight = parseInt(this.style.minHeight); // hoe hoog is ingeklapt element vlgs stylesheet
-        var thisMaxHeight = parseInt(this.style.maxHeight); // hoe hoog is uitgeklapt element vlgs stylesheet
+        var thisMinHeight = parseInt(this.style.minHeight); // hoogte ingeklapt element vlgs stylesheet
+        var thisMaxHeight = parseInt(this.style.maxHeight); // hoogte uitgeklapt element vlgs stylesheet
         var thisStyle = window.getComputedStyle(this, null);
         var thisBottom = parseInt(thisStyle.paddingBottom) + parseInt(thisStyle.borderBottomWidth) + parseInt(thisStyle.marginBottom);
 
-        var scrollToViewAll = thisTop + thisMaxHeight + thisBottom - docTop - winHeight;
-        var scrollToViewHead = thisTop + thisMinHeight + thisBottom - docTop - winHeight;
+        var scrollToViewAll = thisAt + thisMaxHeight + thisBottom - docAt - winHeight;
+        var scrollToViewHead = thisAt + thisMinHeight + thisBottom - docAt - winHeight;
+        var scrollDuration = waitTime.call(this);
+        var scrollLeap = 3;
 
         if (scrollToViewAll > 0) {
-console.log('scrollToViewAll ' + scrollToViewAll)
-            var scrollBy = thisMaxHeight - thisMinHeight;
+            var scrollDistance = thisMaxHeight - thisMinHeight;
             if (scrollToViewHead > 0) {
-console.log('scrollToViewHead ' + scrollToViewHead)
-                scrollBy = thisMaxHeight + thisBottom;
+                scrollDistance = thisMaxHeight + thisBottom;
             }
+            var scrollInterval = scrollDuration * scrollLeap / scrollDistance
             var interval = setInterval(function () {
-                if (document.body.scrollTop >= (docTop + scrollBy)) {
+                if (document.body.scrollTop >= (docAt + scrollDistance)) {
                     clearInterval(interval);
                 }
-                window.scrollBy(0, 4);
-            }, 20);
+                window.scrollDistance(0, scrollLeap);
+            }, scrollInterval);
         }
 
         // css transitie

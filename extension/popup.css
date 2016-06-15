@@ -97,6 +97,6 @@ label {
     display: none;
 }
 .route {
-    transition: height 500ms ease-in-out;
+    transition: height 500ms linear;
     overflow: hidden;
 }
