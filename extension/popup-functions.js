@@ -91,10 +91,13 @@ var routeForm = new function () {
             }
             var scrollInterval = Math.round(scrollDuration * scrollLeap / scrollDistance);
             var interval = setInterval(function () {
-                if (document.body.scrollTop >= (docAt + scrollDistance)) {
+                var lastScrollTop = document.body.scrollTop;
+                window.scrollBy(0, scrollLeap);
+                var scrollCompleted = document.body.scrollTop >= (docAt + scrollDistance);
+                var scrollAtMax = lastScrollTop === document.body.scrollTop;
+                if (scrollCompleted || scrollAtMax) {
                     clearInterval(interval);
                 }
-                window.scrollBy(0, scrollLeap);
             }, scrollInterval);
         }
 
