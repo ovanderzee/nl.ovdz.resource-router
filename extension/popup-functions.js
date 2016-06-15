@@ -115,21 +115,40 @@ var routeForm = new function () {
     this.expand = function () {
         var selfElement = this;
         eventEnd = function () {
-//            var docTop = document.body.scrollTop; // hoe ver is venster gescrolld
-//            var docHeight = document.body.scrollHeight; // hoe hoog is doc
-//            var thisTop = this.offsetTop; // hoe ver is element van bovenkant doc
-//            var thisHeight = this.offsetHeight; // hoe hoog is element
-//              var winHeight = window.innerHeight;
-//            var scrollToView = docTop + thisHeight - docHeight;
-//            console.log(docTop + ' + ' + thisHeight + ' - ' + docHeight + ' = ' + scrollToView);
-//            if (scrollToView > 0) {
-//                document.documentElement.scrollTop = scrollToView + docTop
-//            }
-            selfElement.elements.remove.focus();
-            selfElement.elements.remove.blur();
+            // geen nabewerking; scrollen kan meteen
         };
+        // scroll
+        var docTop = document.body.scrollTop; // scroll
+        var thisTop = this.offsetTop; // hoe ver is element van bovenkant doc
+        var winHeight = window.innerHeight; // hoogte van het venster
+
+        var thisMinHeight = parseInt(this.style.minHeight); // hoe hoog is ingeklapt element vlgs stylesheet
+        var thisMaxHeight = parseInt(this.style.maxHeight); // hoe hoog is uitgeklapt element vlgs stylesheet
+        var thisStyle = window.getComputedStyle(this, null);
+        var thisBottom = parseInt(thisStyle.paddingBottom) + parseInt(thisStyle.borderBottomWidth) + parseInt(thisStyle.marginBottom);
+
+        var scrollToViewAll = thisTop + thisMaxHeight + thisBottom - docTop - winHeight;
+        var scrollToViewHead = thisTop + thisMinHeight + thisBottom - docTop - winHeight;
+
+        if (scrollToViewAll > 0) {
+console.log('scrollToViewAll ' + scrollToViewAll)
+            var scrollBy = thisMaxHeight - thisMinHeight;
+            if (scrollToViewHead > 0) {
+console.log('scrollToViewHead ' + scrollToViewHead)
+                scrollBy = thisMaxHeight + thisBottom;
+            }
+            var interval = setInterval(function () {
+                if (document.body.scrollTop >= (docTop + scrollBy)) {
+                    clearInterval(interval);
+                }
+                window.scrollBy(0, 4);
+            }, 20);
+        }
+
+        // css transitie
         this.className = this.className.replace(' collapsed', '');
         this.style.height = this.style.maxHeight;
+
     };
     this.collapse = function () {
         eventEnd = function () {
