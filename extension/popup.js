@@ -9,27 +9,21 @@ window.onload = function () {
 		getLocalStorageItem.call(generalInputs[i]);
 		generalInputs[i].addEventListener('blur', setLocalStorageItem, false);
 	}
-//    urlState.get.call(document.querySelector('input#loose'), 'http://');
-//    urlState.get.call(document.querySelector('input#secure'), 'https://');
+//    urlModel.get.call(document.querySelector('input#loose'), 'http://');
+//    urlModel.get.call(document.querySelector('input#secure'), 'https://');
 
     /* EXTENSION ACTIVE */
 
-	var generalFieldset = document.querySelector('#general fieldset');
+	var generalForm = document.querySelector('form#general');
 	var activate = document.querySelector('button#activate');
 	var deactivate = document.querySelector('button#deactivate');
 	if (localStorage.getItem('running')) {
-		extensionState.activate.call(generalFieldset);
+		extensionModel.activateView.call(generalForm);
 	} else {
-		extensionState.deactivate.call(generalFieldset);
+		extensionModel.deactivateView.call(generalForm);
 	}
-	activate.addEventListener('click', function () {
-		localStorage.setItem('running', 'running');
-		extensionState.activate.call(generalFieldset);
-	}, false);
-	deactivate.addEventListener('click', function () {
-		localStorage.setItem('running', '');
-		extensionState.deactivate.call(generalFieldset);
-	}, false);
+	activate.addEventListener('click', extensionModel.activate, false);
+	deactivate.addEventListener('click', extensionModel.deactivate, false);
 
     /* NEW */
 
@@ -54,7 +48,7 @@ window.onload = function () {
         form.querySelector('legend').textContent = key;
         form.elements.initial.value = key;
         form.elements.live.value = key;
-//        urlState.get.call(form.elements.live, '');
+//        urlModel.get.call(form.elements.live, '');
         form.elements.live.addEventListener('blur', routeLive.blur, false);
 
         form.elements.local.value = item.local;
@@ -63,7 +57,7 @@ window.onload = function () {
         var localHostName = localStorage.getItem(
             (linkElement.protocol === 'https:') ? 'secure' : 'loose'
         );
-//        urlState.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
+//        urlModel.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);
