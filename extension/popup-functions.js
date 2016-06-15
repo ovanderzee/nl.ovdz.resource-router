@@ -12,7 +12,7 @@ var waitTime = function () {
     var timeComponent = function (prop) {
         var time = window.getComputedStyle(this, null).getPropertyValue(prop);
         var unit = time.replace(/[.\d]+/, '');
-        var ms = (unit === 'ms') ? parseFloat(time) : parseFloat(time) * 1000;
+        var ms = (unit === 'ms') ? parseInt(time) : parseFloat(time) * 1000;
         return ms;
     };
 
@@ -155,12 +155,12 @@ var routeForm = new function () {
             if (scrollToViewHead > 0) {
                 scrollDistance = thisMaxHeight + thisBottom;
             }
-            var scrollInterval = scrollDuration * scrollLeap / scrollDistance
+            var scrollInterval = Math.round(scrollDuration * scrollLeap / scrollDistance);
             var interval = setInterval(function () {
                 if (document.body.scrollTop >= (docAt + scrollDistance)) {
                     clearInterval(interval);
                 }
-                window.scrollDistance(0, scrollLeap);
+                window.scrollBy(0, scrollLeap);
             }, scrollInterval);
         }
 
