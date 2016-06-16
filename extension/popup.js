@@ -2,6 +2,8 @@ var template, populatePopup;
 
 window.onload = function () {
 
+    extensionModel.init();
+
     /* GENERAL SETTINGS */
 
 	var generalInputs = document.querySelectorAll('#general input');
