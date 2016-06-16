@@ -17,7 +17,7 @@ window.onload = function () {
 	var generalForm = document.querySelector('form#general');
 	var activate = document.querySelector('button#activate');
 	var deactivate = document.querySelector('button#deactivate');
-	if (localStorage.getItem('running')) {
+    if (extensionModel.settings.running) {
 		extensionModel.activateView.call(generalForm);
 	} else {
 		extensionModel.deactivateView.call(generalForm);
@@ -36,7 +36,7 @@ window.onload = function () {
 
     template = document.getElementById('template');
     populatePopup = function (key) {
-        var item = JSON.parse(localStorage[key]);
+        var item = JSON.parse(localStorage.getItem(key));
         var form = template.cloneNode(true);
         form.id = 'route_' + i;
         form.addEventListener('click', routeForm.toggle, false);
@@ -64,7 +64,7 @@ window.onload = function () {
         routeForm.init.call(form);
     };
 
-    for (var i = 0; i < extensionModel.urls; i++) {
+    for (var i = 0; i < extensionModel.urls.length; i++) {
         var key = extensionModel.urls[i];
         linkElement.createURL(key);
         if (linkElement.protocol === 'http:' || linkElement.protocol === 'https:') {
