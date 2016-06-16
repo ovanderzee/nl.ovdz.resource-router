@@ -4,7 +4,7 @@ var urlModel = new function () {
 
     this.get = function () {
         self.table[this.value] = this;
-        this.className = this.className.replace(' request-.*$', '');
+        this.className = this.className.replace(/ request-.+/, '');
         this.className += ' request-lost';
         this.title = 'No response';
         var oReq = new XMLHttpRequest();
