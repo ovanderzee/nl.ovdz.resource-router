@@ -32,11 +32,11 @@ var extensionModel = new function () {
     };
 
     this.activate = function () {
-		self.set.call({id: 'running', value: 'running');
+		self.set.call({id: 'running', value: 'running'});
 		self.activateView.call(this.form);
     };
     this.deactivate = function () {
-		self.set.call({id: 'running', value: '');
+		self.set.call({id: 'running', value: ''});
 		self.deactivateView.call(this.form);
     };
 
