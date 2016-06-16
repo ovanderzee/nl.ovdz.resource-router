@@ -1,5 +1,9 @@
 var template, populatePopup;
 
+//var rsrc = 'http://www.hastalavista.dds.nl/spel/mijnenveger.css';
+//urlModel.setupValidation(rsrc);
+//
+
 window.onload = function () {
 
     extensionModel.init();
@@ -11,8 +15,8 @@ window.onload = function () {
         extensionModel.get.call(generalInputs[i]);
 		generalInputs[i].addEventListener('blur', extensionModel.set, false);
 	}
-//    urlModel.get.call(document.querySelector('input#loose'), 'http://');
-//    urlModel.get.call(document.querySelector('input#secure'), 'https://');
+//    urlModel.setupValidation.call(document.querySelector('input#loose'), 'http://');
+//    urlModel.setupValidation.call(document.querySelector('input#secure'), 'https://');
 
     /* EXTENSION ACTIVE */
 
@@ -50,14 +54,14 @@ window.onload = function () {
         form.querySelector('legend').textContent = key;
         form.elements.initial.value = key;
         form.elements.live.value = key;
-//        urlModel.get.call(form.elements.live, '');
+//        urlModel.setupValidation.call(form.elements.live, '');
         form.elements.live.addEventListener('blur', routeLive.blur, false);
 
         form.elements.local.value = item.local;
         linkElement.createURL(key);
 
-//        urlModel.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
         var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
+//        urlModel.setupValidation.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);
