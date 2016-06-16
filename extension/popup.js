@@ -64,8 +64,8 @@ window.onload = function () {
         routeForm.init.call(form);
     };
 
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
+    for (var i = 0; i < extensionModel.urls; i++) {
+        var key = extensionModel.urls[i];
         linkElement.createURL(key);
         if (linkElement.protocol === 'http:' || linkElement.protocol === 'https:') {
             populatePopup(key);
