@@ -1,35 +1,41 @@
 var urlModel = new function () {
     var self = this;
-    this.table = {};
+    var stack = {};
+    this.responseHeaders = {};
 
-    this.get = function () {
-        self.table[this.value] = this;
-        this.className = this.className.replace(/ request-.+/, '');
-        this.className += ' request-lost';
-        this.title = 'No response';
-        var oReq = new XMLHttpRequest();
-        oReq.open("GET", this.value);
-        oReq.send();
-    };
-    this.handle = function (details) {
-        this.title = details.statusLine || details.statusCode;
-        if (details.statusCode === 200) {
-            this.className = this.className.replace(' request-lost', ' request-found');
-        } else {
-            this.className = this.className.replace(' request-lost', ' request-failed');
+    this.setupValidation = function (url) {
+//        self.table[this.value] = this;
+//        this.className = this.className.replace(/ request-.+/, '');
+//        this.className += ' request-lost';
+//        this.title = 'No response';
+        stack[url] = {statusCode: 0, statusLine: 'No response'};
+        if (self.responseHeaders[url]) {
+            self.responseHeaders[url] = Object(self.responseHeaders[url], stack[url]);
         }
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open('GET', url);
+        httpRequest.send();
+console.log ('send ');
+
+        };
+
+    var handleValidation = function (details) {
+//        if (details.statusCode === 200) {
+//            this.className = this.className.replace(' request-lost', ' request-found');
+//        } else {
+//            this.className = this.className.replace(' request-lost', ' request-failed');
+//        }
+        var url = details.url;
+console.log ('handleValidation ' + JSON.stringify (details));
+        if (stack[url]) {
+            self.responseHeaders[url] = Object(stack[url], details);
+            delete stack[url];
+            return {cancel: true};
+        }
+        return {cancel: false};
     };
 
-//    chrome.webRequest.onHeadersReceived.addListener(function (details) {
-//        var control = self.table[details.url];
-//        if (control) {
-//            self.handle.call(control, details);
-//        }
-//        return {cancel: true};
-////        return {cancel: localStorage.running};
-//    }, {
-//        urls: ['*://*/*']
-//    }, ['blocking']);
+    chrome.webRequest.onHeadersReceived.addListener(handleValidation, {urls: ['*://*/*']}, ['blocking']);
 
 /*
     console.log('HDRS ' + JSON.stringify(details));
