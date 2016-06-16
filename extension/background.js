@@ -13,8 +13,10 @@ var routingResponse = function (details) {
 	}
 	if (localRsrc) {
 		linkElement.createURL(details.url);
-		// compose local url
-		localRsrc = linkElement.protocol + '//' + localStorage[linkElement.protocol] + '/' + localRsrc;
+        var localHostName = localStorage.getItem(
+            (linkElement.protocol === 'https:') ? 'secure' : 'loose'
+        );
+		localRsrc = linkElement.protocol + '//' + localHostName + '/' + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localRsrc);
 		return {redirectUrl: localRsrc};
 	} else {
