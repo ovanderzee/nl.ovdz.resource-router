@@ -1,5 +1,5 @@
 var routingResponse = function (details) {
-    if (!extensionModel.settings.running) {
+    if (!localStorage.running || localStorage.testing) {
 		return {cancel: false};
     }
     if (details.url.indexOf('#') > 0) {
@@ -13,7 +13,9 @@ var routingResponse = function (details) {
 	}
 	if (localRsrc) {
 		linkElement.createURL(details.url);
-        var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
+        var localHostName = localStorage.getItem(
+            (linkElement.protocol === 'https:') ? 'secure' : 'loose'
+        );
 		localRsrc = linkElement.protocol + '//' + localHostName + '/' + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localRsrc);
 		return {redirectUrl: localRsrc};
