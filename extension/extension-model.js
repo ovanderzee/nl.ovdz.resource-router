@@ -27,6 +27,13 @@ var extensionModel = new function () {
         localStorage.setItem(this.id, this.value);
     };
 
+    this.startUrlTest = function () {
+		self.set.call({id: 'testing', value: 'testing'});
+    };
+    this.stopUrlTest = function () {
+		self.set.call({id: 'testing', value: ''});
+    };
+
     this.getLocalHostName = function (protocol) {
         (protocol === 'https:') ? 'secure' : 'loose';
     };

@@ -12,12 +12,11 @@ var urlModel = new function () {
         if (self.responseHeaders[url]) {
             self.responseHeaders[url] = Object(self.responseHeaders[url], stack[url]);
         }
+        extensionModel.startUrlTest();
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', url);
         httpRequest.send();
-console.log ('send ');
-
-        };
+    };
 
     var handleValidation = function (details) {
 //        if (details.statusCode === 200) {
@@ -30,7 +29,9 @@ console.log ('handleValidation ' + JSON.stringify (details));
         if (stack[url]) {
             self.responseHeaders[url] = Object(stack[url], details);
             delete stack[url];
-            return {cancel: true};
+            if (JSON.stringify(stack) === '{}') {
+                extensionModel.stopUrlTest();
+            }
         }
         return {cancel: false};
     };
