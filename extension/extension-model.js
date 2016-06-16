@@ -19,6 +19,10 @@ var extensionModel = new function () {
         }
     }
 
+    this.init = function () {
+        self.settings = Object.assign(self.settings, store);
+    };
+
     this.get = function () {
         this.value = self.settings[this.id];
     };
