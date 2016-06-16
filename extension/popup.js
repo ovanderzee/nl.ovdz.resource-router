@@ -54,10 +54,8 @@ window.onload = function () {
         form.elements.local.value = item.local;
         linkElement.createURL(key);
 
-        var localHostName = localStorage.getItem(
-            (linkElement.protocol === 'https:') ? 'secure' : 'loose'
-        );
 //        urlModel.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
+        var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
         form.elements.remove.addEventListener('click', routeRemove.click, false);

@@ -1,13 +1,18 @@
 var extensionModel = new function () {
     var self = this;
-    this.settings = {};
+    this.settings = {
+        loose: 'localhost:80',
+        secure: 'localhost:443',
+        running: ''
+    };
+    var store = {};
     this.urls = [];
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        var keyMatch = key.match(/^[a-z]+$/);
+        var keyMatch = key.match(/[a-z]+/);
         if (keyMatch && keyMatch.length && key === keyMatch[0]) {
             // a setting is a string
-            this.settings[key] = localStorage.getItem(key);
+            store[key] = localStorage.getItem(key);
         } else {
             // it probably is an url
             this.urls.push(key);
@@ -22,12 +27,16 @@ var extensionModel = new function () {
         localStorage.setItem(this.id, this.value);
     };
 
+    this.getLocalHostName = function (protocol) {
+        (protocol === 'https:') ? 'secure' : 'loose';
+    };
+
     this.activate = function () {
-		localStorage.setItem('running', 'running');
+		self.set.call({id: 'running', value: 'running');
 		self.activateView.call(this.form);
     };
     this.deactivate = function () {
-		localStorage.setItem('running', '');
+		self.set.call({id: 'running', value: '');
 		self.deactivateView.call(this.form);
     };
 
