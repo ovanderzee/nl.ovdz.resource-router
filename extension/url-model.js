@@ -8,14 +8,22 @@ var urlModel = new function () {
 //        this.className = this.className.replace(/ request-.+/, '');
 //        this.className += ' request-lost';
 //        this.title = 'No response';
-        stack[url] = {statusCode: 0, statusLine: 'No response'};
-        if (self.responseHeaders[url]) {
-            self.responseHeaders[url] = Object(self.responseHeaders[url], stack[url]);
-        }
+        stack[url] = "asserted";
         extensionModel.startUrlTest();
         var httpRequest = new XMLHttpRequest();
-        httpRequest.open('GET', url);
+        httpRequest.open('GET', url); // HEAD ??
         httpRequest.send();
+
+        setTimeout(function () {
+            handleValidation({
+                "method":"GET",
+                "statusCode":0,
+                "statusLine":"No response",
+                "timeStamp": new Date().getTime(),
+                "type":"xmlhttprequest",
+                "url": url
+            })
+        }, 2000);
     };
 
     var handleValidation = function (details) {
@@ -25,9 +33,8 @@ var urlModel = new function () {
 //            this.className = this.className.replace(' request-lost', ' request-failed');
 //        }
         var url = details.url;
-console.log ('handleValidation ' + JSON.stringify (details));
         if (stack[url]) {
-            self.responseHeaders[url] = Object(stack[url], details);
+            self.responseHeaders[url] = details;
             delete stack[url];
             if (JSON.stringify(stack) === '{}') {
                 extensionModel.stopUrlTest();
