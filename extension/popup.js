@@ -1,12 +1,12 @@
 var template, populatePopup;
 
-//var rsrc = 'http://www.hastalavista.dds.nl/spel/mijnenveger.css';
-//urlModel.setupValidation(rsrc);
-//
+testConnectivity.live();
 
 window.onload = function () {
 
     extensionModel.init();
+    testConnectivity.localhost();
+    testConnectivity.local();
 
     /* GENERAL SETTINGS */
 

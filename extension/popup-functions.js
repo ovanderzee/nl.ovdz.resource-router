@@ -143,3 +143,28 @@ var routeRemove = {
         }
     }
 };
+
+var testConnectivity = {
+    live: function () {
+        for (var i = 0; i < extensionModel.urls.length; i++) {
+            var url = extensionModel.urls[i];
+            urlModel.setupValidation(url);
+        }
+    },
+    local: function () {
+        for (var i = 0; i < extensionModel.urls.length; i++) {
+            var url = extensionModel.urls[i];
+            var item = JSON.parse(localStorage.getItem(url));
+            linkElement.createURL(url);
+            var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
+            urlModel.setupValidation(linkElement.protocol + '//' + localHostName + '/' + item.local);
+        }
+    },
+    localhost: function () {
+        var loose = 'http://' + localStorage.getItem('loose');
+        urlModel.setupValidation(loose);
+        var secure = 'https://' + localStorage.getItem('secure');
+        urlModel.setupValidation(secure);
+    }
+};
+
