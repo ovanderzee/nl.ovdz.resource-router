@@ -43,7 +43,8 @@ var extensionModel = new function () {
     };
 
     this.getLocalHostName = function (protocol) {
-        (protocol === 'https:') ? 'secure' : 'loose';
+        var protocolName = (protocol === 'https:') ? 'secure' : 'loose';
+        return localStorage.getItem(protocolName);
     };
 
     this.activate = function () {
