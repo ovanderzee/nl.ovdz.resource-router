@@ -9,6 +9,10 @@ var extensionModel = new function () {
     this.urls = [];
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
+        if (!key) {
+            localStorage.removeItem(key);
+            continue;
+        }
         var keyMatch = key.match(/[a-z]+/);
         if (keyMatch && keyMatch.length && key === keyMatch[0]) {
             // a setting is a string
