@@ -1,13 +1,30 @@
 var urlModel = new function () {
     var self = this;
     var stack = {};
-    this.responseHeaders = {};
+    var responseHeaders = {};
+
+    this.getHttpStateClass = function (url) {
+        var state = responseHeaders[url].statusCode;
+        var class = 'failed';
+        if (state) {
+            if (state === 200) {
+                class = 'found';
+            }
+        } else {
+            class = 'lost';
+        }
+        return class;
+    };
+
+    this.getHttpStateText = function (url) {
+        // ex.: "statusLine":"HTTP/1.1 404 Not Found"
+        var text = responseHeaders[url].statusCode.replace('HTTP/1.1 ','');
+        text = text.replace('HTTP/1.1 ','');
+        text = text.replace(/^\d+ /,'');
+        return;
+    };
 
     this.setupValidation = function (url) {
-//        self.table[this.value] = this;
-//        this.className = this.className.replace(/ request-.+/, '');
-//        this.className += ' request-lost';
-//        this.title = 'No response';
         stack[url] = "asserted";
         extensionModel.startUrlTest();
         var httpRequest = new XMLHttpRequest();
@@ -27,14 +44,9 @@ var urlModel = new function () {
     };
 
     var handleValidation = function (details) {
-//        if (details.statusCode === 200) {
-//            this.className = this.className.replace(' request-lost', ' request-found');
-//        } else {
-//            this.className = this.className.replace(' request-lost', ' request-failed');
-//        }
         var url = details.url;
         if (stack[url]) {
-            self.responseHeaders[url] = details;
+            responseHeaders[url] = details;
             delete stack[url];
             if (JSON.stringify(stack) === '{}') {
                 extensionModel.stopUrlTest();
