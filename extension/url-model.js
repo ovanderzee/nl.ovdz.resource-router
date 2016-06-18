@@ -65,7 +65,7 @@ var urlModel = new function () {
         {"name":"Vary","value":"Accept-Encoding"},
         {"name":"Content-Encoding","value":"gzip"},
         {"name":"Content-Length","value":"351"},{"name":"Connection","value":"close"},
-         {"name":"Content-Type","value":"text/html; charset=iso-8859-1"}
+        {"name":"Content-Type","value":"text/html; charset=iso-8859-1"}
     ],"statusCode":401,"statusLine":"HTTP/1.1 401 Authorization Required","tabId":-1,"timeStamp":1466175970771.569,
     "type":"xmlhttprequest","url":"http://servicepunt.mbor.finalist.com/sites/all/themes/servicepunt/static/css/main.css"}
     404 {"frameId":0,"method":"GET","parentFrameId":-1,"requestId":"14905","responseHeaders":[
