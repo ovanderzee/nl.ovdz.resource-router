@@ -5,15 +5,15 @@ var urlModel = new function () {
 
     this.getHttpStateClass = function (url) {
         var state = responseHeaders[url].statusCode;
-        var class = 'failed';
+        var className = 'failed';
         if (state) {
             if (state === 200) {
-                class = 'found';
+                className = 'found';
             }
         } else {
-            class = 'lost';
+            className = 'lost';
         }
-        return class;
+        return className;
     };
 
     this.getHttpStateText = function (url) {
