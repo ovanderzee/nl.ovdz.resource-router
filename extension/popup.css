@@ -64,14 +64,15 @@ label {
 .value {
 	margin-left: 0.25em;
 	flex: 0 0 25em;
-	text-align: right;
 }
 .value input {
 	width: 100%;
     font-size: inherit;
-	text-align: left;
 }
 
+#general .value {
+    text-align: right;
+}
 #general .value input {
     width: calc(100% - 5em);
 }
@@ -83,9 +84,6 @@ label {
 
 .state .tag {
 	text-align: center;
-}
-.state .value {
-	text-align: left;
 }
 
 #template {display: none;}
