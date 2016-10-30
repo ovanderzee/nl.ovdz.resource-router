@@ -31,11 +31,13 @@ button {
     background: orange;
 }
 .request-found {
-    color: limegreen;
+    color: darkgreen;
 }
-.request-failed,
+.request-failed {
+    color: orangered;
+}
 .request-lost {
-    color: orange;
+    color: orangered;
 }
 #activate, #deactivate {
 	display: none;
