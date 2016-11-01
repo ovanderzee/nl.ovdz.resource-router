@@ -100,3 +100,6 @@ label {
     transition: height 500ms linear;
     overflow: hidden;
 }
+.http-status {
+    line-height: 1.5;
+}
