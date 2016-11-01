@@ -11,7 +11,7 @@ var urlModel = new function () {
                 className = 'found';
             }
         } else {
-            className = 'lost';
+            className = 'timeout';
         }
         return className;
     };
