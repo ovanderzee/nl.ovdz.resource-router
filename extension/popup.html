@@ -18,14 +18,18 @@
 				<span class="tag">localhost</span>
 				<span class="value">
 					http://
-					<input type="url" id="loose" required placeholder="hostname:portnumber" />
+					<input type="url" id="loose" data-prefix="http://" data-suffix="/" required placeholder="hostname:portnumber" />
+					/
+					<div class="http-status">&nbsp;</div>
 				</span>
 			</label>
 			<label>
 				<span class="tag">local secure</span>
 				<span class="value">
 					https://
-					<input type="url" id="secure" placeholder="hostname:portnumber" />
+					<input type="url" id="secure" data-prefix="https://" data-suffix="/" placeholder="hostname:portnumber" />
+					/
+					<div class="http-status">&nbsp;</div>
 				</span>
 			</label>
 			<button type="button" id="required_ok">ok</button>
