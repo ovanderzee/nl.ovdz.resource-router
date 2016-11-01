@@ -12,14 +12,14 @@ var populatePopup = function (key, index) {
     form.querySelector('legend').textContent = key;
     form.elements.initial.value = key;
     form.elements.live.value = key;
-//    urlModel.setupValidation.call(form.elements.live, '');
+    urlModel.setupValidation.call(form.elements.live, '');
     form.elements.live.addEventListener('blur', routeLive.blur, false);
 
     form.elements.local.value = item.local;
     linkElement.createURL(key);
 
     var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
-//    urlModel.setupValidation.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
+    urlModel.setupValidation.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
     form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
     form.elements.remove.addEventListener('click', routeRemove.click, false);
@@ -28,13 +28,9 @@ var populatePopup = function (key, index) {
     routeForm.init.call(form);
 };
 
-testConnectivity.live();
-
 window.onload = function () {
 
     extensionModel.init();
-    testConnectivity.localhost();
-    testConnectivity.local();
 
     /* GENERAL SETTINGS */
 
@@ -43,8 +39,8 @@ window.onload = function () {
         extensionModel.get.call(generalInputs[i]);
 		generalInputs[i].addEventListener('blur', extensionModel.set, false);
 	}
-//    urlModel.setupValidation.call(document.querySelector('input#loose'), 'http://');
-//    urlModel.setupValidation.call(document.querySelector('input#secure'), 'https://');
+    urlModel.setupValidation.call(document.querySelector('input#loose'), 'http://');
+    urlModel.setupValidation.call(document.querySelector('input#secure'), 'https://');
 
     /* EXTENSION ACTIVE */
 

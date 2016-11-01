@@ -3,56 +3,79 @@ var urlModel = new function () {
     var stack = {};
     var responseHeaders = {};
 
-    this.getHttpStateClass = function (url) {
-        var state = responseHeaders[url].statusCode;
+    var showHttpCode = function (input) {
+        var details = responseHeaders[input.value];
+        if (!details) {
+            return;
+        }
+        this.className = input.className.replace(/request-\w$/, '');
         var className = 'failed';
-        if (state) {
-            if (state === 200) {
+        if (details.statusCode) {
+            if (details.statusCode === 200) {
                 className = 'found';
             }
         } else {
             className = 'timeout';
         }
-        return className;
+        input.className  += ' request-' + className;
     };
 
-    this.getHttpStateText = function (url) {
+    var showHttpComment = function (input) {
         // ex.: "statusLine":"HTTP/1.1 404 Not Found"
-        var text = responseHeaders[url].statusCode.replace('HTTP/1.1 ','');
+        var details = responseHeaders[input.value];
+        if (!details) {
+            return;
+        }
+        var text = details.statusLine;
         text = text.replace('HTTP/1.1 ','');
         text = text.replace(/^\d+ /,'');
-        return;
+        input.parentNode.querySelector('.http-status').textContent = text;
     };
 
-    this.setupValidation = function (url) {
-        stack[url] = "asserted";
+    this.setupValidation = function (prefix) {
+        var input = this;
+        var url = prefix + input.value;
+        stack[url] = input;
+
+console.log('start validate ' + input.name + '#'  + input.id + ': ' + url);
+
         extensionModel.startUrlTest();
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', url); // HEAD ??
         httpRequest.send();
 
+        // handle hopeless requests
         setTimeout(function () {
             handleValidation({
-                "method":"GET",
-                "statusCode":0,
-                "statusLine":"No response",
+                "method": "GET",
+                "statusCode": 0,
+                "statusLine": "No response",
                 "timeStamp": new Date().getTime(),
-                "type":"xmlhttprequest",
+                "type": "xmlhttprequest",
                 "url": url
             });
-        }, 2000);
+        }, 1200);
     };
 
     var handleValidation = function (details) {
-        var url = details.url;
-        if (stack[url]) {
-            responseHeaders[url] = details;
-            delete stack[url];
-            if (JSON.stringify(stack) === '{}') {
-                extensionModel.stopUrlTest();
-            }
+        responseHeaders[details.url] = details;
+        var input = stack[details.url];
+        var returnObj = {cancel: false};
+        if (!input) {
+            return returnObj;
         }
-        return {cancel: false};
+
+console.log('handle validate ' + input.name + '#'  + input.id + ': ' + details.statusCode);
+
+        showHttpCode(input);
+        showHttpComment(input);
+
+        // (when) to end
+        delete stack[details.url];
+        if (JSON.stringify(stack) === '{}') {
+            extensionModel.stopUrlTest();
+        }
+        return returnObj;
     };
 
     chrome.webRequest.onHeadersReceived.addListener(handleValidation, {urls: ['*://*/*']}, ['responseHeaders']);
