@@ -3,8 +3,15 @@ var urlModel = new function () {
     var stack = {};
     var responseHeaders = {};
 
+    var validatableURL = function (input) {
+        var prefix = input.dataset.prefix || '';
+        var suffix = input.dataset.suffix || '';
+        return prefix + input.value + suffix;
+    };
+
     var showHttpCode = function (input) {
-        var details = responseHeaders[input.value];
+        var url = validatableURL(input);
+        var details = responseHeaders[url];
         if (!details) {
             return;
         }
@@ -22,7 +29,8 @@ var urlModel = new function () {
 
     var showHttpComment = function (input) {
         // ex.: "statusLine":"HTTP/1.1 404 Not Found"
-        var details = responseHeaders[input.value];
+        var url = validatableURL(input);
+        var details = responseHeaders[url];
         if (!details) {
             return;
         }
@@ -32,9 +40,9 @@ var urlModel = new function () {
         input.parentNode.querySelector('.http-status').textContent = text;
     };
 
-    this.setupValidation = function (prefix) {
+    this.setupValidation = function () {
         var input = this;
-        var url = prefix + input.value;
+        var url = validatableURL(input);
         stack[url] = input;
 
 console.log('start validate ' + input.name + '#'  + input.id + ': ' + url);
