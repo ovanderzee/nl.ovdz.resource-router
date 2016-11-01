@@ -34,9 +34,17 @@ Add to trusted sites (Mac OSX)
 
 ### Run local server for editing resources
 
-Run the default gulp task
+Just serve the sources
 
-    cd ~/nl.ovdz.resource-router && gulp develop
+    cd ~/nl.ovdz.resource-router && gulp serve
+
+Lint and serve the sources
+
+    cd ~/nl.ovdz.resource-router && gulp sources
+
+Build and serve the sources
+
+    cd ~/nl.ovdz.resource-router && gulp sass
 
 
 ## toDo, toWant
