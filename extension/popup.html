@@ -14,23 +14,19 @@
 		<fieldset class="required">
 			<button type="button" id="activate" value="running">activate</button>
 			<button type="button" id="deactivate" value="">deactivate</button>
-			<label>
+			<label id="loose-http">
 				<span class="tag">localhost</span>
 				<span class="value">
-					http://
 					<input type="url" id="loose" data-prefix="http://" data-suffix="/" required placeholder="hostname:portnumber" />
-					/
-					<div class="http-status">&nbsp;</div>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<label>
+			<label id="secure-http">
 				<span class="tag">local secure</span>
 				<span class="value">
-					https://
 					<input type="url" id="secure" data-prefix="https://" data-suffix="/" placeholder="hostname:portnumber" />
-					/
-					<div class="http-status">&nbsp;</div>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<button type="button" id="required_ok">ok</button>
 		</fieldset>
@@ -42,15 +38,15 @@
 				<span class="tag">route original file</span>
 				<span class="value">
 					<input type="url" name="live" />
-					<span class="http-status">&nbsp;</span>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<label>
 				<span class="tag">to local served resource</span>
 				<span class="value">
 					<input type="url" name="local" />
-					<span class="http-status">&nbsp;</span>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<button type="button" name="add">ok</button>
 		</fieldset>
@@ -72,15 +68,15 @@
 				<span class="tag">origin</span>
 				<span class="value">
 					<input type="url" name="live" />
-					<span class="http-status">&nbsp;</span>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<label class="resource">
 				<span class="tag">resource</span>
 				<span class="value">
 					<input type="url" name="local" />
-					<span class="http-status">&nbsp;</span>
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<button type="button" name="remove" value="confirm">remove</button>
 		</fieldset>

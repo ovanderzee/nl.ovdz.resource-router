@@ -37,7 +37,7 @@ var urlModel = new function () {
         var text = details.statusLine;
         text = text.replace('HTTP/1.1 ','');
         text = text.replace(/^\d+ /,'');
-        input.parentNode.querySelector('.http-status').textContent = text;
+        input.parentNode.parentNode.querySelector('.comment span').textContent = text;
     };
 
     this.setupValidation = function () {
@@ -70,10 +70,11 @@ console.log('start validate ' + input.name + '#'  + input.id + ': ' + url);
         var input = stack[details.url];
         var returnObj = {cancel: false};
         if (!input) {
+if (details.url.indexOf('localhost') > 0) console.log('no validation for: ' + details.url);
             return returnObj;
         }
 
-console.log('handle validate ' + input.name + '#'  + input.id + ': ' + details.statusCode);
+console.log('handle validate ' + input.name + '#'  + input.id + ': ' + details.url + ': ' + details.statusLine);
 
         showHttpCode(input);
         showHttpComment(input);
