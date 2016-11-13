@@ -47,6 +47,8 @@ var routeForm = new function () {
         this.addEventListener('transitionend', self.transitionEnd);
     };
     this.toggle = function (event) {
+        var titleClicked = event.target.tagName === 'LEGEND';
+        if (!titleClicked) return;
         if (this.className.indexOf(' collapsed') > -1) {
             self.expand.call(this, event);
         } else {
