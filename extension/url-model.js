@@ -12,10 +12,10 @@ var urlModel = new function () {
     var showHttpCode = function (input) {
         var url = validatableURL(input);
         var details = responseHeaders[url];
+        this.className = input.className.replace(/request-\w$/, '');
         if (!details) {
             return;
         }
-        this.className = input.className.replace(/request-\w$/, '');
         var className = 'failed';
         if (details.statusCode) {
             if (details.statusCode === 200) {
@@ -31,19 +31,25 @@ var urlModel = new function () {
         // ex.: "statusLine":"HTTP/1.1 404 Not Found"
         var url = validatableURL(input);
         var details = responseHeaders[url];
+        var commentElem = input.parentNode.parentNode.querySelector('.comment span');
         if (!details) {
+            commentElem.textContent = String.fromCharCode(160);
             return;
         }
         var text = details.statusLine;
         text = text.replace('HTTP/1.1 ','');
         text = text.replace(/^\d+ /,'');
-        input.parentNode.parentNode.querySelector('.comment span').textContent = text;
+        commentElem.textContent = text;
     };
 
     this.setupValidation = function () {
         var input = this;
         var url = validatableURL(input);
         stack[url] = input;
+
+        delete responseHeaders[url];
+        showHttpCode(input);
+        showHttpComment(input);
 
 console.log('start validate ' + input.name + '#'  + input.id + ': ' + url);
 
