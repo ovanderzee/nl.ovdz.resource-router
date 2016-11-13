@@ -130,6 +130,11 @@ gulp.task('compile', function() {
     gulp.watch(paths.sass, compileStyles);
 });
 
+gulp.task('serve', [
+	'connect',
+	'secure'
+]);
+
 gulp.task('sources', [
 	'lint',
 	'connect',
