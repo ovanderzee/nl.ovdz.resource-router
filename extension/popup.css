@@ -11,10 +11,14 @@ fieldset {
 	border: 0 none;
 	padding: 0.25em;
 }
-legend {margin: 0.5em 0 0 0;}
+legend {
+	margin: 0.5em 0 0 0;
+}
+div.buttons {
+	text-align: right;
+}
 button {
-	display: block;
-	margin: 0.25em 0.25em 0.25em auto;
+	margin: 0.25em;
     font-size: inherit;
     color: white;
     background: red;
@@ -48,7 +52,7 @@ input:focus {
 }
 .active #deactivate,
 .passive #activate {
-	display: block;
+	display: initial;
 }
 
 label {

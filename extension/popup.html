@@ -12,8 +12,10 @@
 	<h1>Frontend Resource Router</h1>
 	<form id="general">
 		<fieldset class="required">
-			<button type="button" id="activate" value="running">activate</button>
-			<button type="button" id="deactivate" value="">deactivate</button>
+			<div class="buttons">
+				<button type="button" id="activate" value="running">activate</button>
+				<button type="button" id="deactivate" value="">deactivate</button>
+			</div>
 			<label id="loose-http">
 				<span class="tag">localhost</span>
 				<span class="value">
@@ -28,7 +30,9 @@
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" id="required_ok">ok</button>
+			<div class="buttons">
+				<button type="button" id="required_ok">ok</button>
+			</div>
 		</fieldset>
 	</form>
 	<form id="new">
@@ -48,7 +52,9 @@
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" name="add">ok</button>
+			<div class="buttons">
+				<button type="button" name="add">ok</button>
+			</div>
 		</fieldset>
 	</form>
 	<h2>Current Routes</h2>
@@ -78,7 +84,9 @@
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" name="remove" value="confirm">remove</button>
+			<div class="buttons">
+				<button type="button" name="remove" value="confirm">remove</button>
+			</div>
 		</fieldset>
 	</form>
 </body>
