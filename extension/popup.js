@@ -8,20 +8,22 @@ var populatePopup = function (key, index) {
     form.elements.active.checked = Boolean(item.active);
     routeActive.init.call(form.elements.active);
     form.elements.active.addEventListener('click', routeActive.click, false);
+    form.elements.active.addEventListener('click', function () {
+        if (this.checked) {
+        console.log (this.checked);
+            routeTest.perform.call(this);
+        }
+    }, false);
 
     form.querySelector('legend').textContent = key;
     form.elements.initial.value = key;
     form.elements.live.value = key;
-    urlModel.setupValidation.call(form.elements.live, '');
     form.elements.live.addEventListener('blur', routeLive.blur, false);
 
     form.elements.local.value = item.local;
-    linkElement.createURL(key);
-
-    var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
-    urlModel.setupValidation.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
     form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
+    form.elements.test.addEventListener('click', routeTest.perform, false);
     form.elements.remove.addEventListener('click', routeRemove.click, false);
 
     document.body.appendChild(form);
