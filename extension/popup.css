@@ -11,15 +11,23 @@ fieldset {
 	border: 0 none;
 	padding: 0.25em;
 }
-legend {margin: 0.5em 0 0 0;}
+legend {
+	margin: 0.5em 0 0 0;
+}
+div.buttons {
+	text-align: right;
+}
 button {
-	display: block;
-	margin: 0.25em 0.25em 0.25em auto;
+	margin: 0.25em;
     font-size: inherit;
     color: white;
     background: red;
 	border: 0 none;
 	cursor: pointer;
+}
+input:focus {
+    outline-offset: 0;
+    outline: #87cefa auto 4px;
 }
 
 .active,
@@ -31,25 +39,28 @@ button {
     background: orange;
 }
 .request-found {
-    color: limegreen;
+    color: darkgreen;
 }
-.request-failed,
-.request-lost {
-    color: orange;
+.request-failed {
+    color: orangered;
+}
+.request-timeout {
+    color: orangered;
 }
 #activate, #deactivate {
 	display: none;
 }
 .active #deactivate,
 .passive #activate {
-	display: block;
+	display: initial;
 }
 
 label {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 }
-.tag,
-.value {
+label > span {
 	align-self: baseline;
     padding: 0.25em;
 }
@@ -59,31 +70,59 @@ label {
 .tag input {
 	margin: 0 auto;
 }
-.value {
-	margin-left: 0.25em;
-	flex: 0 0 25em;
-	text-align: right;
+.value,
+.comment {
+	flex: 0 0 24em;
 }
 .value input {
+    padding: 1px 3px;
+}
+.value input,
+.comment span {
+    display: inline-block;
 	width: 100%;
     font-size: inherit;
-	text-align: left;
+    border: 0 none;
+    text-align: left;
+}
+.comment span {
+    line-height: 0.8;
+    padding: 0 3px;
 }
 
-#general .value input {
-    width: calc(100% - 5em);
+#general label {
+    text-align: right;
 }
+#general .value input,
+#general .comment span {
+    width: calc(100% - 6em);
+}
+#loose-http .value:before {
+    content: 'http://';
+}
+#secure-http .value:before {
+    content: 'http://';
+}
+#general .value:after,
+#general .comment:after {
+    content: '/';
+}
+#general .comment:after {
+    color: transparent;
+}
+
 #new .tag,
 #new .value,
 #new label {
     display: block
 }
+#new .value,
+#new input {
+    background: #f3f3f3;
+}
 
 .state .tag {
 	text-align: center;
-}
-.state .value {
-	text-align: left;
 }
 
 #template {display: none;}

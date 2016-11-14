@@ -153,3 +153,13 @@ var routeRemove = function () {
         }
     }
 };
+
+var routeTest = {
+    perform: function () {
+        var form = this.form;
+        urlModel.setupValidation.call(form.elements.live, '');
+        linkElement.createURL(form.elements.live.value);
+        var localHostName = extensionModel.getLocalHostName(linkElement.protocol);
+        urlModel.setupValidation.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
+    }
+};

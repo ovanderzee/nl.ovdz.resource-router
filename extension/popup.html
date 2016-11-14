@@ -12,23 +12,27 @@
 	<h1>Frontend Resource Router</h1>
 	<form id="general">
 		<fieldset class="required">
-			<button type="button" id="activate" value="running">activate</button>
-			<button type="button" id="deactivate" value="">deactivate</button>
-			<label>
+			<div class="buttons">
+				<button type="button" id="activate" value="running">activate</button>
+				<button type="button" id="deactivate" value="">deactivate</button>
+			</div>
+			<label id="loose-http">
 				<span class="tag">localhost</span>
 				<span class="value">
-					http://
-					<input type="url" id="loose" required placeholder="hostname:portnumber" />
+					<input type="url" id="loose" data-prefix="http://" data-suffix="/" required placeholder="hostname:portnumber" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<label>
+			<label id="secure-http">
 				<span class="tag">local secure</span>
 				<span class="value">
-					https://
-					<input type="url" id="secure" placeholder="hostname:portnumber" />
+					<input type="url" id="secure" data-prefix="https://" data-suffix="/" placeholder="hostname:portnumber" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" id="required_ok">ok</button>
+			<div class="buttons">
+				<button type="button" id="required_ok">ok</button>
+			</div>
 		</fieldset>
 	</form>
 	<form id="new">
@@ -39,14 +43,19 @@
 				<span class="value">
 					<input type="url" name="live" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<label>
 				<span class="tag">to local served resource</span>
 				<span class="value">
 					<input type="url" name="local" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" name="add">ok</button>
+			<div class="buttons">
+				<button type="button" name="test">test</button>
+				<button type="button" name="add">ok</button>
+			</div>
 		</fieldset>
 	</form>
 	<h2>Current Routes</h2>
@@ -67,14 +76,19 @@
 				<span class="value">
 					<input type="url" name="live" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
 			<label class="resource">
 				<span class="tag">resource</span>
 				<span class="value">
 					<input type="url" name="local" />
 				</span>
+				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<button type="button" name="remove"><span style="display: none">confirm </span>remove</button>
+			<div class="buttons">
+				<button type="button" name="test">test</button>
+				<button type="button" name="remove"><span style="display: none">confirm </span>remove</button>
+			</div>
 		</fieldset>
 	</form>
 </body>

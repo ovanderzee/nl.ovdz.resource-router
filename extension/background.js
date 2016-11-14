@@ -1,5 +1,5 @@
 var routingResponse = function (details) {
-    if (!localStorage.running) {
+    if (!localStorage.running || localStorage.testing) {
 		return {cancel: false};
     }
     if (details.url.indexOf('#') > 0) {

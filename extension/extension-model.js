@@ -1,18 +1,31 @@
 var extensionModel = new function () {
     var self = this;
-    this.settings = {};
+    this.settings = {
+        loose: 'localhost:80',
+        secure: 'localhost:443',
+        running: ''
+    };
+    var store = {};
     this.urls = [];
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
-        var keyMatch = key.match(/^[a-z]+$/);
+        if (!key) {
+            localStorage.removeItem(key);
+            continue;
+        }
+        var keyMatch = key.match(/[a-z]+/);
         if (keyMatch && keyMatch.length && key === keyMatch[0]) {
             // a setting is a string
-            this.settings[key] = localStorage.getItem(key);
+            store[key] = localStorage.getItem(key);
         } else {
             // it probably is an url
             this.urls.push(key);
         }
     }
+
+    this.init = function () {
+        self.settings = Object.assign(self.settings, store);
+    };
 
     this.get = function () {
         this.value = self.settings[this.id];
@@ -22,12 +35,24 @@ var extensionModel = new function () {
         localStorage.setItem(this.id, this.value);
     };
 
+    this.startUrlTest = function () {
+		self.set.call({id: 'testing', value: 'testing'});
+    };
+    this.stopUrlTest = function () {
+		self.set.call({id: 'testing', value: ''});
+    };
+
+    this.getLocalHostName = function (protocol) {
+        var protocolName = (protocol === 'https:') ? 'secure' : 'loose';
+        return localStorage.getItem(protocolName);
+    };
+
     this.activate = function () {
-		localStorage.setItem('running', 'running');
+		self.set.call({id: 'running', value: 'running'});
 		self.activateView.call(this.form);
     };
     this.deactivate = function () {
-		localStorage.setItem('running', '');
+		self.set.call({id: 'running', value: ''});
 		self.deactivateView.call(this.form);
     };
 
