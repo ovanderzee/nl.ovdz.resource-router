@@ -134,11 +134,19 @@ var routeLive = {
     }
 };
 
-var routeRemove = {
-    click: function () {
-        if (this.value) {
-            this.textContent = this.value + ' ' + this.textContent;
-            this.removeAttribute('value');
+var routeRemove = function () {
+    var self = this;
+    this.init = function () {
+        self.style = this.querySelector('span').style;
+        this.addEventListener('blur', self.blur, false);
+        this.addEventListener('click', self.click, false);
+    };
+    this.blur = function () {
+        self.style.display = 'none';
+    };
+    this.click = function () {
+        if (self.style.display === 'none') {
+            self.style.display = '';
         } else {
             routeModel.removeRoute.call(this);
             this.form.parentNode.removeChild(this.form);

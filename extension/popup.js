@@ -60,7 +60,7 @@ window.onload = function () {
 //        urlModel.get.call(form.elements.local, linkElement.protocol + '//' + localHostName + '/');
         form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
-        form.elements.remove.addEventListener('click', routeRemove.click, false);
+        (new routeRemove()).init.call(form.elements.remove);
 
         document.body.appendChild(form);
         routeForm.init.call(form);
