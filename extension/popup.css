@@ -30,7 +30,7 @@ button {
 }
 input:focus {
     outline-offset: 0;
-    outline: #87cefa auto 4px;
+    outline: lightskyblue auto 4px;
 }
 
 .active,
@@ -114,6 +114,9 @@ label > span {
     color: transparent;
 }
 
+#new {
+	background: lightskyblue;
+}
 #new .tag,
 #new .value,
 #new label {
@@ -122,6 +125,10 @@ label > span {
 #new .value,
 #new input {
     background: #f3f3f3;
+}
+#new input:focus {
+	outline-offset: 0;
+	outline: white auto 4px;
 }
 
 .state .tag {
