@@ -58,7 +58,8 @@ input:focus {
 	display: initial;
 }
 
-label {
+#general label,
+.route label {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
@@ -129,6 +130,7 @@ label > span {
 }
 #new .tag,
 #new .value,
+#new .comment,
 #new label {
     display: block
 }

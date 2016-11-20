@@ -67,6 +67,7 @@ window.onload = function () {
     newRoute.elements.live.addEventListener('blur', newEntry, false);
     newRoute.elements.local.addEventListener('blur', newEntry, false);
     newRoute.elements.add.addEventListener('click', newEntry, false);
+    newRoute.elements.test.addEventListener('click', routeTest.perform, false);
 
     /* ROUTES */
 
