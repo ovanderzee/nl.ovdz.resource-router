@@ -93,8 +93,18 @@ label > span {
     padding: 0 3px;
 }
 
+#general legend {
+	width: calc(100% - 6em);
+}
+#general .activation {
+	text-align: right;
+	display: inline-block;
+	margin: -0.5em 0 0 0;
+	width: 6em;
+}
 #general label {
     text-align: right;
+	clear: both;
 }
 #general .value input,
 #general .comment span {
