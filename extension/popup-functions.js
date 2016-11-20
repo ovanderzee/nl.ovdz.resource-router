@@ -40,6 +40,7 @@ var routeForm = new function () {
     var eventEnd;
     var self = this;
     this.init = function () {
+        // measure anything, in the bright light
         this.style.maxHeight = this.clientHeight + 'px';
         this.className += ' collapsed';
         this.style.minHeight = this.clientHeight + 'px';
@@ -56,7 +57,7 @@ var routeForm = new function () {
         }
     };
     this.transitionEnd = function () {
-       eventEnd.call(this);
+        eventEnd.call(this);
     };
     this.expand = function () {
         eventEnd = function () {

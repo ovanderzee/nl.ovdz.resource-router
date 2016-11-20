@@ -47,6 +47,8 @@ window.onload = function () {
     /* EXTENSION ACTIVE */
 
 	var generalForm = document.querySelector('form#general');
+    generalForm.addEventListener('click', routeForm.toggle, false);
+    routeForm.init.call(generalForm);
 	var activate = document.querySelector('button#activate');
 	var deactivate = document.querySelector('button#deactivate');
     if (extensionModel.settings.running) {
@@ -60,6 +62,8 @@ window.onload = function () {
     /* NEW */
 
     var newRoute = document.getElementById('new');
+    newRoute.addEventListener('click', routeForm.toggle, false);
+    routeForm.init.call(newRoute);
     newRoute.elements.live.addEventListener('blur', newEntry, false);
     newRoute.elements.local.addEventListener('blur', newEntry, false);
     newRoute.elements.add.addEventListener('click', newEntry, false);
