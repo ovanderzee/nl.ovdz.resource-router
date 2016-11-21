@@ -13,9 +13,9 @@ var extensionModel = new function () {
             localStorage.removeItem(key);
             continue;
         }
-        var keyMatch = key.match(/[a-z]+/);
-        if (keyMatch && keyMatch.length && key === keyMatch[0]) {
-            // a setting is a string
+        var keyMatch = key.match(/^\w+$/);
+        if (keyMatch) {
+            // a word is a setting is a string
             store[key] = localStorage.getItem(key);
         } else {
             // it probably is an url
