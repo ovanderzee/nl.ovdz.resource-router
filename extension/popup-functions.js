@@ -135,24 +135,20 @@ var routeLive = {
     }
 };
 
-var routeRemove = function () {
+var routeRemove = function (button) {
     var self = this;
-    this.init = function () {
-        self.style = this.querySelector('span').style;
-        this.addEventListener('blur', self.blur, false);
-        this.addEventListener('click', self.click, false);
-    };
-    this.blur = function () {
+    this.style = button.querySelector('span').style;
+    button.addEventListener('blur', function () {
         self.style.display = 'none';
-    };
-    this.click = function () {
+    }, false);
+    button.addEventListener('click', function () {
         if (self.style.display === 'none') {
             self.style.display = '';
         } else {
-            routeModel.removeRoute.call(this);
-            this.form.parentNode.removeChild(this.form);
+            routeModel.removeRoute.call(button);
+            button.form.parentNode.removeChild(button.form);
         }
-    }
+    }, false);
 };
 
 var routeTest = {

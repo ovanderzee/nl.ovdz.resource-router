@@ -24,7 +24,7 @@ var populatePopup = function (key, index) {
     form.elements.local.addEventListener('blur', routeModel.setLocal, false);
 
     form.elements.test.addEventListener('click', routeTest.perform, false);
-    (new routeRemove()).init.call(form.elements.remove);
+    var removeRoute = new routeRemove(form.elements.remove);
 
     document.body.appendChild(form);
     routeForm.init.call(form);
