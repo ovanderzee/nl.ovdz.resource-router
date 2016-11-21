@@ -88,9 +88,12 @@ label > span {
     font-size: inherit;
     border: 0 none;
     text-align: left;
+    box-sizing: border-box;
+}
+.comment {
+    line-height: 0.8;
 }
 .comment span {
-    line-height: 0.8;
     padding: 0 3px;
 }
 
@@ -100,8 +103,10 @@ label > span {
 #general .activation {
 	text-align: right;
 	display: inline-block;
-	margin: -0.5em 0 0 0;
-	width: 6em;
+    position: relative;
+	top: -0.25em;
+    width: 6em;
+    vertical-align: top;
 }
 #general label {
     text-align: right;
@@ -119,7 +124,7 @@ label > span {
 }
 #general .value:after,
 #general .comment:after {
-    content: '/';
+    content: ' /';
 }
 #general .comment:after {
     color: transparent;
