@@ -1,5 +1,5 @@
 var template;
-var populatePopup = function (key, index) {
+var populatePopup = function (key) {
     var item = JSON.parse(localStorage.getItem(key));
     var form = template.cloneNode(true);
     form.id = 'route_' + document.forms.length;
@@ -64,8 +64,6 @@ window.onload = function () {
     var newRoute = document.getElementById('new');
     newRoute.addEventListener('click', routeForm.toggle, false);
     routeForm.init.call(newRoute);
-    newRoute.elements.live.addEventListener('blur', newEntry, false);
-    newRoute.elements.local.addEventListener('blur', newEntry, false);
     newRoute.elements.add.addEventListener('click', newEntry, false);
     newRoute.elements.test.addEventListener('click', routeTest.perform, false);
 

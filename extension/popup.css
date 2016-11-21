@@ -142,6 +142,9 @@ label > span {
 	outline-offset: 0;
 	outline: white auto 4px;
 }
+#new .comment span {
+    text-align: right;
+}
 
 .state .tag {
 	text-align: center;
