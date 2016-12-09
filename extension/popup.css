@@ -12,7 +12,7 @@ fieldset {
 	padding: 0.25em;
 }
 legend {
-	padding: 0.1em 0 0.25em;
+	padding: 0.25em 0;
 	word-break: break-word;
 	display: inline-block;
 	cursor: pointer;
@@ -98,13 +98,20 @@ label > span {
 }
 
 #general legend {
+    /* do not bother troubled legend met sophisticated calc function
 	width: calc(100% - 6em);
+    */
+	width: 22em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
 }
 #general .activation {
 	text-align: right;
 	display: inline-block;
-    position: relative;
-	top: -0.25em;
+    position: absolute;
+    right: 0;
+    top: 0;
     width: 6em;
     vertical-align: top;
 }
@@ -163,9 +170,10 @@ form.collapsed label {
 	clip: rect(1px, 1px, 1px, 1px);
 }
 form.collapsed legend {
-	padding: 0.1em 0;
+	padding-bottom: 0.05em;
 }
 form {
     transition: height 500ms linear;
     overflow: hidden;
+    position: relative;
 }
