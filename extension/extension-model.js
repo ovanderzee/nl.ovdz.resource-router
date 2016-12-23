@@ -42,11 +42,6 @@ var extensionModel = new function () {
 		self.set.call({id: 'testing', value: ''});
     };
 
-    this.getLocalHostName = function (protocol) {
-        var protocolName = (protocol === 'https:') ? 'secure' : 'loose';
-        return localStorage.getItem(protocolName);
-    };
-
     this.activate = function () {
 		self.set.call({id: 'running', value: 'running'});
 		self.activateView.call(this.form);
