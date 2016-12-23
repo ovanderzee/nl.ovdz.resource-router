@@ -3,13 +3,6 @@ var urlModel = new function () {
     var stack = {};
     var responseHeaders = {};
 
-    var validatableURL = function (input) {
-        var prefix = input.dataset.prefix || '';
-        var suffix = input.dataset.suffix || '';
-        var url = prefix + input.value + suffix;
-        return url;
-    };
-
     var clearHttpCode = function (input) {
         input.className = input.className.replace(/request-\w+/g, '');
     };
@@ -49,12 +42,12 @@ var urlModel = new function () {
     this.setupValidation = function (host) {
         var input = this;
         var url = input.value;
-        if (input.dataset.prefix || input.dataset.suffix) { // local servers
-            url = validatableURL(input);
-        } else { // local resource as hostless string
-            linkElement.createURL(url)
-            if (linkElement.protocol === location.protocol) { // chrome-extension:
-                url = host + "/" + url;
+        if (input.id === 'loose' || input.id === 'secure') { // local servers
+            url = host + url;
+        } else {
+            linkElement.createURL(url);
+            if (linkElement.protocol === location.protocol) { // local resource as hostless string // protocol is chrome-extension:
+                url = host + url;
             }
         }
 
