@@ -46,10 +46,32 @@ var routeModel = new function () {
 
     /* BACKGROUND */
 
-    this.route = function (live) {
+    var localResource = function (live) {
         if (getValue(live, 'active')) {
             return getValue(live, 'local');
         }
+    };
+
+    this.localRsrc = function (live) {
+        // remove hash
+        if (live.indexOf('#') > 0) {
+            live = live.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
+        }
+        // include searchterm in test (when interpreted)
+        var localRsrc = localResource(live);
+        if (!localRsrc && live.indexOf('?') > 0) {
+            // exclude searchterm from test (when for versioning)
+            localRsrc = localResource(live.split('?')[0]);
+        }
+        return localRsrc;
+    };
+
+	this.localUrl = function (live, localRsrc) {
+		linkElement.createURL(live);
+        var localHostName = localStorage.getItem(
+            (linkElement.protocol === 'https:') ? 'secure' : 'loose'
+        );
+		return linkElement.protocol + '//' + localHostName + '/' + localRsrc;
     };
 
     /* POPUP */
