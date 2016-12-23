@@ -16,6 +16,7 @@
 		"scripts": [
 			"link-element.js",
 			"route-model.js",
+			"url-model.js",
 			"background.js"
 		]
 	},

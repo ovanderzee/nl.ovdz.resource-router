@@ -1,5 +1,5 @@
 var routingResponse = function (details) {
-    if (!localStorage.running || localStorage.testing) {
+    if (!localStorage.running || urlModel.isValidating()) {
 		return {cancel: false};
     }
     var localRsrc = routeModel.localRsrc(details.url);

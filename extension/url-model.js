@@ -42,6 +42,10 @@ var urlModel = new function () {
         commentElem.textContent = text;
     };
 
+    this.isValidating = function () {
+        return JSON.stringify(stack) !== '{}';
+    };
+
     this.setupValidation = function (host) {
         var input = this;
         var url = input.value;
@@ -61,7 +65,6 @@ var urlModel = new function () {
         clearHttpCode(input);
         clearHttpComment(input);
 
-        extensionModel.startUrlTest();
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', url); // HEAD ??
         httpRequest.send();
@@ -93,9 +96,6 @@ var urlModel = new function () {
 
         // (when) to end
         delete stack[details.url];
-        if (JSON.stringify(stack) === '{}') {
-            extensionModel.stopUrlTest();
-        }
         return returnObj;
     };
 
