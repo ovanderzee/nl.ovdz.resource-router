@@ -66,12 +66,12 @@ var routeModel = new function () {
         return localRsrc;
     };
 
-	this.localUrl = function (live, localRsrc) {
+	this.localHost = function (live, localRsrc) {
 		linkElement.createURL(live);
         var localHostName = localStorage.getItem(
             (linkElement.protocol === 'https:') ? 'secure' : 'loose'
         );
-		return linkElement.protocol + '//' + localHostName + '/' + localRsrc;
+		return linkElement.protocol + '//' + localHostName;
     };
 
     /* POPUP */

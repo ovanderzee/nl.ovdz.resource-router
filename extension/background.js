@@ -4,7 +4,8 @@ var routingResponse = function (details) {
     }
     var localRsrc = routeModel.localRsrc(details.url);
 	if (localRsrc) {
-	    var localUrl = routeModel.localUrl(details.url, localRsrc);
+	    var localHost = routeModel.localHost(details.url);
+	    var localUrl = localHost + "/" + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localUrl);
 		return {redirectUrl: localUrl};
 	} else {
