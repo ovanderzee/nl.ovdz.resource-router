@@ -72,7 +72,6 @@ window.onload = function () {
     template = document.getElementById('template');
     for (var i = 0; i < extensionModel.urls.length; i++) {
         var key = extensionModel.urls[i];
-        linkElement.createURL(key);
         populatePopup(key);
     }
 
