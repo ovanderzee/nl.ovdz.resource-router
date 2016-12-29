@@ -35,8 +35,8 @@ var urlModel = new function () {
         commentElem.textContent = text;
     };
 
-    this.isValidating = function () {
-        return JSON.stringify(stack) !== '{}';
+    this.isValidating = function (url) {
+        return Boolean(stack[url]);
     };
 
     this.setupValidation = function (host) {
