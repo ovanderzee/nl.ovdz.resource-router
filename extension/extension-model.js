@@ -22,6 +22,18 @@ var extensionModel = new function () {
             this.urls.push(key);
         }
     }
+    var activeState = {
+        className: ' active',
+        color: [50, 205, 50, 255],
+        description: 'engaged',
+        toggleHint: 'dismiss'
+    }
+    var passiveState = {
+        className: ' passive',
+        color: [255, 165, 0, 255],
+        description: 'dismissed',
+        toggleHint: 'engage'
+    }
 
     this.init = function () {
         // merge localStorage in settings
@@ -36,6 +48,13 @@ var extensionModel = new function () {
         localStorage.setItem(this.id, this.value);
     };
 
+    this.isRunning = function () {
+        return self.settings.running === 'running';
+    };
+    this.stateVars = function () {
+        return self.isRunning() ? activeState : passiveState;
+    };
+
     this.activate = function () {
 		self.set.call({id: 'running', value: 'running'});
 		self.activateView.call(this.form);
@@ -47,12 +66,24 @@ var extensionModel = new function () {
 
     this.activateView = function () {
         this.className = this.className.replace(' passive', '');
-        this.className += ' active';
-        chrome.browserAction.setBadgeBackgroundColor({color: [50, 205, 50, 255]});
+        this.className += activeState.className;
+        chrome.browserAction.setBadgeBackgroundColor({color: activeState.color});
     };
     this.deactivateView = function () {
         this.className = this.className.replace(' active', '');
-        this.className += ' passive';
-        chrome.browserAction.setBadgeBackgroundColor({color: [255, 165, 0, 255]});
+        this.className += passiveState.className;
+        chrome.browserAction.setBadgeBackgroundColor({color: passiveState.color});
+    };
+
+    this.setBadge = function () {
+        var activeCount = 0;
+        for (var i = 0; i < self.urls.length; i++) {
+            var item = JSON.parse(localStorage.getItem(self.urls[i]));
+            if (Boolean(item.active)) {
+                activeCount++;
+            }
+        }
+        chrome.browserAction.setBadgeText({text: String(activeCount)});
+        chrome.browserAction.setBadgeBackgroundColor({color: extensionModel.stateVars().color});
     };
 };
