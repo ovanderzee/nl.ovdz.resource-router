@@ -10,7 +10,6 @@ var populatePopup = function (key) {
     form.elements.active.addEventListener('click', routeActive.click, false);
     form.elements.active.addEventListener('click', function () {
         if (this.checked) {
-        console.log (this.checked);
             routeTest.perform.call(this);
         }
     }, false);

@@ -116,10 +116,16 @@ var routeActive = new function () {
         this.form.className += newState;
     };
     this.click = function () {
+        var control = this;
         routeModel.setActive.call(this);
         this.form.className = this.form.className.replace(' passive', '');
         this.form.className = this.form.className.replace(' active', '');
         self.init.call(this);
+        chrome.browserAction.getBadgeText({}, function (count) {
+            count = Number(count);
+            control.checked ? count++ : count--;
+            chrome.browserAction.setBadgeText({text: String(count)});
+        });
     };
 };
 

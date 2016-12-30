@@ -24,6 +24,7 @@ var extensionModel = new function () {
     }
 
     this.init = function () {
+        // merge localStorage in settings
         self.settings = Object.assign(self.settings, store);
     };
 
