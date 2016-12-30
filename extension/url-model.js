@@ -1,6 +1,7 @@
 var urlModel = new function () {
     var self = this;
     var stack = {};
+    localStorage.setItem('valStack', JSON.stringify(stack));
     var responseHeaders = {};
 
     var clearHttpCode = function (input) {
@@ -36,7 +37,8 @@ var urlModel = new function () {
     };
 
     this.isValidating = function (url) {
-        return Boolean(stack[url]);
+        var valStack = JSON.parse(localStorage.getItem('valStack'));
+        return Boolean(valStack[url]);
     };
 
     this.setupValidation = function (host) {
@@ -52,6 +54,7 @@ var urlModel = new function () {
         }
 
         stack[url] = input;
+        localStorage.setItem('valStack', JSON.stringify(stack));
 
         // clear comments and input state
         delete responseHeaders[url];
@@ -89,6 +92,7 @@ var urlModel = new function () {
 
         // (when) to end
         delete stack[details.url];
+        localStorage.setItem('valStack', JSON.stringify(stack));
         return returnObj;
     };
 
