@@ -3,7 +3,7 @@ var extensionModel = new function () {
     this.settings = {
         loose: 'localhost:80',
         secure: 'localhost:443',
-        running: ''
+        rerouting: 'idle'
     };
     var store = {};
     this.urls = [];
@@ -23,16 +23,14 @@ var extensionModel = new function () {
         }
     }
     var activeState = {
-        className: ' active',
+        className: 'active',
         color: [50, 205, 50, 255],
-        description: 'engaged',
-        toggleHint: 'dismiss'
+        description: 'engaged'
     }
     var passiveState = {
-        className: ' passive',
+        className: 'passive',
         color: [255, 165, 0, 255],
-        description: 'dismissed',
-        toggleHint: 'engage'
+        description: 'dismissed'
     }
 
     this.init = function () {
@@ -49,30 +47,21 @@ var extensionModel = new function () {
     };
 
     this.isRunning = function () {
-        return self.settings.running === 'running';
+        return self.settings.rerouting === 'running';
     };
     this.stateVars = function () {
         return self.isRunning() ? activeState : passiveState;
     };
-
-    this.activate = function () {
-		self.set.call({id: 'running', value: 'running'});
-		self.activateView.call(this.form);
+    this.stateView = function () {
+        this.className = this.className.replace(' ' + activeState.className, '');
+        this.className = this.className.replace(' ' + passiveState.className, '');
+        newState = self.stateVars();
+        this.className += ' ' + newState.className;
+        chrome.browserAction.setBadgeBackgroundColor({color: newState.color});
     };
-    this.deactivate = function () {
-		self.set.call({id: 'running', value: ''});
-		self.deactivateView.call(this.form);
-    };
-
-    this.activateView = function () {
-        this.className = this.className.replace(' passive', '');
-        this.className += activeState.className;
-        chrome.browserAction.setBadgeBackgroundColor({color: activeState.color});
-    };
-    this.deactivateView = function () {
-        this.className = this.className.replace(' active', '');
-        this.className += passiveState.className;
-        chrome.browserAction.setBadgeBackgroundColor({color: passiveState.color});
+    this.toggleState = function () {
+        self.set.call(this);
+        self.stateView.call(this.form);
     };
 
     this.setBadge = function () {

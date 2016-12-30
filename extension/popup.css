@@ -34,11 +34,11 @@ input:focus {
 }
 
 .active,
-#activate {
+#rerouting[value="running"] {
     background: limegreen;
 }
 .passive,
-#deactivate {
+#rerouting[value="idle"] {
     background: orange;
 }
 .request-found {
@@ -50,11 +50,11 @@ input:focus {
 .request-timeout {
     color: orangered;
 }
-#activate, #deactivate {
+#rerouting {
 	display: none;
 }
-.active #deactivate,
-.passive #activate {
+.active #rerouting[value="idle"],
+.passive #rerouting[value="running"] {
 	display: initial;
 }
 

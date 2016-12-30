@@ -48,15 +48,12 @@ window.onload = function () {
 	var generalForm = document.querySelector('form#general');
     generalForm.addEventListener('click', routeForm.toggle, false);
     routeForm.init.call(generalForm);
-	var activate = document.querySelector('button#activate');
-	var deactivate = document.querySelector('button#deactivate');
-    if (extensionModel.settings.running) {
-		extensionModel.activateView.call(generalForm);
-	} else {
-		extensionModel.deactivateView.call(generalForm);
+
+    var toggleButtons = document.querySelectorAll('button#rerouting');
+	for (var i = 0; i < toggleButtons.length; i++) {
+		toggleButtons[i].addEventListener('click', extensionModel.toggleState, false);
 	}
-	activate.addEventListener('click', extensionModel.activate, false);
-	deactivate.addEventListener('click', extensionModel.deactivate, false);
+	extensionModel.stateView.call(generalForm);
 
     /* NEW */
 
