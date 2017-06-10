@@ -11,7 +11,7 @@ Resource-Router also provides tools to serve and lint the routed files in a loca
 * Surf to chrome://extensions/
 * Checkbox "Developer mode" has to checked
 * Click button "Load unpacked extension..." 
-* In the dialog, browse to the extension root directory (the directory "source")
+* In the dialog, browse to the extension root directory (the directory "extension")
 * The plugin icon will appear right of the address field
 
 ### Build local editing environment
