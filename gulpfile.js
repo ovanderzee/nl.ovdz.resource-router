@@ -1,15 +1,29 @@
 var gulp = require('gulp');
+var projectData = require('./gulp-local-projects.json');
+var settingsFactory = require('./gulp-settings-factory.js');
+var settings = settingsFactory.new({
+	loose: 9080,
+	secure: 9443,
+	webroot: 'htdocs'
+}, projectData);
+
+/*
 var webroot = 'htdocs';
 //var webroot = 'themes/custom';
-var compile = webroot + '/static';
+*/
+var compile = settings.webroot + '/static';
 var extension = 'extension';
 var paths = {
-    webroot: [webroot + '/**/*.*'],
-    jsobjects: [webroot + '/**/*.json', extension + '/**/*.json'],
-    scripts: [webroot + '/**/*.js', extension + '/**/*.js'],
-    styles: [webroot + '/**/*.css', extension + '/**/*.css'],
+    webroot: [settings.webroot + '/**/*.*'],
+    jsobjects: [settings.webroot + '/**/*.json', extension + '/**/*.json'],
+    scripts: [settings.webroot + '/**/*.js', extension + '/**/*.js'],
+    styles: [settings.webroot + '/**/*.css', extension + '/**/*.css'],
     sass: [compile + '/sass/**/*.s+(a|c)ss'],
 };
+
+
+
+
 
 var lintLog = function(event) {
     console.log('\n---- linted ' + event.path + ' ----');
@@ -75,18 +89,18 @@ gulp.task('lint', function() {
 
 var connectReload = function(connect) {
     var connect = require('gulp-connect');
-    return gulp.src(paths.webroot)
+    return gulp.src(settings.webroot)
         .pipe(connect.reload());
 };
 
 gulp.task('connect', function() {
     var connect = require('gulp-connect');
 	connect.server({
-		port: 9080,
-		root: webroot,
+		port: settings.loose,
+		root: settings.webroot,
 	    livereload: true
 	});
-    gulp.watch(paths.webroot, connectReload);
+    gulp.watch(settings.webroot, connectReload);
 });
 
 gulp.task('secure', function() {
@@ -95,18 +109,18 @@ gulp.task('secure', function() {
 	connect.server({
 		// https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
 		// http://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
-		port: 9443,
-		root: webroot,
+		port: settings.secure,
+		root: settings.webroot,
 		https: true,
 		key: fs.readFileSync('key.pem'),
 		cert: fs.readFileSync('cert.pem')
 	});
-    gulp.watch(paths.webroot, connectReload);
+    gulp.watch(settings.webroot, connectReload);
 });
 
 var compileStyles = function (event, fail) {
     var compass = require('gulp-compass');
-    // config.rb in compile dir (parent of sass) then comments aboutline-numbers in sass artifacts
+    // config.rb in compile dir (parent of sass) then comments about line-numbers in sass artifacts
     return gulp.src(event.path)
         .pipe(compass({
             config_file: compile + '/config.rb',
@@ -130,20 +144,30 @@ gulp.task('compile', function() {
     gulp.watch(paths.sass, compileStyles);
 });
 
+gulp.task('settings', function() {
+	settings = settingsFactory.make(process.argv);
+	console.log('settings: ' + JSON.stringify(settings));
+});
+
 gulp.task('serve', [
+	'settings',
 	'connect',
 	'secure'
 ]);
 
 gulp.task('sources', [
+	'settings',
 	'lint',
 	'connect',
 	'secure'
 ]);
 
 gulp.task('sass', [
+	'settings',
 	'lint',
 	'compile',
 	'connect',
 	'secure'
 ]);
+
+
