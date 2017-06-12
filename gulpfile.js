@@ -145,7 +145,7 @@ gulp.task('compile', function() {
 });
 
 gulp.task('settings', function() {
-	settings = settingsFactory.make(process.argv);
+	settings = settingsFactory.make();
 	console.log('settings: ' + JSON.stringify(settings));
 });
 
