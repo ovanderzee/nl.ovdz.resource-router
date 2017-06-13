@@ -44,7 +44,7 @@ var getPromptSettings = function (argv) {
 		}
 	}
 	if (!args.project) {
-		console.error ('No project found in prompt')
+		console.error ('No project found at prompt')
 	}
 	return args;
 };
@@ -59,7 +59,7 @@ var makeSettings = function () {
 	var promptSettings = getPromptSettings(process.argv);
 	var projectSettings = getProjectSettings(promptSettings.project);
 	var finalSettings = Object.assign({}, defaultSettings, projectSettings, promptSettings);
-	return Object.assign({}, defaultSettings, projectSettings, promptSettings);
+	return finalSettings;
 };
 
 /**
