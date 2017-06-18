@@ -1,5 +1,10 @@
 {
 	"aventus": {
-		"webroot": "../finalist/aventus-internet/bitbucket/sites/all/themes/aventus/static"
+		"docroot": "../finalist/aventus-internet/bitbucket/sites/all/themes/aventus",
+		"command": {"exec": "gulp", "args": ["watch"]}
+	},
+	"rekenkamer": {
+		"docroot": "../finalist/algemene-rekenkamer/rekenkamer-intranet/sites/all/themes/rekenkamer_intranet",
+		"command": {"exec": "gulp", "args": ["watch"]}
 	}
 }

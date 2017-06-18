@@ -4,20 +4,16 @@ var settingsFactory = require('./gulp-settings-factory.js');
 var settings = settingsFactory.new({
 	loose: 9080,
 	secure: 9443,
-	webroot: 'htdocs'
+	docroot: 'htdocs'
 }, projectData);
 
-/*
-var webroot = 'htdocs';
-//var webroot = 'themes/custom';
-*/
-var compile = settings.webroot + '/static';
+var compile = settings.docroot + '/static';
 var extension = 'extension';
 var paths = {
-    webroot: [settings.webroot + '/**/*.*'],
-    jsobjects: [settings.webroot + '/**/*.json', extension + '/**/*.json'],
-    scripts: [settings.webroot + '/**/*.js', extension + '/**/*.js'],
-    styles: [settings.webroot + '/**/*.css', extension + '/**/*.css'],
+    docroot: [settings.docroot + '/**/*.*'],
+    jsobjects: [settings.docroot + '/**/*.json', extension + '/**/*.json'],
+    scripts: [settings.docroot + '/**/*.js', extension + '/**/*.js'],
+    styles: [settings.docroot + '/**/*.css', extension + '/**/*.css'],
     sass: [compile + '/sass/**/*.s+(a|c)ss'],
 };
 
@@ -89,7 +85,7 @@ gulp.task('lint', function() {
 
 var connectReload = function(connect) {
     var connect = require('gulp-connect');
-    return gulp.src(settings.webroot)
+    return gulp.src(settings.docroot)
         .pipe(connect.reload());
 };
 
@@ -97,10 +93,10 @@ gulp.task('connect', function() {
     var connect = require('gulp-connect');
 	connect.server({
 		port: settings.loose,
-		root: settings.webroot,
+		root: settings.docroot,
 	    livereload: true
 	});
-    gulp.watch(settings.webroot, connectReload);
+    gulp.watch(settings.docroot, connectReload);
 });
 
 gulp.task('secure', function() {
@@ -110,12 +106,12 @@ gulp.task('secure', function() {
 		// https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
 		// http://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
 		port: settings.secure,
-		root: settings.webroot,
+		root: settings.docroot,
 		https: true,
 		key: fs.readFileSync('key.pem'),
 		cert: fs.readFileSync('cert.pem')
 	});
-    gulp.watch(settings.webroot, connectReload);
+    gulp.watch(settings.docroot, connectReload);
 });
 
 var compileStyles = function (event, fail) {
@@ -144,9 +140,14 @@ gulp.task('compile', function() {
     gulp.watch(paths.sass, compileStyles);
 });
 
+
 gulp.task('settings', function() {
 	settings = settingsFactory.make();
 	console.log('settings: ' + JSON.stringify(settings));
+	if (settings.docroot && settings.command && settings.command.exec) {
+		var commandService = require('./gulp-command-service.js');
+		commandService.run(settings);
+	}
 });
 
 gulp.task('serve', [
