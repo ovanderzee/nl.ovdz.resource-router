@@ -1,19 +1,17 @@
 // init badge decoration
 
-extensionModel.init();
 extensionModel.setBadge();
 
 var routingResponse = function (details) {
-    if (!extensionModel.isRunning || urlModel.isValidating(details.url)) {
-		return {cancel: false};
-    }
     var localRsrc = routeModel.localRsrc(details.url);
-	if (localRsrc) {
+//    console.log( details.url + ' ==> ' + localRsrc + '\n runs: ' + extensionModel.isRunning() + ' validates: ' + urlModel.isValidating(details.url) );
+    var reRoute = localRsrc && extensionModel.isRunning() && !urlModel.isValidating(details.url);
+	if (reRoute) {
 	    var localHost = routeModel.localHost(details.url);
 	    var localUrl = localHost + "/" + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localUrl);
 		return {redirectUrl: localUrl};
-	} else {
+    } else {
 		return {cancel: false};
 	}
 };

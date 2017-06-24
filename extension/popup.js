@@ -31,8 +31,6 @@ var populatePopup = function (key) {
 
 window.onload = function () {
 
-    extensionModel.init();
-
     /* GENERAL SETTINGS */
 
 	var generalInputs = document.querySelectorAll('#general input');

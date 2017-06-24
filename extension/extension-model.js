@@ -1,11 +1,16 @@
 var extensionModel = new function () {
     var self = this;
-    this.settings = {
+    var defaults = {
         loose: 'localhost:80',
         secure: 'localhost:443',
         rerouting: 'idle'
     };
-    var store = {};
+    for (prop in defaults) {
+        if (!localStorage.getItem(prop)) {
+            localStorage.setItem(prop, defaults[prop]);
+        }
+    }
+
     this.urls = [];
     for (var i = 0; i < localStorage.length; i++) {
         var key = localStorage.key(i);
@@ -14,11 +19,8 @@ var extensionModel = new function () {
             continue;
         }
         var keyMatch = key.match(/^\w+$/);
-        if (keyMatch) {
-            // a word is a setting is a string
-            store[key] = localStorage.getItem(key);
-        } else {
-            // it probably is an url
+        if (!keyMatch) {
+            // if a stored item is not a word, it probably is an url
             this.urls.push(key);
         }
     }
@@ -33,21 +35,15 @@ var extensionModel = new function () {
         description: 'dismissed'
     }
 
-    this.init = function () {
-        // merge localStorage in settings
-        self.settings = Object.assign(self.settings, store);
-    };
-
     this.get = function () {
-        this.value = self.settings[this.id];
+        this.value = localStorage.getItem(this.id);
     };
     this.set = function () {
-        self.settings[this.id] = this.value;
         localStorage.setItem(this.id, this.value);
     };
 
     this.isRunning = function () {
-        return self.settings.rerouting === 'running';
+        return localStorage.getItem('rerouting') === 'running';
     };
     this.stateVars = function () {
         return self.isRunning() ? activeState : passiveState;
