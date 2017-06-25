@@ -1,7 +1,7 @@
 var urlModel = new function () {
     var self = this;
-    var stack = {};
-    localStorage.setItem('valStack', JSON.stringify(stack));
+    var validating = {};
+    localStorage.setItem('validating', JSON.stringify(validating));
     var responseHeaders = {};
 
     var clearHttpCode = function (input) {
@@ -37,24 +37,28 @@ var urlModel = new function () {
     };
 
     this.isValidating = function (url) {
-        var valStack = JSON.parse(localStorage.getItem('valStack'));
-        return Boolean(valStack[url]);
+        var validating = JSON.parse(localStorage.getItem('validating'));
+        return Boolean(validating[url]);
     };
 
     this.setupValidation = function (host) {
+        // 'this' is always an input[type="url"]
         var input = this;
         var url = input.value;
+        var selector = '#' + input.form.id;
         if (input.id === 'loose' || input.id === 'secure') { // local servers
             url = host + url + '/';
+            selector += ' #' + input.id;
         } else {
             linkElement.createURL(url);
             if (linkElement.protocol === location.protocol) { // local resource as hostless string // protocol is chrome-extension:
                 url = host + url;
             }
+            selector += ' input[name="' + input.name+ '"]';
         }
 
-        stack[url] = input;
-        localStorage.setItem('valStack', JSON.stringify(stack));
+        validating[url] = selector;
+        localStorage.setItem('validating', JSON.stringify(validating));
 
         // clear comments and input state
         delete responseHeaders[url];
@@ -79,7 +83,8 @@ var urlModel = new function () {
     };
 
     var handleValidation = function (details) {
-        var input = stack[details.url];
+        var selector = validating[details.url];
+        var input = document.querySelector(selector);
         var returnObj = {cancel: false};
         if (!input) {
             return returnObj;
@@ -91,8 +96,8 @@ var urlModel = new function () {
         showHttpComment(input, details.url);
 
         // (when) to end
-        delete stack[details.url];
-        localStorage.setItem('valStack', JSON.stringify(stack));
+        delete validating[details.url];
+        localStorage.setItem('validating', JSON.stringify(validating));
         return returnObj;
     };
 
