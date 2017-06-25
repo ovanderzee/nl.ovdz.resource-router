@@ -3,7 +3,7 @@
 extensionModel.setBadge();
 
 var routingResponse = function (details) {
-    var localRsrc = routeModel.localRsrc(details.url);
+    var localRsrc = routeModel.getLocalResource(details.url);
 //    console.log( details.url + ' ==> ' + localRsrc + '\n runs: ' + extensionModel.isRunning() + ' validates: ' + urlModel.isValidating(details.url) );
     var reRoute = localRsrc && extensionModel.isRunning() && !urlModel.isValidating(details.url);
 	if (reRoute) {

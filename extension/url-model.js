@@ -45,7 +45,7 @@ var urlModel = new function () {
         var input = this;
         var url = input.value;
         if (input.id === 'loose' || input.id === 'secure') { // local servers
-            url = host + url;
+            url = host + url + '/';
         } else {
             linkElement.createURL(url);
             if (linkElement.protocol === location.protocol) { // local resource as hostless string // protocol is chrome-extension:

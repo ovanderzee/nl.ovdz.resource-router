@@ -52,7 +52,7 @@ var routeModel = new function () {
         }
     };
 
-    this.localRsrc = function (live) {
+    this.getLocalResource = function (live) {
         // remove hash
         if (live.indexOf('#') > 0) {
             live = live.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
