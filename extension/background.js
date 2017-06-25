@@ -7,7 +7,7 @@ var routingResponse = function (details) {
 //    console.log( details.url + ' ==> ' + localRsrc + '\n runs: ' + extensionModel.isRunning() + ' validates: ' + urlModel.isValidating(details.url) );
     var reRoute = localRsrc && extensionModel.isRunning() && !urlModel.isValidating(details.url);
 	if (reRoute) {
-	    var localHost = routeModel.localHost(details.url);
+	    var localHost = routeModel.getLocalHost(details.url);
 	    var localUrl = localHost + "/" + localRsrc;
 		console.log('ROUTE ' + details.url + ' to: ' + localUrl);
 		return {redirectUrl: localUrl};

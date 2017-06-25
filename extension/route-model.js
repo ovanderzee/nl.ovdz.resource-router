@@ -46,7 +46,7 @@ var routeModel = new function () {
 
     /* BACKGROUND */
 
-    var localResource = function (live) {
+    var getResource = function (live) {
         if (getValue(live, 'active')) {
             return getValue(live, 'local');
         }
@@ -58,15 +58,15 @@ var routeModel = new function () {
             live = live.replace(/#(.+)\?/, '?').replace(/#(.+)$/, '');
         }
         // include searchterm in test (when interpreted)
-        var localRsrc = localResource(live);
+        var localRsrc = getResource(live);
         if (!localRsrc && live.indexOf('?') > 0) {
             // exclude searchterm from test (when for versioning)
-            localRsrc = localResource(live.split('?')[0]);
+            localRsrc = getResource(live.split('?')[0]);
         }
         return localRsrc;
     };
 
-	this.localHost = function (live, localRsrc) {
+	this.getLocalHost = function (live) {
 		linkElement.createURL(live);
         var localHostName = localStorage.getItem(
             (linkElement.protocol === 'https:') ? 'secure' : 'loose'

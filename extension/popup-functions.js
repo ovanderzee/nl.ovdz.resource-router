@@ -160,7 +160,8 @@ var routeRemove = function (button) {
 var routeTest = {
     perform: function () {
         var form = this.form;
+        var localHost = routeModel.getLocalHost(form.elements.live.value);
         urlModel.setupValidation.call(form.elements.live, '');
-        urlModel.setupValidation.call(form.elements.local, routeModel.localHost(form.elements.live.value) + '/');
+        urlModel.setupValidation.call(form.elements.local, localHost + '/');
     }
 };
