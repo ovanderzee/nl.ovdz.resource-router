@@ -1,4 +1,4 @@
-var template;
+var template, showAllRoutes;
 var populatePopup = function (key) {
     var item = JSON.parse(localStorage.getItem(key));
     var form = template.cloneNode(true);
@@ -25,7 +25,7 @@ var populatePopup = function (key) {
     form.elements.test.addEventListener('click', routeTest.perform, false);
     var removeRoute = new routeRemove(form.elements.remove);
 
-    document.body.appendChild(form);
+    document.body.insertBefore(form, showAllRoutes);
     routeForm.init.call(form);
 };
 
@@ -52,6 +52,11 @@ window.onload = function () {
 		toggleButtons[i].addEventListener('click', extensionModel.toggleState, false);
 	}
 	extensionModel.stateView.call(generalForm);
+
+    showAllRoutes = document.getElementById('show-all');
+    showAllRoutes.addEventListener('click', function () {
+        document.body.className = '';
+    }, false);
 
     /* NEW */
 

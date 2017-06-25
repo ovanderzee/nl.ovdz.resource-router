@@ -177,3 +177,14 @@ form {
     overflow: hidden;
     position: relative;
 }
+
+.running .route.passive {
+    position: absolute;
+    bottom: -1000px
+}
+#show-all {
+    display: none;
+}
+.running #show-all {
+    display: initial;
+}

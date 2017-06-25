@@ -51,8 +51,9 @@ var extensionModel = new function () {
     this.stateView = function () {
         this.className = this.className.replace(' ' + activeState.className, '');
         this.className = this.className.replace(' ' + passiveState.className, '');
-        newState = self.stateVars();
+        var newState = self.stateVars();
         this.className += ' ' + newState.className;
+        document.body.className = localStorage.getItem('rerouting');
         chrome.browserAction.setBadgeBackgroundColor({color: newState.color});
     };
     this.toggleState = function () {
