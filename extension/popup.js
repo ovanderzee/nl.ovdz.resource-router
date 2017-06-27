@@ -47,10 +47,8 @@ window.onload = function () {
     generalForm.addEventListener('click', routeForm.toggle, false);
     routeForm.init.call(generalForm);
 
-    var toggleButtons = document.querySelectorAll('button#rerouting');
-	for (var i = 0; i < toggleButtons.length; i++) {
-		toggleButtons[i].addEventListener('click', extensionModel.toggleState, false);
-	}
+    var toggleButton = document.querySelector('button#rerouting');
+	toggleButton.addEventListener('click', extensionModel.toggleState, false);
 	extensionModel.stateView.call(generalForm);
 
     showAllRoutes = document.getElementById('show-all');

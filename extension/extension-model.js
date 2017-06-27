@@ -26,13 +26,15 @@ var extensionModel = new function () {
     }
     var activeState = {
         className: 'active',
-        color: [50, 205, 50, 255],
-        description: 'engaged'
+        badgeColor: [50, 205, 50, 255],
+        buttonLabel: 'dismiss',
+        buttonValue: 'idle'
     }
     var passiveState = {
         className: 'passive',
-        color: [255, 165, 0, 255],
-        description: 'dismissed'
+        badgeColor: [255, 165, 0, 255],
+        buttonLabel: 'engage',
+        buttonValue: 'running'
     }
 
     this.get = function () {
@@ -54,7 +56,9 @@ var extensionModel = new function () {
         var newState = self.stateVars();
         this.className += ' ' + newState.className;
         document.body.className = localStorage.getItem('rerouting');
-        chrome.browserAction.setBadgeBackgroundColor({color: newState.color});
+        this.rerouting.value = newState.buttonValue;
+        this.rerouting.textContent = newState.buttonLabel;
+        chrome.browserAction.setBadgeBackgroundColor({color: newState.badgeColor});
     };
     this.toggleState = function () {
         self.set.call(this);
@@ -70,6 +74,6 @@ var extensionModel = new function () {
             }
         }
         chrome.browserAction.setBadgeText({text: String(activeCount)});
-        chrome.browserAction.setBadgeBackgroundColor({color: extensionModel.stateVars().color});
+        chrome.browserAction.setBadgeBackgroundColor({color: extensionModel.stateVars().badgeColor});
     };
 };
