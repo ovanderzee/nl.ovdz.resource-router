@@ -38,8 +38,24 @@ describe('Extension Model: data abstraction', function () {
         expect(extensionModel.isRunning()).to.be.false;
 	});
 
+	it('should return properties based on activation state', function () {
+	    localStorage.setItem('rerouting', 'running');
+	    var runProps = extensionModel.stateVars();
+	    localStorage.setItem('rerouting', 'idle');
+	    var idleProps = extensionModel.stateVars();
+        expect(idleProps === runProps).to.be.false;
+	});
 
-
+	it('should change the activation state', function () {
+	    var toggleObject = {id: 'rerouting', value: 'running'};
+	    var settingsForm = {rerouting: toggleObject, className: ''};
+	    toggleObject.form = settingsForm;
+	    extensionModel.toggleState.call(toggleObject);
+	    var runState = extensionModel.isRunning();
+	    extensionModel.toggleState.call(toggleObject);
+	    var idleState = extensionModel.isRunning();
+        expect(idleState === runState).to.be.false;
+	});
 
 });
 
