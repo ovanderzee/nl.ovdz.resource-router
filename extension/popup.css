@@ -127,7 +127,7 @@ label > span {
     content: 'http://';
 }
 #secure-http .value:before {
-    content: 'http://';
+    content: 'https://';
 }
 #general .value:after,
 #general .comment:after {
