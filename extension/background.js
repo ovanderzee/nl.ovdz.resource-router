@@ -1,6 +1,7 @@
-// init badge decoration
 
-extensionModel.setBadge();
+var initBadgeDecoration = function () {
+	extensionModel.setBadge();
+};
 
 var routingResponse = function (details) {
     var localRsrc = routeModel.getLocalResource(details.url);
@@ -15,6 +16,8 @@ var routingResponse = function (details) {
 		return {cancel: false};
 	}
 };
+
+initBadgeDecoration();
 
 chrome.webRequest.onBeforeRequest.addListener(function (details) {
 	return routingResponse(details);

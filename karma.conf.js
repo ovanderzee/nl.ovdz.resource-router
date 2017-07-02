@@ -23,6 +23,7 @@ module.exports = function(config) {
       'extension/popup-functions.js',
       'extension/popup.js',
       'extension/background.js',
+      'specs/helper-file.js',
       'specs/*.spec.js'
     ],
 

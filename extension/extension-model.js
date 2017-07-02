@@ -69,7 +69,7 @@ var extensionModel = new function () {
         var activeCount = 0;
         for (var i = 0; i < self.urls.length; i++) {
             var item = JSON.parse(localStorage.getItem(self.urls[i]));
-            if (Boolean(item.active)) {
+            if (item && item.active && Boolean(item.active)) {
                 activeCount++;
             }
         }

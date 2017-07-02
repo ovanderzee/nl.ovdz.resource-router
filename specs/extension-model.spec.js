@@ -46,16 +46,35 @@ describe('Extension Model: data abstraction', function () {
         expect(idleProps === runProps).to.be.false;
 	});
 
+});
+
+describe('Extension Model: click the rerouting button', function () {
+
+	var stateToggleElement = {id: 'rerouting'};
+	var settingsForm = {rerouting: stateToggleElement, className: ''};
+	stateToggleElement.form = settingsForm;
+
 	it('should change the activation state', function () {
-	    var toggleObject = {id: 'rerouting', value: 'running'};
-	    var settingsForm = {rerouting: toggleObject, className: ''};
-	    toggleObject.form = settingsForm;
-	    extensionModel.toggleState.call(toggleObject);
+		stateToggleElement.value = 'running';
+
+	    extensionModel.toggleState.call(stateToggleElement);
 	    var runState = extensionModel.isRunning();
-	    extensionModel.toggleState.call(toggleObject);
+	    extensionModel.toggleState.call(stateToggleElement);
 	    var idleState = extensionModel.isRunning();
+
         expect(idleState === runState).to.be.false;
 	});
+
+	it('should change the badge background', function () {
+	    extensionModel.toggleState.call(stateToggleElement);
+
+		expect(badgeTextSpy.called).to.be.false;
+		expect(badgeBgSpy.called).to.be.true;
+
+	    badgeTextSpy.reset();
+		badgeBgSpy.reset();
+	});
+
 
 });
 

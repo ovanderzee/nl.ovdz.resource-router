@@ -1,4 +1,20 @@
 
+describe('Extension Background: display extension state', function () {
+
+	before (initBadgeDecoration);
+
+	it('should set the text of the badge', function () {
+		expect(badgeTextSpy.called).to.be.true;
+		badgeTextSpy.reset();
+	});
+
+	it('should set the background color of the badge', function () {
+		expect(badgeBgSpy.called).to.be.true;
+		badgeBgSpy.reset();
+	});
+
+});
+
 describe('Extension Background: conditional redirection', function () {
 
     var details;
