@@ -89,11 +89,20 @@ var connectReload = function(connect) {
         .pipe(connect.reload());
 };
 
+var cors = function (req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Headers', 'headers_you_want_to_accept');
+	next();
+};
+
 gulp.task('connect', function() {
     var connect = require('gulp-connect');
 	connect.server({
 		port: settings.loose,
 		root: settings.docroot,
+		middleware: function() {
+			return [cors];
+		},
 	    livereload: true
 	});
     gulp.watch(settings.docroot, connectReload);
@@ -107,6 +116,9 @@ gulp.task('secure', function() {
 		// http://stackoverflow.com/questions/12871565/how-to-create-pem-files-for-https-web-server
 		port: settings.secure,
 		root: settings.docroot,
+		middleware: function() {
+			return [cors];
+		},
 		https: true,
 		key: fs.readFileSync('key.pem'),
 		cert: fs.readFileSync('cert.pem')
