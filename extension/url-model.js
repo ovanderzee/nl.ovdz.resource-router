@@ -2,38 +2,38 @@ var urlModel = new function () {
     var self = this;
     var validating = {};
     localStorage.setItem('validating', JSON.stringify(validating));
-    var responseHeaders = {};
 
-    var clearHttpCode = function (input) {
-        input.className = input.className.replace(/request-\w+/g, '');
+    var getInputLabelElement = function (input) {
+        return input.form.querySelector('.' + input.name);
+    }
+
+    var getInputCommentElement = function (input) {
+        return input.form.querySelector('.' + input.name + ' .comment span');
+    }
+
+    var clearResponse = function (input) {
+        // code
+        var labelElem = getInputLabelElement(input);
+        labelElem.className = labelElem.className.replace(/request-\w+/g, '');
+        // comment
+        getInputCommentElement(input).textContent = String.fromCharCode(160);
     };
 
-    var showHttpCode = function (input, url) {
-        var details = responseHeaders[url];
-        var className = 'failed';
+    var loadResponse = function (input, details) {
+        // code
+        var className = 'timeout';
         if (details.statusCode) {
+            className = 'failed';
             if (details.statusCode === 200 || details.statusCode === 304) {
                 className = 'found';
             }
-        } else {
-            className = 'timeout';
         }
-        input.className  += ' request-' + className;
-    };
-
-    var clearHttpComment = function (input) {
-        var commentElem = input.form.querySelector('.' + input.name + ' .comment span');
-        commentElem.textContent = String.fromCharCode(160);
-    };
-
-    var showHttpComment = function (input, url) {
-        // ex.: "statusLine":"HTTP/1.1 404 Not Found"
-        var details = responseHeaders[url];
-        var commentElem = input.form.querySelector('.' + input.name + ' .comment span');
-        var text = details.statusLine;
-        text = text.replace('HTTP/1.1 ','');
-        text = text.replace(/^\d+ /,'');
-        commentElem.textContent = text;
+        getInputLabelElement(input).className  += ' request-' + className;
+        // comment, ex.: "statusLine":"HTTP/1.1 404 Not Found"
+        var comment = details.statusLine;
+        comment = comment.replace('HTTP/1.1 ','');
+        comment = comment.replace(/^\d+ /,'');
+        getInputCommentElement(input).textContent = comment;
     };
 
     this.isValidating = function (url) {
@@ -59,11 +59,7 @@ var urlModel = new function () {
 
         validating[url] = selector;
         localStorage.setItem('validating', JSON.stringify(validating));
-
-        // clear comments and input state
-        delete responseHeaders[url];
-        clearHttpCode(input);
-        clearHttpComment(input);
+        clearResponse(input);
 
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', url); // HEAD ??
@@ -90,10 +86,7 @@ var urlModel = new function () {
             return returnObj;
         }
         clearTimeout(input.dataset.timeout);
-
-        responseHeaders[details.url] = details;
-        showHttpCode(input, details.url);
-        showHttpComment(input, details.url);
+        loadResponse(input, details);
 
         // (when) to end
         delete validating[details.url];

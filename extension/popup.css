@@ -41,13 +41,13 @@ input:focus {
 #rerouting[value="idle"] {
     background: orange;
 }
-.request-found {
+.request-found input {
     color: darkgreen;
 }
-.request-failed {
-    color: orangered;
+.request-failed input {
+    color: darkgrey;
 }
-.request-timeout {
+.request-timeout input {
     color: orangered;
 }
 #rerouting {
