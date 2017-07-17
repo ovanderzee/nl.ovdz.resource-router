@@ -46,6 +46,11 @@ Build and serve the sources
 
     cd ~/nl.ovdz.resource-router && gulp sass
 
+### Unit testing
+
+    cd ~/nl.ovdz.resource-router && karma start
+
+
 
 ## toDo, toWant
 
