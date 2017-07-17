@@ -22,14 +22,14 @@ var urlModel = new function () {
     };
 
     var clearHttpComment = function (input) {
-        var commentElem = input.parentNode.parentNode.querySelector('.comment span');
+        var commentElem = input.form.querySelector('.' + input.name + ' .comment span');
         commentElem.textContent = String.fromCharCode(160);
     };
 
     var showHttpComment = function (input, url) {
         // ex.: "statusLine":"HTTP/1.1 404 Not Found"
         var details = responseHeaders[url];
-        var commentElem = input.parentNode.parentNode.querySelector('.comment span');
+        var commentElem = input.form.querySelector('.' + input.name + ' .comment span');
         var text = details.statusLine;
         text = text.replace('HTTP/1.1 ','');
         text = text.replace(/^\d+ /,'');

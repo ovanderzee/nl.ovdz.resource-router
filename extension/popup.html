@@ -16,17 +16,17 @@
 			<div class="activation">
 				<button type="button" id="rerouting" value=""></button>
 			</div>
-			<label id="loose-http">
+			<label id="loose-http" class="loose">
 				<span class="tag">localhost</span>
 				<span class="value">
-					<input type="url" id="loose" required placeholder="hostname:portnumber" />
+					<input type="url" id="loose" name="loose" required placeholder="hostname:portnumber" />
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<label id="secure-http">
+			<label id="secure-http" class="secure">
 				<span class="tag">local secure</span>
 				<span class="value">
-					<input type="url" id="secure" placeholder="hostname:portnumber" />
+					<input type="url" id="secure" name="secure" placeholder="hostname:portnumber" />
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
@@ -38,14 +38,14 @@
 	<form id="new">
 		<fieldset class="required">
 			<legend>New Route</legend>
-			<label>
+			<label class="live">
 				<span class="tag">route original file</span>
 				<span class="value">
 					<input type="url" name="live" />
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<label>
+			<label class="local">
 				<span class="tag">to local served resource</span>
 				<span class="value">
 					<input type="url" name="local" />
@@ -71,14 +71,14 @@
 					active
 				</span>
 			</label>
-			<label class="origin">
+			<label class="live">
 				<span class="tag">origin</span>
 				<span class="value">
 					<input type="url" name="live" />
 				</span>
 				<span class="comment"><span>&nbsp;</span></span>
 			</label>
-			<label class="resource">
+			<label class="local">
 				<span class="tag">resource</span>
 				<span class="value">
 					<input type="url" name="local" />
