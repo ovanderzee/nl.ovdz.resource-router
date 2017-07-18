@@ -15,5 +15,6 @@
 */
 var badgeTextSpy = sinon.spy(chrome.browserAction, 'setBadgeText');
 var badgeBgSpy = sinon.spy(chrome.browserAction, 'setBadgeBackgroundColor');
+var timeoutSpy = sinon.spy(window, 'setTimeout');
 
 

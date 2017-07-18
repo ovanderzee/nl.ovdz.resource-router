@@ -17,6 +17,10 @@ describe('URL Model: validate URL\'s', function () {
                 return self.live;
             case self.local.query:
                 return self.local;
+            case self.liveParent.query:
+                return self.liveParent;
+            case self.localParent.query:
+                return self.localParent;
             case self.liveComment.query:
                 return self.liveComment;
             case self.localComment.query:
@@ -35,6 +39,14 @@ describe('URL Model: validate URL\'s', function () {
         };
         this.live = new testInput ('live', 'http://www.bv.nl/test-url'),
         this.local = new testInput ('local', 'local-rsrc')
+
+        // parents
+        var testParent = function (name) {
+            this.query = '.' + name;
+            this.className = '';
+        };
+        this.liveParent = new testParent ('live'),
+        this.localParent = new testParent ('local')
 
         // comments
         var testComment = function (name) {
@@ -71,14 +83,18 @@ describe('URL Model: validate URL\'s', function () {
         urlModel.setupValidation.call(testForm.live, '');
 	    var validationMode = urlModel.isValidating(testForm.live.value);
         expect(validationMode).to.be.true;
-	});
+    });
 
 	it('should set a timeout for handling the callback when starting a validation', function () {
 	    localStorage.setItem('validating', '{}');
+        testForm.live.dataset = {};
         urlModel.setupValidation.call(testForm.live, '');
         expect(typeof testForm.live.dataset.timeout === 'number').to.be.true;
 	});
 
 });
+
+
+
 
 
