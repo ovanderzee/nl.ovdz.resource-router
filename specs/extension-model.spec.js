@@ -66,13 +66,12 @@ describe('Extension Model: click the rerouting button', function () {
 	});
 
 	it('should change the badge background', function () {
+	    badgeTextSpy.reset();
+		badgeBgSpy.reset();
 	    extensionModel.toggleState.call(stateToggleElement);
 
 		expect(badgeTextSpy.called).to.be.false;
 		expect(badgeBgSpy.called).to.be.true;
-
-	    badgeTextSpy.reset();
-		badgeBgSpy.reset();
 	});
 
 

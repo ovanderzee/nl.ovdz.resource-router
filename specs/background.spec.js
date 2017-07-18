@@ -1,16 +1,19 @@
 
 describe('Extension Background: display extension state', function () {
 
-	before (initBadgeDecoration);
+	beforeEach (function () {
+        badgeTextSpy.reset();
+        badgeBgSpy.reset();
+	});
 
 	it('should set the text of the badge', function () {
+	    initBadgeDecoration();
 		expect(badgeTextSpy.called).to.be.true;
-		badgeTextSpy.reset();
 	});
 
 	it('should set the background color of the badge', function () {
+	    initBadgeDecoration();
 		expect(badgeBgSpy.called).to.be.true;
-		badgeBgSpy.reset();
 	});
 
 });

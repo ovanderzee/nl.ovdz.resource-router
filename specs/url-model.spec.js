@@ -87,9 +87,9 @@ describe('URL Model: validate URL\'s', function () {
 
 	it('should set a timeout for handling the callback when starting a validation', function () {
 	    localStorage.setItem('validating', '{}');
-        testForm.live.dataset = {};
+        timeoutSpy.reset();
         urlModel.setupValidation.call(testForm.live, '');
-        expect(typeof testForm.live.dataset.timeout === 'number').to.be.true;
+        expect(timeoutSpy.called).to.be.true;
 	});
 
 });
