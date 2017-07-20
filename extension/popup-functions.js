@@ -21,6 +21,13 @@ var waitTime = function () {
     return delay + duration;
 };
 
+    /* UTILS */
+
+var proceedLocalHTTPS = function () {
+    var creationObj = {"url": "https://" + localStorage.getItem('secure')};
+    chrome.tabs.create(creationObj);
+};
+
     /* NEW */
 
 var newEntry = function () {
