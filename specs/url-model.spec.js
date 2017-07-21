@@ -95,6 +95,18 @@ describe('URL Model: validate URL\'s', function () {
         expect(timeoutSpy.called).to.be.true;
 	});
 
+	it('should release the validated url to redirection', function (done) {
+	    localStorage.setItem('validating', '{}');
+
+        urlModel.setupValidation.call(testForm.live, '');
+
+        setTimeout (function () {
+            var validationMode = urlModel.isValidating(testForm.live.value);
+            expect(validationMode).to.be.false;
+            done();
+        }, 1500)
+    });
+
 });
 
 
