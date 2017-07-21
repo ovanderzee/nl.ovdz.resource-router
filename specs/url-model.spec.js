@@ -1,8 +1,17 @@
 
-describe('URL Model: validate URL\'s', function () {
+describe('URL Model: initialise URL validation', function () {
 
     // executing localStorage.clear in a before hook will raise an error while local servers a tested
     localStorage.clear();
+
+	it('should initiate an empty validation stack', function () {
+	    var validationStack = localStorage.getItem('validating');
+        expect(validationStack === '{}').to.be.true;
+	});
+
+});
+
+describe('URL Model: validate URL\'s', function () {
 
     var testForm = new function () {
         // form
@@ -61,11 +70,6 @@ describe('URL Model: validate URL\'s', function () {
     testStack[testForm.live.value] = testForm.live.query;
     testStack[testForm.local.value] = testForm.local.query;
 
-	it('should initiate an empty validation stack', function () {
-	    var validationStack = localStorage.getItem('validating');
-        expect(validationStack === '{}').to.be.true;
-	});
-
 	it('should confirm the validation mode for a specific URL', function () {
 	    localStorage.setItem('validating', JSON.stringify(testStack));
 	    var validationMode = urlModel.isValidating(testForm.live.value);
@@ -78,23 +82,19 @@ describe('URL Model: validate URL\'s', function () {
         expect(validationMode).to.be.false;
 	});
 
-	it('should set the validation-array when starting a validation', function () {
+	it('should block the url being validated from redirection', function () {
 	    localStorage.setItem('validating', '{}');
         urlModel.setupValidation.call(testForm.live, '');
 	    var validationMode = urlModel.isValidating(testForm.live.value);
         expect(validationMode).to.be.true;
     });
 
-	it('should set a timeout for handling the callback when starting a validation', function () {
-	    localStorage.setItem('validating', '{}');
+	it('should always execute the validation\'s callback', function () {
         timeoutSpy.reset();
         urlModel.setupValidation.call(testForm.live, '');
         expect(timeoutSpy.called).to.be.true;
 	});
 
 });
-
-
-
 
 

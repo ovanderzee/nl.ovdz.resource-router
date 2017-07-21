@@ -81,17 +81,17 @@ var urlModel = new function () {
     var handleValidation = function (details) {
         var selector = validating[details.url];
         var input = document.querySelector(selector);
-        var returnObj = {cancel: false};
-        if (!input) {
-            return returnObj;
-        }
-        clearTimeout(input.dataset.timeout);
-        loadResponse(input, details);
 
-        // (when) to end
+        if (input) {
+            clearTimeout(input.dataset.timeout);
+            loadResponse(input, details);
+        }
+
         delete validating[details.url];
         localStorage.setItem('validating', JSON.stringify(validating));
-        return returnObj;
+
+        // ignore the response
+        return {cancel: false};
     };
 
     chrome.webRequest.onHeadersReceived.addListener(handleValidation, {urls: ['*://*/*']}, ['responseHeaders']);
