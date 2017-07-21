@@ -19,7 +19,7 @@ var urlModel = new function () {
         getInputCommentElement(input).textContent = String.fromCharCode(160);
     };
 
-    var loadResponse = function (input, details) {
+    var setResponse = function (input, details) {
         // code
         var className = 'timeout';
         if (details.statusCode) {
@@ -84,7 +84,7 @@ var urlModel = new function () {
 
         if (input) {
             clearTimeout(input.dataset.timeout);
-            loadResponse(input, details);
+            setResponse(input, details);
         }
 
         delete validating[details.url];
