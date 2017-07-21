@@ -56,11 +56,6 @@ window.onload = function () {
         document.body.className = '';
     }, false);
 
-    /* UTILS */
-
-    var proceedLocalHTTPSButton = document.querySelector('button#proceed_local_HTTPS');
-	proceedLocalHTTPSButton.addEventListener('click', proceedLocalHTTPS, false);
-
     /* NEW */
 
     var newRoute = document.getElementById('new');
