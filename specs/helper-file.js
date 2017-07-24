@@ -25,3 +25,15 @@ var timeoutSpy = sinon.spy(window, 'setTimeout');
 	the assertion of the second test will always be confirmed
 	So, always reset the spy as a prerequisite to the test
 */
+
+/* Include the html */
+
+for (prop in window.__html__) {
+    var regex = /<body*>(.+)<\/body>/i;
+    var whitewash = window.__html__[prop].replace(/\s/gm, ' ')
+    var popup = regex.exec(whitewash);
+    document.body.innerHTML += popup[1];
+}
+
+window.onload();
+

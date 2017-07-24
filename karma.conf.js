@@ -23,6 +23,7 @@ module.exports = function(config) {
       'extension/popup-functions.js',
       'extension/popup.js',
       'extension/background.js',
+      'extension/popup.html',
       'specs/helper-file.js',
       'specs/*.spec.js'
     ],
@@ -37,7 +38,9 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      '**/*.html': ['html2js']
     },
+    // html2js maakt een window.__html__ object met pad als key en html-string als value
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

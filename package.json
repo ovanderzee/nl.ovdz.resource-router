@@ -15,6 +15,7 @@
     "chai": "*",
     "karma": "*",
     "karma-chai": "*",
+    "karma-html2js-preprocessor": "^1.1.0",
     "karma-mocha": "*",
     "karma-phantomjs-launcher": "*",
     "karma-sinon": "*",
