@@ -11,19 +11,24 @@ var extensionModel = new function () {
         }
     }
 
-    this.urls = [];
-    for (var i = 0; i < localStorage.length; i++) {
-        var key = localStorage.key(i);
-        if (!key) {
-            localStorage.removeItem(key);
-            continue;
+    this.routes = function () {
+        var routes = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            if (!key) {
+                // sanitise localStorage
+                localStorage.removeItem(key);
+                continue;
+            }
+            var keyMatch = key.match(/^\w+$/);
+            if (!keyMatch) {
+                // if a stored item is not a word, it probably is an url
+                routes.push(key);
+            }
         }
-        var keyMatch = key.match(/^\w+$/);
-        if (!keyMatch) {
-            // if a stored item is not a word, it probably is an url
-            this.urls.push(key);
-        }
-    }
+        return routes;
+    };
+
     var activeState = {
         className: 'active',
         badgeColor: [50, 205, 50, 255],
@@ -67,13 +72,14 @@ var extensionModel = new function () {
 
     this.setBadge = function () {
         var activeCount = 0;
-        for (var i = 0; i < self.urls.length; i++) {
-            var item = JSON.parse(localStorage.getItem(self.urls[i]));
+        var routes = self.routes();
+        for (var i = 0; i < routes.length; i++) {
+            var item = JSON.parse(localStorage.getItem(routes[i]));
             if (item && item.active && Boolean(item.active)) {
                 activeCount++;
             }
         }
         chrome.browserAction.setBadgeText({text: String(activeCount)});
-        chrome.browserAction.setBadgeBackgroundColor({color: extensionModel.stateVars().badgeColor});
+        chrome.browserAction.setBadgeBackgroundColor({color: self.stateVars().badgeColor});
     };
 };

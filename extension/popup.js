@@ -69,9 +69,9 @@ var buildUI = function () {
     template = document.getElementById('template');
     showAllRoutes = document.getElementById('show-all');
     eventHandling();
-    for (var i = 0; i < extensionModel.urls.length; i++) {
-        var key = extensionModel.urls[i];
-        populatePopup(key);
+    var routes = extensionModel.routes();
+    for (var i = 0; i < routes.length; i++) {
+        populatePopup(routes[i]);
     }
 };
 
