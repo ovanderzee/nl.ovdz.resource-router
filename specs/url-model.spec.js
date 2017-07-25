@@ -107,25 +107,28 @@ describe('URL Model: validate URL\'s', function () {
         }, 1500)
     });
 
-//	it('should update the validated url\'s display with the validation result', function (done) {
-//        testForm.localComment.textContent = String.fromCharCode(160);
-//        testForm.localParent.className = 'local ';
-//
-//        urlModel.setupValidation.call(testForm.local, '');
-//
-//        setTimeout (function () {
-//            console.log ('comment  ' + testForm.localComment.textContent + ' len ' + testForm.localComment.textContent.length ) ;
-//            console.log ('comment bool ' + testForm.localComment.textContent.length > 2);
-//
-//            console.log ('parent  ' + testForm.localParent.className);
-//            console.log ('parent class ' + testForm.localParent.className.indexOf('request-') > -1);
-//
-//
-//            expect(testForm.localComment.textContent.length > 2).to.be.true;
-//            expect(testForm.localParent.className.indexOf('request-') > -1).to.be.true;
-//            done();
-//        }, 1500)
-//    });
+	it('should update the validated url\'s display with the validation result', function (done) {
+	    var routeForm = document.querySelector('form.route.passive');
+        var localParent = routeForm.querySelector('.local');
+        var localInput = localParent.querySelector('input');
+        var localComment = localParent.querySelector('.comment span');
+
+        // reset label and comment
+        var clearClassName = 'local';
+        var clearTextContent = String.fromCharCode(160);
+        localParent.className = resetClassName;
+        localComment.textContent = clearTextContent;
+
+        urlModel.setupValidation.call(localInput, '');
+
+        setTimeout (function () {
+            console.log(localParent.className + ' !== ' + clearClassName);
+            console.log(localComment.textContent + ' !== ' + clearTextContent);
+            expect(localParent.className.indexOf('request-') > -1).to.be.true;
+            expect(localComment.textContent.length > 2).to.be.true;
+            done();
+        }, 1500)
+    });
 
 });
 
