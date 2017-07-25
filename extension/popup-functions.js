@@ -127,6 +127,11 @@ var routeActive = new function () {
             chrome.browserAction.setBadgeText({text: String(count)});
         });
     };
+    this.test = function () {
+        if (this.checked) {
+            routeTest.perform.call(this);
+        }
+    };
 };
 
 var routeLive = {

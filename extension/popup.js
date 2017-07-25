@@ -8,11 +8,7 @@ var populatePopup = function (key) {
     form.elements.active.checked = Boolean(item.active);
     routeActive.init.call(form.elements.active);
     form.elements.active.addEventListener('click', routeActive.click, false);
-    form.elements.active.addEventListener('click', function () {
-        if (this.checked) {
-            routeTest.perform.call(this);
-        }
-    }, false);
+    form.elements.active.addEventListener('click', routeActive.test, false);
 
     form.querySelector('legend').textContent = key;
     form.elements.initial.value = key;
