@@ -26,14 +26,18 @@ var timeoutSpy = sinon.spy(window, 'setTimeout');
 	So, always reset the spy as a prerequisite to the test
 */
 
-/* Include the html */
+/* Include the html in karma testfile */
 
 for (prop in window.__html__) {
-    var regex = /<body*>(.+)<\/body>/i;
     var whitewash = window.__html__[prop].replace(/\s/gm, ' ')
-    var popup = regex.exec(whitewash);
-    document.body.innerHTML += popup[1];
+    var bodyRegEx = /<body*>(.+)<\/body>/i;
+    var popupBody = bodyRegEx.exec(whitewash);
+    document.body.innerHTML += popupBody[1];
 }
+
+/* bootstrap the html and scripts for phantomJS */
 
 buildUI();
 
+//console.log(' document.body.innerHTML ' + document.body.innerHTML);
+//console.log(' document.forms.length ' + document.forms.length);

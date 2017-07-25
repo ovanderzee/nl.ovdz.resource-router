@@ -66,6 +66,11 @@ var eventHandling = function () {
 };
 
 var buildUI = function () {
+    var validating = JSON.parse(localStorage.getItem('validating'));
+    if (validating === null) {
+        // do not run before all scripts and intended html was loaded (karma)
+        return;
+    }
     template = document.getElementById('template');
     showAllRoutes = document.getElementById('show-all');
     eventHandling();
