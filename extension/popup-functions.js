@@ -148,18 +148,40 @@ var routeLive = {
 
 var routeRemove = function (button) {
     var self = this;
+
+console.log('1' + self == window);
     this.style = button.querySelector('span').style;
-    button.addEventListener('blur', function () {
+    var blurHandler = function () {
+console.log('2' + self == window);
         self.style.display = 'none';
-    }, false);
-    button.addEventListener('click', function () {
+    };
+    var clickHandler = function () {
         if (self.style.display === 'none') {
             self.style.display = '';
         } else {
-            routeModel.removeRoute.call(button);
-            button.form.parentNode.removeChild(button.form);
+            self.perform();
         }
-    }, false);
+    };
+    this.perform = function () {
+        var form = button.form;
+        // remove from localStorage
+        routeModel.removeRoute.call(button);
+        // remove bindings
+        form.removeEventListener('click', routeForm.toggle, false);
+        form.elements.active.removeEventListener('click', routeActive.click, false);
+        form.elements.active.removeEventListener('click', routeActive.test, false);
+        form.elements.live.removeEventListener('blur', routeLive.blur, false);
+        form.elements.local.removeEventListener('blur', routeModel.setLocal, false);
+        form.elements.test.removeEventListener('click', routeTest.perform, false);
+        form.elements.remove.removeEventListener('blur', blurHandler, false);
+        form.elements.remove.removeEventListener('click', clickHandler, false);
+        form.removeEventListener('transitionend', routeForm.transitionEnd);
+        // remove from HTML
+        form.parentNode.removeChild(form);
+    };
+    button.addEventListener('blur', blurHandler, false);
+    button.addEventListener('click', clickHandler, false);
+    return this;
 };
 
 var routeTest = {
