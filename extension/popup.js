@@ -29,7 +29,7 @@ var populatePopup = function (key) {
     routeForm.init.call(form);
 };
 
-window.onload = function () {
+var eventHandling = function () {
 
     /* GENERAL SETTINGS */
 
@@ -51,7 +51,6 @@ window.onload = function () {
 	toggleButton.addEventListener('click', extensionModel.toggleState, false);
 	extensionModel.stateView.call(generalForm);
 
-    showAllRoutes = document.getElementById('show-all');
     showAllRoutes.addEventListener('click', function () {
         document.body.className = '';
     }, false);
@@ -64,13 +63,20 @@ window.onload = function () {
     newRoute.elements.add.addEventListener('click', newEntry, false);
     newRoute.elements.test.addEventListener('click', routeTest.perform, false);
 
-    /* ROUTES */
+};
 
+var buildUI = function () {
     template = document.getElementById('template');
+    showAllRoutes = document.getElementById('show-all');
+    eventHandling();
     for (var i = 0; i < extensionModel.urls.length; i++) {
         var key = extensionModel.urls[i];
         populatePopup(key);
     }
-
 };
 
+document.addEventListener('readystatechange', function () {
+    if (document.readyState === 'interactive') {
+        buildUI();
+    }
+}, false);

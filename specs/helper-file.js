@@ -35,5 +35,5 @@ for (prop in window.__html__) {
     document.body.innerHTML += popup[1];
 }
 
-window.onload();
+buildUI();
 
