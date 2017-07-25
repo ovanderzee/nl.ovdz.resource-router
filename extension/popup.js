@@ -2,7 +2,7 @@ var template, showAllRoutes;
 var populatePopup = function (key) {
     var item = JSON.parse(localStorage.getItem(key));
     var form = template.cloneNode(true);
-    form.id = 'route_' + document.forms.length;
+    form.id = 'route_' + Math.ceil(Math.random()*97531).toString(36);
     form.addEventListener('click', routeForm.toggle, false);
 
     form.elements.active.checked = Boolean(item.active);
