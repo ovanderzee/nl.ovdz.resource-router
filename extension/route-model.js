@@ -96,7 +96,7 @@ var routeModel = new function () {
     };
 
     this.removeRoute = function () {
-        var livefield = this.form.elements.live;
+        var livefield = this.elements.live;
         removeItem(livefield.value);
     };
 

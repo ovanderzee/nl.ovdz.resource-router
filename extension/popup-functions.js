@@ -146,42 +146,41 @@ var routeLive = {
     }
 };
 
+var destroyRoute = new Event('destroyRoute');
+
 var routeRemove = function (button) {
     var self = this;
-
-console.log('1' + self == window);
     this.style = button.querySelector('span').style;
     var blurHandler = function () {
-console.log('2' + self == window);
         self.style.display = 'none';
     };
     var clickHandler = function () {
         if (self.style.display === 'none') {
             self.style.display = '';
         } else {
-            self.perform();
+            button.form.dispatchEvent(destroyRoute);
         }
     };
-    this.perform = function () {
-        var form = button.form;
+    var destroyHandler = function () {
         // remove from localStorage
-        routeModel.removeRoute.call(button);
+        routeModel.removeRoute.call(this);
         // remove bindings
-        form.removeEventListener('click', routeForm.toggle, false);
-        form.elements.active.removeEventListener('click', routeActive.click, false);
-        form.elements.active.removeEventListener('click', routeActive.test, false);
-        form.elements.live.removeEventListener('blur', routeLive.blur, false);
-        form.elements.local.removeEventListener('blur', routeModel.setLocal, false);
-        form.elements.test.removeEventListener('click', routeTest.perform, false);
-        form.elements.remove.removeEventListener('blur', blurHandler, false);
-        form.elements.remove.removeEventListener('click', clickHandler, false);
-        form.removeEventListener('transitionend', routeForm.transitionEnd);
+        this.removeEventListener('click', routeForm.toggle, false);
+        this.elements.active.removeEventListener('click', routeActive.click, false);
+        this.elements.active.removeEventListener('click', routeActive.test, false);
+        this.elements.live.removeEventListener('blur', routeLive.blur, false);
+        this.elements.local.removeEventListener('blur', routeModel.setLocal, false);
+        this.elements.test.removeEventListener('click', routeTest.perform, false);
+        this.elements.remove.removeEventListener('blur', blurHandler, false);
+        this.elements.remove.removeEventListener('click', clickHandler, false);
+        this.removeEventListener('transitionend', routeForm.transitionEnd);
+        this.removeEventListener('destroyRoute', destroyHandler, false);
         // remove from HTML
-        form.parentNode.removeChild(form);
+        this.parentNode.removeChild(this);
     };
     button.addEventListener('blur', blurHandler, false);
     button.addEventListener('click', clickHandler, false);
-    return this;
+    button.form.addEventListener('destroyRoute', destroyHandler, false);
 };
 
 var routeTest = {
