@@ -28,7 +28,7 @@ var newEntry = function () {
     var local = this.form.elements.local;
     if (live.value && local.value) {
         routeModel.addRoute.call(this.form);
-        populatePopup(live.value);
+        populateRouteForm(live.value);
         live.value = '';
         local.value = '';
     }
@@ -146,7 +146,13 @@ var routeLive = {
     }
 };
 
-var destroyRoute = new Event('destroyRoute');
+try {
+    var destroyRoute = new Event('destroyRoute');
+} catch (e) {
+    // https://github.com/ariya/phantomjs/issues/11289
+    var destroyRoute = document.createEvent('CustomEvent');  // MUST be 'CustomEvent'
+    destroyRoute.initCustomEvent('destroyRoute', false, false, null);
+}
 
 var routeRemove = function (button) {
     var self = this;

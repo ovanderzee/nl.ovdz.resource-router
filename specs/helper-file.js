@@ -39,5 +39,36 @@ for (prop in window.__html__) {
 
 buildUI();
 
-//console.log(' document.body.innerHTML ' + document.body.innerHTML);
-//console.log(' document.forms.length ' + document.forms.length);
+/* Helper object for updating HTML and localStorage */
+
+var specHelper = new function () {
+    var self = this;
+
+    var clearHTML = function () {
+        var configuredRoutes = document.querySelectorAll('form.route.active, form.route.passive');
+        for (var i = (configuredRoutes.length - 1); i >= 0; i--) {
+            configuredRoutes[i].dispatchEvent(destroyRoute);
+        }
+    };
+    var buildHTML = function () {
+        populatePopup();
+    };
+
+    this.emptyDataSet = function () {
+	    localStorage.clear();
+	    clearHTML();
+    };
+
+    this.simpleDataSet = function () {
+	    localStorage.clear();
+	    clearHTML();
+        localStorage.setItem ('http://www.test.it/css/active.css', '{"active":true,"local":"test.it/styles.css"}');
+        localStorage.setItem ('http://www.test.it/css/passive.css', '{"active":false,"local":"test.it/styles.css"}');
+        localStorage.setItem ('loose', 'localhost:9080');
+        localStorage.setItem ('rerouting', 'running');
+        localStorage.setItem ('secure', 'localhost:9443');
+        localStorage.setItem ('validating', '{}');
+        buildHTML();
+    };
+
+};

@@ -1,5 +1,5 @@
 var template, showAllRoutes;
-var populatePopup = function (key) {
+var populateRouteForm = function (key) {
     var item = JSON.parse(localStorage.getItem(key));
     var form = template.cloneNode(true);
     form.id = 'route_' + Math.ceil(Math.random()*97531).toString(36);
@@ -23,6 +23,13 @@ var populatePopup = function (key) {
 
     document.body.insertBefore(form, showAllRoutes);
     routeForm.init.call(form);
+};
+
+var populatePopup = function () {
+    var routes = extensionModel.routes();
+    for (var i = 0; i < routes.length; i++) {
+        populateRouteForm(routes[i]);
+    }
 };
 
 var eventHandling = function () {
@@ -65,15 +72,13 @@ var buildUI = function () {
     var validating = JSON.parse(localStorage.getItem('validating'));
     if (validating === null) {
         // do not run before all scripts and intended html was loaded (karma)
+        // console.error('exiting load function; ' + navigator.userAgent);
         return;
     }
     template = document.getElementById('template');
     showAllRoutes = document.getElementById('show-all');
     eventHandling();
-    var routes = extensionModel.routes();
-    for (var i = 0; i < routes.length; i++) {
-        populatePopup(routes[i]);
-    }
+    populatePopup();
 };
 
 document.addEventListener('readystatechange', function () {
