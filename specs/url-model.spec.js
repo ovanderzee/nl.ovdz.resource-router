@@ -1,16 +1,4 @@
 
-describe('URL Model: initialise URL validation', function () {
-
-    // executing localStorage.clear in a before hook will raise an error while local servers a tested
-    localStorage.clear();
-
-	it('should initiate an empty validation stack', function () {
-	    var validationStack = localStorage.getItem('validating');
-        expect(validationStack === '{}').to.be.true;
-	});
-
-});
-
 describe('URL Model: validate URL\'s', function () {
 
     var testForm = new function () {
@@ -108,6 +96,7 @@ describe('URL Model: validate URL\'s', function () {
     });
 
 	it('should update the validated url\'s display with the validation result', function (done) {
+	    specHelper.simpleDataSet();
 	    var routeForm = document.querySelector('form.route.passive');
         var localParent = routeForm.querySelector('.local');
         var localInput = localParent.querySelector('input');
@@ -116,14 +105,12 @@ describe('URL Model: validate URL\'s', function () {
         // reset label and comment
         var clearClassName = 'local';
         var clearTextContent = String.fromCharCode(160);
-        localParent.className = resetClassName;
+        localParent.className = clearClassName;
         localComment.textContent = clearTextContent;
 
         urlModel.setupValidation.call(localInput, '');
 
         setTimeout (function () {
-            console.log(localParent.className + ' !== ' + clearClassName);
-            console.log(localComment.textContent + ' !== ' + clearTextContent);
             expect(localParent.className.indexOf('request-') > -1).to.be.true;
             expect(localComment.textContent.length > 2).to.be.true;
             done();
