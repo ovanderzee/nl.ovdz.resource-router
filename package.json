@@ -4,6 +4,7 @@
   "description": "serve resources local",
   "dependencies": {},
   "devDependencies": {
+    "chai": "*",
     "fs": "*",
     "gulp": "*",
     "gulp-compass": "^2.1.0",
@@ -12,9 +13,9 @@
     "gulp-eslint": "*",
     "gulp-jscs": "*",
     "gulp-jsonlint": "*",
-    "chai": "*",
     "karma": "*",
     "karma-chai": "*",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-mocha": "*",
     "karma-phantomjs-launcher": "*",
