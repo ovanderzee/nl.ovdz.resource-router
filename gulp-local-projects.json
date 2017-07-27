@@ -3,6 +3,10 @@
 		"docroot": "../finalist/aventus-internet/bitbucket/sites/all/themes/aventus",
 		"command": {"exec": "gulp", "args": ["watch"]}
 	},
+	"landg": {
+		"docroot": "../finalist/landg-internet/landg-internet/site/src/main/webapp/static",
+		"command": {"exec": "compass", "args": ["watch"]}
+	},
 	"ou": {
 		"docroot": "../liferay/ou/CorporateWebsite/trunk/corp-theme/target/corp-theme-1.0.33-SNAPSHOT",
 		"command": {"exec": "echo", "args": ["Save compiled stylesheet in target/***-SNAPSHOT folder!!!!"]}
