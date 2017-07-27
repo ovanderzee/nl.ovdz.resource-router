@@ -28,7 +28,7 @@ var timeoutSpy = sinon.spy(window, 'setTimeout');
 
 /* Include the html in karma testfile */
 
-for (prop in window.__html__) {
+for (var prop in window.__html__) {
     var whitewash = window.__html__[prop].replace(/\s/gm, ' ')
     var bodyRegEx = /<body*>(.+)<\/body>/i;
     var popupBody = bodyRegEx.exec(whitewash);
