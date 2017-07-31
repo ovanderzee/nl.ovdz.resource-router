@@ -1,6 +1,6 @@
 {
 	"aventus": {
-		"docroot": "../finalist/aventus-internet/bitbucket/sites/all/themes/aventus",
+		"docroot": "../finalist/aventus-internet/aventus-internet/sites/all/themes/aventus",
 		"command": {"exec": "gulp", "args": ["watch"]}
 	},
 	"landg": {
@@ -14,5 +14,9 @@
 	"rekenkamer": {
 		"docroot": "../finalist/algemene-rekenkamer/rekenkamer-intranet/sites/all/themes/rekenkamer_intranet",
 		"command": {"exec": "gulp", "args": ["watch"]}
+	},
+	"zuyd": {
+		"docroot": "../finalist/landg-internet/landg-internet/site/src/main/webapp/static",
+		"command": {"exec": "compass", "args": ["watch"]}
 	}
 }
